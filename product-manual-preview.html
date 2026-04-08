@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>商品手册生成系统预览</title>
+  <style>
+    :root{--bg:#f6efe7;--card:#fffaf5;--line:#ead7cc;--text:#241711;--muted:#6d5a52;--brand:#c4491d;--soft:#f4d4c3;--ok:#2d7f5e;--warn:#9b5f11}
+    *{box-sizing:border-box} body{margin:0;font-family:"Microsoft YaHei","PingFang SC",sans-serif;color:var(--text);background:linear-gradient(180deg,#faf4ee,#f5ede5)}
+    .wrap{max-width:1400px;margin:0 auto;padding:24px;display:grid;grid-template-columns:260px 1fr;gap:24px}
+    .side,.card,.frame,.phone,.slide{background:rgba(255,250,245,.88);border:1px solid var(--line);border-radius:24px;box-shadow:0 14px 36px rgba(69,28,14,.08)}
+    .side{padding:20px;position:sticky;top:24px;height:max-content}
+    .badge{display:inline-block;padding:8px 12px;border-radius:999px;background:#f8e4da;color:#8c2f11;font-size:12px;font-weight:700}
+    h1{margin:14px 0 10px;font-size:30px;line-height:1.1} h2{margin:0;font-size:26px} h3{margin:0 0 10px;font-size:20px} h4{margin:0 0 8px;font-size:16px}
+    p{margin:0;color:var(--muted);line-height:1.75;font-size:14px} .menu{display:grid;gap:10px;margin:18px 0}
+    .menu a,.tab,.chip{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:999px;border:1px solid var(--line);background:#fff;cursor:pointer;color:var(--text);text-decoration:none;font-size:13px}
+    .tab.active,.chip.active,.menu a:hover{background:var(--brand);border-color:var(--brand);color:#fff}
+    .main{display:grid;gap:24px}.hero{padding:28px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:18px}
+    .stat{padding:16px;border:1px solid var(--line);border-radius:18px;background:#fff}.stat b{display:block;font-size:28px;margin-bottom:4px}
+    .card{padding:22px}.tabs,.chips{display:flex;flex-wrap:wrap;gap:10px}.pane{display:none}.pane.active{display:block}
+    .grid2,.grid3{display:grid;gap:16px}.grid2{grid-template-columns:repeat(2,1fr)}.grid3{grid-template-columns:repeat(3,1fr)}
+    .frame{overflow:hidden}.top{padding:14px 18px;border-bottom:1px solid var(--line);background:linear-gradient(90deg,#fbe9df,#fff4eb)}
+    .desk{display:grid;grid-template-columns:220px 1fr 300px;min-height:640px}
+    .left,.center,.right{padding:18px}.left,.right{background:#fcf7f2}.left{border-right:1px solid var(--line)}.right{border-left:1px solid var(--line)}
+    .stack{display:grid;gap:10px}.item{padding:12px 14px;border:1px solid var(--line);border-radius:14px;background:#fff}
+    .item.active{background:#fbe9df;border-color:#f2c3aa}.item small{display:block;margin-top:6px;color:var(--muted)}
+    .canvas{padding:18px;border:1px solid var(--line);border-radius:20px;background:linear-gradient(135deg,#fbe7db,#fff)}
+    .head{display:flex;justify-content:space-between;gap:16px;align-items:flex-start}.head h3{font-size:28px}
+    .tag{display:inline-block;padding:6px 10px;border-radius:999px;background:#f8e4da;color:#8c2f11;font-size:12px;font-weight:700}
+    .metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0}.metric{padding:12px;border:1px solid var(--line);border-radius:14px;background:#fff}.metric b{display:block;font-size:18px}
+    .preview{display:grid;grid-template-columns:1.3fr .7fr;gap:14px}.heroSlide,.info{padding:16px;border:1px solid var(--line);border-radius:16px;background:#fff}
+    ul{margin:10px 0 0;padding-left:18px;color:var(--muted)} li{margin:4px 0;line-height:1.7;font-size:14px}
+    .good,.warn{display:inline-block;padding:6px 10px;border-radius:999px;font-size:12px;font-weight:700}.good{background:#e0f0ea;color:var(--ok)}.warn{background:#f7e3bf;color:var(--warn)}
+    .phoneWrap{display:flex;justify-content:center}.phone{width:360px;padding:14px}.screen{border:1px solid var(--line);border-radius:28px;overflow:hidden;background:linear-gradient(180deg,#fff7f1,#fff)}
+    .bar{padding:14px 18px 8px;display:flex;justify-content:space-between;font-size:12px;color:var(--muted)} .mhead,.scroll{padding:0 18px 18px}.mhead h3{font-size:28px}
+    .mcard{padding:16px;border:1px solid var(--line);border-radius:18px;background:#fff;margin-bottom:12px}.mchips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+    .mchip{padding:8px 10px;border-radius:999px;background:#f7eee7;border:1px solid var(--line);font-size:12px}
+    .flow{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}.step{padding:16px;border:1px solid var(--line);border-radius:18px;background:#fff}.step b{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--brand);color:#fff;margin-bottom:10px}
+    .table{display:grid;gap:10px}.row{display:grid;grid-template-columns:180px 1fr 120px;gap:12px;padding:14px;border:1px solid var(--line);border-radius:16px;background:#fff}
+    .row code{display:inline-block;padding:4px 8px;border-radius:999px;background:#f8e4da;color:#8c2f11}
+    @media (max-width:1180px){.wrap{grid-template-columns:1fr}.side{position:static}.stats,.grid2,.grid3,.desk,.preview,.flow,.row{grid-template-columns:1fr}}
+    @media (max-width:720px){.wrap{padding:14px}.hero,.card,.side{padding:18px}.stats{grid-template-columns:1fr 1fr}.phone{width:100%}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <aside class="side">
+      <span class="badge">Interactive Preview</span>
+      <h1>商品手册生成系统</h1>
+      <p>通过选择标准库商品，同步基础数据和营销内容，自动生成可导出的商品手册 PPT，兼顾 PC 深度编辑与移动端快速发起。</p>
+      <div class="menu">
+        <a href="#overview">项目概览</a>
+        <a href="#proto">交互原型</a>
+        <a href="#mapping">字段映射</a>
+        <a href="#flow">生成流程</a>
+      </div>
+      <div class="item">
+        <h4>已识别基础</h4>
+        <small>商品数 1105</small>
+        <small>已有字段 26 个</small>
+        <small>有封面图 670 条</small>
+        <small>参考手册 32 页</small>
+      </div>
+    </aside>
+
+    <main class="main">
+      <section class="hero card" id="overview">
+        <span class="badge">From Standard Library To PPT</span>
+        <h2 style="margin:16px 0 10px;font-size:48px;line-height:1.05">选商品，补内容，自动出手册</h2>
+        <p>参考《脱骨侠产品手册》的结构，系统需要支持从标准库按品牌、渠道、规格和系列挑选商品，补充品牌背书、供应链、卖点和适用场景等内容，然后自动编排生成封面、目录、品牌页、供应链页、系列总览页、商品详情页和封底。</p>
+        <div class="stats">
+          <div class="stat"><b>4</b><span>核心能力：同步 / 编组 / 编排 / 导出</span></div>
+          <div class="stat"><b>PC+移动</b><span>主工作台 + 快发起</span></div>
+          <div class="stat"><b>模板化</b><span>招商册 / 渠道册 / 单品册 / 组合册</span></div>
+          <div class="stat"><b>MVP</b><span>先做自动成册，再补营销字段</span></div>
+        </div>
+      </section>
+
+      <section class="card" id="proto">
+        <div style="display:flex;justify-content:space-between;gap:16px;align-items:end;margin-bottom:16px">
+          <div>
+            <h2>交互原型</h2>
+            <p>你可以切换视图、模拟筛选商品、调整模板和模块，右侧预览会联动变化。</p>
+          </div>
+        </div>
+        <div class="tabs" style="margin-bottom:18px">
+          <button class="tab active" data-tab="pc">PC 端工作台</button>
+          <button class="tab" data-tab="mobile">移动端快发</button>
+          <button class="tab" data-tab="data">标准库字段</button>
+          <button class="tab" data-tab="ppt">PPT 生成逻辑</button>
+        </div>
+
+        <div class="pane active" data-pane="pc">
+          <div class="grid2" style="margin-bottom:16px">
+            <div class="item">
+              <h4>1. 选品过滤模拟</h4>
+              <p>切换下面条件，模拟从标准库同步商品进入手册项目。</p>
+              <div style="margin-top:12px"><small>渠道</small><div class="chips" id="channelFilter"></div></div>
+              <div style="margin-top:12px"><small>品牌</small><div class="chips" id="brandFilter"></div></div>
+              <div style="margin-top:12px"><small>包装单位</small><div class="chips" id="unitFilter"></div></div>
+            </div>
+            <div class="item">
+              <h4>2. 模板与模块</h4>
+              <p>切换手册模板和模块开关，模拟 PPT 页面结构变化。</p>
+              <div style="margin-top:12px"><small>手册模板</small><div class="chips" id="templateFilter"></div></div>
+              <div style="margin-top:12px" class="chips">
+                <label class="chip"><input type="checkbox" checked data-module="brand">品牌介绍</label>
+                <label class="chip"><input type="checkbox" checked data-module="supply">供应链背书</label>
+                <label class="chip"><input type="checkbox" checked data-module="series">系列总览</label>
+                <label class="chip"><input type="checkbox" checked data-module="channel">渠道页</label>
+                <label class="chip"><input type="checkbox" checked data-module="product">商品详情页</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="frame">
+            <div class="top">商品手册生成后台 / PC 工作台</div>
+            <div class="desk">
+              <div class="left">
+                <h4>项目菜单</h4>
+                <div class="stack">
+                  <div class="item active">手册项目</div>
+                  <div class="item">标准库选品</div>
+                  <div class="item">页面编排</div>
+                  <div class="item">字段补充</div>
+                  <div class="item">导出与版本</div>
+                </div>
+                <h4 style="margin-top:16px">当前筛选</h4>
+                <div class="stack" id="activeFilters"></div>
+              </div>
+              <div class="center">
+                <div class="canvas">
+                  <div class="head">
+                    <div>
+                      <span class="tag" id="templateTag">渠道册</span>
+                      <h3 id="canvasTitle">脱骨侠 · 渠道商品手册</h3>
+                      <p id="canvasDesc">按渠道聚合商品，自动生成适合业务沟通的可编辑 PPT。</p>
+                    </div>
+                    <div>
+                      <span class="good" id="syncState">已同步 3 个商品</span>
+                      <span class="warn" id="warnState">缺图 0 个</span>
+                    </div>
+                  </div>
+                  <div class="metrics">
+                    <div class="metric"><b id="metricProducts">3</b><span>当前选中商品</span></div>
+                    <div class="metric"><b id="metricSlides">8</b><span>预计输出页数</span></div>
+                    <div class="metric"><b>PC 深编</b><span>当前模式</span></div>
+                  </div>
+                  <div class="preview">
+                    <div class="heroSlide">
+                      <span class="tag" id="headlineTag">渠道册</span>
+                      <h3 style="margin:12px 0 10px" id="previewHeadline">品牌背书 + 渠道分组 + 商品详情</h3>
+                      <p id="previewBody">系统会优先输出封面、目录、品牌/供应链页，再按渠道和商品分类编组商品页。</p>
+                      <div class="metrics" style="margin-top:14px">
+                        <div class="metric"><b id="sampleChannel">线上</b><span>主渠道</span></div>
+                        <div class="metric"><b id="sampleBrand">脱骨侠</b><span>当前品牌</span></div>
+                        <div class="metric"><b id="sampleUnit">多包装</b><span>包装形式</span></div>
+                      </div>
+                    </div>
+                    <div class="info">
+                      <h4>生成前校验</h4>
+                      <ul id="validationList"></ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="right">
+                <h4>选中商品示例</h4>
+                <div class="stack" id="productList"></div>
+                <h4 style="margin-top:16px">PPT 预览大纲</h4>
+                <div class="stack" id="slideList"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pane" data-pane="mobile">
+          <div class="grid2">
+            <div class="item">
+              <h4>移动端定位</h4>
+              <ul>
+                <li>快速选择品牌、渠道和模板</li>
+                <li>查看已同步商品和缺失提示</li>
+                <li>轻量删除商品、重新生成</li>
+                <li>在线预览和分享下载</li>
+              </ul>
+            </div>
+            <div class="item">
+              <h4>移动端不建议承载</h4>
+              <ul>
+                <li>大量商品批量编辑</li>
+                <li>逐页拖拽排版</li>
+                <li>复杂字段补录</li>
+                <li>高级权限与版本对比</li>
+              </ul>
+            </div>
+          </div>
+          <div class="phoneWrap" style="margin-top:18px">
+            <div class="phone">
+              <div class="screen">
+                <div class="bar"><span>16:58</span><span>商品手册</span><span>5G</span></div>
+                <div class="mhead">
+                  <span class="badge">Mobile Fast Flow</span>
+                  <h3 style="margin:12px 0 8px">一键生成手册</h3>
+                  <p>面向销售和产品同学，强调“快选、快看、快发”。</p>
+                </div>
+                <div class="scroll">
+                  <div class="mcard">
+                    <h4>当前项目</h4>
+                    <p id="mobileProject">脱骨侠 2026 春季渠道册</p>
+                    <div class="mchips">
+                      <span class="mchip" id="mBrand">品牌：脱骨侠</span>
+                      <span class="mchip" id="mChannel">渠道：线上</span>
+                      <span class="mchip" id="mTemplate">模板：渠道册</span>
+                    </div>
+                  </div>
+                  <div class="mcard">
+                    <h4>已同步商品</h4>
+                    <p>已选商品会显示在这里，可快速删减后重新生成。</p>
+                    <div class="mchips" id="mobileProducts"></div>
+                  </div>
+                  <div class="mcard">
+                    <h4>生成状态</h4>
+                    <p id="mobileStatus">预计生成 8 页，可在线预览后导出 PPT。</p>
+                  </div>
+                  <div class="mcard">
+                    <h4>提醒</h4>
+                    <p id="mobileWarnings">当前配置完整，可直接导出外部版。</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pane" data-pane="data">
+          <div class="grid3">
+            <div class="item"><h4>标准库已有字段</h4><ul><li>标准名称、品牌、分类、单位、口味</li><li>固形物含量、净含量、温层、含骨、保质期</li><li>渠道、辣度、建议零售价、封面图</li><li>编码类字段、版本、状态</li></ul></div>
+            <div class="item"><h4>生成手册需新增</h4><ul><li>核心卖点</li><li>开发原因 / 产品特性</li><li>适用销售场景</li><li>推荐渠道 / 推荐等级</li><li>详情图 / 场景图 / 包装图</li></ul></div>
+            <div class="item"><h4>权限控制</h4><ul><li>成本价仅内部版可见</li><li>旺店通 / 金蝶编码外部版隐藏</li><li>支持内部版 / 外部版导出规则</li></ul></div>
+          </div>
+          <div class="table" style="margin-top:16px">
+            <div class="row"><strong>标准名称</strong><span>作为商品页标题，也可兜底拆解规格、口味、保质期等信息。</span><code>必填</code></div>
+            <div class="row"><strong>品牌 / 分类 / 渠道</strong><span>决定手册分组逻辑，用于按品牌、渠道、系列自动编排目录和商品清单。</span><code>必填</code></div>
+            <div class="row"><strong>封面图</strong><span>决定详情页视觉质量。当前仅 670 条有图，缺图需要占位图或补图流程。</span><code>高优先级</code></div>
+            <div class="row"><strong>卖点 / 场景 / 特性</strong><span>参考手册中大量出现，但目前标准库还没有形成结构化字段。</span><code>需补充</code></div>
+          </div>
+        </div>
+
+        <div class="pane" data-pane="ppt">
+          <div class="flow">
+            <div class="step"><b>1</b><h4>创建项目</h4><p>选品牌、模板、端和导出版本。</p></div>
+            <div class="step"><b>2</b><h4>同步商品</h4><p>按品牌、渠道、温层、单位、分类批量拉取。</p></div>
+            <div class="step"><b>3</b><h4>补齐内容</h4><p>卖点、场景、详情图和推荐渠道。</p></div>
+            <div class="step"><b>4</b><h4>自动编排</h4><p>生成封面、目录、品牌页、商品页和封底。</p></div>
+            <div class="step"><b>5</b><h4>导出留痕</h4><p>导出 PPT/PDF 并保留版本快照。</p></div>
+          </div>
+          <div class="grid2" style="margin-top:16px">
+            <div class="item"><h4>MVP 建议</h4><ul><li>标准库选品同步</li><li>模板选择</li><li>自动生成封面 / 目录 / 商品页</li><li>PC 预览与 PPT 导出</li><li>移动端快速发起和预览</li></ul></div>
+            <div class="item"><h4>二期建议</h4><ul><li>品牌素材库 / 资质素材库</li><li>AI 生成卖点摘要</li><li>多语言手册</li><li>审批流和外部分享页</li><li>效果数据回流</li></ul></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card" id="mapping">
+        <h2>参考手册拆解</h2>
+        <p style="margin-top:8px">根据 OCR 提取到的 32 页结构，可归纳为“品牌页 + 供应链页 + 系列总览 + 按渠道/规格展开的商品详情页”。</p>
+        <div class="grid3" style="margin-top:16px">
+          <div class="slide"><h4>品牌页</h4><p>集团介绍、品牌地位、销量和渠道覆盖。</p></div>
+          <div class="slide"><h4>供应链页</h4><p>原料、研发、工厂、品控和物流背书。</p></div>
+          <div class="slide"><h4>商品页</h4><p>规格、口味、保质期、适用场景、开发原因和卖点。</p></div>
+        </div>
+      </section>
+
+      <section class="card" id="flow">
+        <h2>功能结论</h2>
+        <p style="margin-top:8px">这不是简单的 Excel 导出，而是一个面向销售资料生产的商品手册配置系统。</p>
+        <div class="grid3" style="margin-top:16px">
+          <div class="item"><h4>PC 端核心</h4><ul><li>复杂筛选与批量选品</li><li>模块开关与页面编排</li><li>字段补录与缺失校验</li><li>导出与版本管理</li></ul></div>
+          <div class="item"><h4>移动端核心</h4><ul><li>快速发起项目</li><li>查看商品和进度</li><li>轻量调整后重生成</li><li>在线预览与分享</li></ul></div>
+          <div class="item"><h4>数据建设重点</h4><ul><li>提升商品图覆盖率</li><li>卖点 / 场景结构化</li><li>品牌与供应链素材中心</li><li>内部外部版权限</li></ul></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const products = [
+      {name:"无骨鸡爪-边巷-500克-蒜香重辣-10天",brand:"边巷",channel:"线上",unit:"罐",temp:"冷藏",price:"29.90",image:true},
+      {name:"无骨鸡爪-边巷-500克-蒜香中辣-10天",brand:"边巷",channel:"线上",unit:"罐",temp:"冷藏",price:"29.90",image:true},
+      {name:"无骨鸡爪-边巷-500克-蒜香微辣-10天",brand:"边巷",channel:"线上",unit:"罐",temp:"冷藏",price:"29.90",image:true},
+      {name:"椒麻三角骨-脱骨侠-450克-椒麻-9个月",brand:"脱骨侠",channel:"冻品休食",unit:"盒",temp:"冷冻",price:"19.90",image:true},
+      {name:"无骨鸭掌-脱骨侠-900克-藤椒-9个月",brand:"脱骨侠",channel:"冻品休食",unit:"罐",temp:"冷冻",price:"43.80",image:true},
+      {name:"虎皮凤爪-脱骨侠-2.5千克-卤香-12个月",brand:"脱骨侠",channel:"餐饮",unit:"袋",temp:"冷冻",price:"180.00",image:true},
+      {name:"去骨鸭掌-沃集鲜-500克-藤椒贡菜-45天",brand:"沃集鲜",channel:"冻品休食",unit:"盒",temp:"冷藏",price:"29.90",image:true},
+      {name:"无骨鸡爪-脱骨侠-208克-酸辣柠檬-9个月",brand:"脱骨侠",channel:"常温休食",unit:"盒",temp:"常温",price:"19.90",image:false}
+    ];
+    const filters = {channel:["全部","线上","常温休食","冻品休食","餐饮"],brand:["全部","脱骨侠","边巷","沃集鲜"],unit:["全部","罐","盒","袋"],template:["招商册","渠道册","单品册","组合册"]};
+    const state = {channel:"线上",brand:"全部",unit:"全部",template:"渠道册",modules:{brand:true,supply:true,series:true,channel:true,product:true}};
+
+    function btn(container,key,list){container.innerHTML="";list.forEach(v=>{const b=document.createElement("button");b.className="chip"+(state[key]===v?" active":"");b.textContent=v;b.onclick=()=>{state[key]=v;render()};container.appendChild(b)})}
+    function selected(){return products.filter(p=>(state.channel==="全部"||p.channel===state.channel)&&(state.brand==="全部"||p.brand===state.brand)&&(state.unit==="全部"||p.unit===state.unit))}
+    function missing(list){return list.filter(i=>!i.image).length}
+    function slides(list){
+      const s=["封面","目录"];
+      if(state.modules.brand)s.push("品牌介绍");
+      if(state.modules.supply)s.push("供应链背书");
+      if(state.modules.series)s.push("系列总览");
+      if(state.modules.channel)s.push("渠道页");
+      if(state.template==="单品册"){s.push("单品主视觉");if(state.modules.product&&list[0])s.push("商品详情："+list[0].name)}
+      else if(state.template==="组合册"){s.push("商品组合总览");if(state.modules.product)s.push("组合商品卡")}
+      else if(state.template==="招商册"){s.push("核心卖点页","渠道适配页");if(state.modules.product)list.slice(0,3).forEach(i=>s.push("商品详情："+i.name))}
+      else {s.push("渠道推荐页");if(state.modules.product)list.slice(0,4).forEach(i=>s.push("商品详情："+i.name))}
+      s.push("封底"); return s;
+    }
+    function validations(list){
+      return [
+        list.length?"已同步商品，可进入页面编排。":"当前无匹配商品，请调整筛选条件。",
+        missing(list)?`存在 ${missing(list)} 个商品缺少封面图。`:"封面图完整，可输出详情页。",
+        state.modules.product?"将生成商品详情页。":"已关闭商品详情页，仅输出结构页。",
+        state.template==="招商册"?"建议补齐卖点和适用场景字段。":"基础字段已可支持 MVP 输出。"
+      ];
+    }
+    function render(){
+      btn(document.getElementById("channelFilter"),"channel",filters.channel);
+      btn(document.getElementById("brandFilter"),"brand",filters.brand);
+      btn(document.getElementById("unitFilter"),"unit",filters.unit);
+      btn(document.getElementById("templateFilter"),"template",filters.template);
+      const list=selected(), s=slides(list), m=missing(list), first=list[0];
+
+      const activeFilters=document.getElementById("activeFilters");
+      activeFilters.innerHTML="";
+      [`渠道：${state.channel}`,`品牌：${state.brand}`,`单位：${state.unit}`,`模板：${state.template}`,`命中：${list.length} 个`].forEach(t=>{const d=document.createElement("div");d.className="item";d.textContent=t;activeFilters.appendChild(d)});
+
+      const productList=document.getElementById("productList");
+      const mobileProducts=document.getElementById("mobileProducts");
+      productList.innerHTML=""; mobileProducts.innerHTML="";
+      if(!list.length){productList.innerHTML='<div class="item">暂无匹配商品<small>请切换筛选条件</small></div>'; mobileProducts.innerHTML='<span class="mchip">暂无商品</span>'}
+      else list.forEach((i,n)=>{const d=document.createElement("div");d.className="item"+(n===0?" active":"");d.innerHTML=`${i.name}<small>${i.brand} / ${i.channel} / ${i.unit} / ${i.temp} / ￥${i.price}</small>`;productList.appendChild(d);const c=document.createElement("span");c.className="mchip";c.textContent=i.name.slice(0,14);mobileProducts.appendChild(c)});
+
+      const slideList=document.getElementById("slideList");
+      slideList.innerHTML=""; s.forEach((t,n)=>{const d=document.createElement("div");d.className="item"+(n===0?" active":"");d.textContent=`${String(n+1).padStart(2,"0")} · ${t}`;slideList.appendChild(d)});
+
+      const v=document.getElementById("validationList");
+      v.innerHTML=""; validations(list).forEach(t=>{const li=document.createElement("li");li.textContent=t;v.appendChild(li)});
+
+      document.getElementById("templateTag").textContent=state.template;
+      document.getElementById("headlineTag").textContent=state.template;
+      document.getElementById("canvasTitle").textContent=`${state.brand==="全部"?(first?first.brand:"多品牌"):state.brand} · ${state.template}`;
+      document.getElementById("canvasDesc").textContent=({招商册:"强调品牌背书、供应链实力、系列结构和核心卖点。",渠道册:"适合业务快速沟通渠道商品结构。",单品册:"聚焦重点商品单独提报。",组合册:"适合组合提案和新品组合推介。"})[state.template];
+      document.getElementById("previewHeadline").textContent=({招商册:"品牌背书 + 供应链实力 + 招商商品组合",渠道册:"渠道分组 + 商品矩阵 + 快速导出",单品册:"单品放大 + 卖点沉淀 + 精准提报",组合册:"组合主题 + 商品搭配 + 一次成册"})[state.template];
+      document.getElementById("previewBody").textContent=first?`当前首个商品为“${first.name}”，系统会基于标准库字段和营销补充字段自动生成页面。`:"当前没有匹配商品。";
+      document.getElementById("metricProducts").textContent=list.length;
+      document.getElementById("metricSlides").textContent=s.length;
+      document.getElementById("syncState").textContent=`已同步 ${list.length} 个商品`;
+      document.getElementById("warnState").textContent=`缺图 ${m} 个`;
+      document.getElementById("sampleChannel").textContent=state.channel==="全部"?"多渠道":state.channel;
+      document.getElementById("sampleBrand").textContent=state.brand==="全部"?(first?first.brand:"待选"):state.brand;
+      document.getElementById("sampleUnit").textContent=state.unit==="全部"?"多包装":state.unit;
+      document.getElementById("mBrand").textContent=`品牌：${state.brand==="全部"?(first?first.brand:"待选"):state.brand}`;
+      document.getElementById("mChannel").textContent=`渠道：${state.channel==="全部"?"多渠道":state.channel}`;
+      document.getElementById("mTemplate").textContent=`模板：${state.template}`;
+      document.getElementById("mobileProject").textContent=`${state.brand==="全部"?"商品手册":state.brand+" 商品手册"} / ${state.template}`;
+      document.getElementById("mobileStatus").textContent=`预计生成 ${s.length} 页，可在线预览后导出 PPT。`;
+      document.getElementById("mobileWarnings").textContent=m?`当前有 ${m} 个商品缺少封面图，建议先补图再导出外部版。`:"当前配置完整，可直接导出外部版。";
+    }
+
+    document.querySelectorAll("[data-module]").forEach(i=>i.addEventListener("change",e=>{state.modules[e.target.dataset.module]=e.target.checked;render()}));
+    document.querySelectorAll(".tab").forEach(t=>t.addEventListener("click",()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));document.querySelectorAll(".pane").forEach(x=>x.classList.remove("active"));t.classList.add("active");document.querySelector(`[data-pane="${t.dataset.tab}"]`).classList.add("active")}));
+    render();
+  </script>
+</body>
+</html>
