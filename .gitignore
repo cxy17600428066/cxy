@@ -1,2 +1,4 @@
 .edge-headless/
 .edge-profile/
+.git-auto-sync.pid
+.git-auto-sync.log
