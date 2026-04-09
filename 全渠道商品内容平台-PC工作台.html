@@ -5,39 +5,39 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>产品手册生成流程 - PC端</title>
 <style>
- :root{--bg:#f5f7fb;--card:#ffffff;--line:#e5eaf3;--txt:#1f2329;--muted:#86909c;--brand:#3473ff;--brand2:#255ad6;--soft:#edf3ff;--blue:#3473ff;--bsoft:#edf3ff;--green:#00b42a;--gsoft:#e8ffea;--accent:#ff7d00;--shadow:0 8px 24px rgba(15,35,95,.06)}
-*{box-sizing:border-box}body{margin:0;color:var(--txt);font-family:"Segoe UI Variable","PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg)}
+:root{--bg:#f6efe7;--card:#fffaf5;--line:#eadfd1;--txt:#1f2937;--muted:#6b7280;--brand:#d2601e;--brand2:#a54412;--soft:#fff0e1;--blue:#1d4ed8;--bsoft:#eef4ff;--green:#166534;--gsoft:#ecfdf3;--shadow:0 24px 60px rgba(17,24,39,.08)}
+*{box-sizing:border-box}body{margin:0;color:var(--txt);font-family:"Segoe UI Variable","PingFang SC","Microsoft YaHei",sans-serif;background:linear-gradient(180deg,#fbf7f2,#f6efe7 48%,#efe4d8)}
 button,input,textarea{font:inherit}button{cursor:pointer}
-.app{max-width:1580px;margin:0 auto;padding:20px;display:grid;gap:16px}.hero,.panel,.drawer{background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow)}
-.hero{padding:24px;background:linear-gradient(180deg,#fff,#fbfdff);box-shadow:inset 0 3px 0 var(--brand),var(--shadow);color:var(--txt)}.hero h1{margin:12px 0 8px;font:900 38px/1.08 "Bahnschrift","Segoe UI Variable","PingFang SC",sans-serif;color:#1d2129}.hero p{margin:0;max-width:980px;line-height:1.8;color:#4e5969}.badge{display:inline-flex;padding:6px 12px;border-radius:999px;background:var(--soft);color:var(--brand);font-size:12px;font-weight:800;border:1px solid #d7e4ff}
-.stats{margin-top:16px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.stat{padding:14px 16px;border-radius:12px;background:#f9fbff;border:1px solid #e1e8f5}.stat span{display:block;font-size:12px;color:var(--muted)}.stat strong{display:block;margin-top:6px;font-size:24px;color:#1d2129}
-.panel{padding:18px}.topbar{display:flex;justify-content:space-between;gap:16px;align-items:end;margin-bottom:14px}.topbar h2{margin:0;font-size:22px;color:#1d2129}.topbar p{margin:6px 0 0;line-height:1.7;color:var(--muted)}.hint{color:var(--muted);font-size:13px}
-.stepper{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}.step{padding:14px;border:1px solid var(--line);border-radius:10px;background:#fff;cursor:pointer;transition:border-color .2s ease,box-shadow .2s ease,background-color .2s ease}.step.active{border-color:#c7d7ff;background:#f7faff;box-shadow:0 0 0 1px rgba(52,115,255,.08)}.step.done{border-color:#d7e4ff;background:#f8fbff}.step b{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--brand2),var(--brand));color:#fff;margin-bottom:10px}.step.done b{background:linear-gradient(135deg,#5b8cff,#3473ff)}.step strong{display:block;font-size:14px;color:#1d2129}.step small{display:block;margin-top:6px;line-height:1.55;color:var(--muted)}
+.app{max-width:1500px;margin:0 auto;padding:20px;display:grid;gap:16px}.hero,.panel,.drawer{background:rgba(255,250,245,.94);border:1px solid var(--line);border-radius:28px;box-shadow:var(--shadow)}
+.hero{padding:14px 18px;background:linear-gradient(135deg,#17356a,#2258f6 62%,#5aa7ff);color:#fff}.hero h1{margin:6px 0 2px;font:900 22px/1.08 "Bahnschrift","Segoe UI Variable","PingFang SC",sans-serif}.hero p{display:none}.badge{display:inline-flex;padding:5px 10px;border-radius:999px;background:rgba(255,255,255,.14);font-size:10px;font-weight:800}
+.stats{margin-top:10px;display:flex;flex-wrap:wrap;gap:8px}.stat{display:flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.14)}.stat span{display:block;font-size:10px;color:rgba(255,255,255,.68)}.stat strong{display:block;font-size:12px;line-height:1.2}
+.panel{padding:18px}.topbar{display:flex;justify-content:space-between;gap:16px;align-items:end;margin-bottom:14px}.topbar h2{margin:0;font-size:22px}.topbar p{margin:6px 0 0;line-height:1.7;color:var(--muted)}.hint{color:var(--muted);font-size:13px}
+.stepper{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}.step{display:grid;grid-template-columns:36px minmax(0,1fr);grid-template-areas:"badge title" "badge desc";column-gap:12px;row-gap:3px;align-items:center;min-height:88px;padding:12px 16px;border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,#fffdf9,#fff8f0);cursor:pointer;text-align:left}.step.active{border-color:#f0b37e;background:#fff4ea}.step.done{border-color:#bde2c6;background:#f4fff7}.step b{grid-area:badge;display:grid;place-items:center;width:36px;height:36px;border-radius:14px;background:linear-gradient(135deg,var(--brand2),var(--brand));color:#fff;font-size:18px;font-weight:900;margin:0;box-shadow:0 10px 20px rgba(29,78,216,.18)}.step.done b{background:linear-gradient(135deg,#1c7c43,#22a35b)}.step strong{grid-area:title;display:block;font-size:16px;line-height:1.15;color:#1e293b;letter-spacing:-.01em}.step small{grid-area:desc;display:block;margin:0;font-size:12px;line-height:1.3;color:var(--muted)}
 .layout{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:16px;align-items:start}.main{display:grid;gap:14px;min-width:0}.side{min-width:0}.view{display:none}.view.active{display:grid;gap:14px}
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.card{padding:14px;border:1px solid var(--line);border-radius:12px;background:#fff;box-shadow:0 4px 14px rgba(15,35,95,.04)}
-.dish.sel,.scene.sel{border-color:#c7d7ff;background:#f7faff;box-shadow:0 0 0 1px rgba(52,115,255,.08)}.dish h3,.scene h3{margin:0;font-size:16px;color:#1d2129}.dish p,.scene p,.preview p,.line,.mini,.list small,.cap small{color:var(--muted)}.dish p,.scene p,.preview p{line-height:1.7}
-.meta{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}.chip{padding:6px 10px;border-radius:999px;background:#f2f5fa;color:#4e5969;font-size:12px;font-weight:700;border:1px solid #e6ebf2}
-.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.btn{border:1px solid transparent;padding:9px 14px;border-radius:6px;font-weight:800;transition:all .2s ease}.btn.p{background:var(--brand);border-color:var(--brand);color:#fff}.btn.s{background:var(--bsoft);border-color:#d4e3ff;color:var(--blue)}.btn.g{background:#fff;border-color:var(--line);color:#344054}.btn.d{background:#fff2f0;color:#d92d20;border-color:#f3c6c2}.btn:disabled{cursor:not-allowed;opacity:.48;box-shadow:none}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.card{padding:14px;border:1px solid var(--line);border-radius:22px;background:linear-gradient(180deg,#fffdf9,#fff8f2)}
+.dish.sel,.scene.sel{border-color:#f0b37e;background:#fff4ea}.dish{display:flex;flex-direction:column;gap:10px;height:100%}.dish h3,.scene h3{margin:0;font-size:16px}.dish p,.scene p,.preview p,.line,.mini,.list small,.cap small{color:var(--muted)}.dish p,.scene p,.preview p{line-height:1.7}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}.chip{padding:6px 10px;border-radius:999px;background:#f7efe5;color:#6c4f3a;font-size:12px;font-weight:700}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.dish .actions{margin-top:auto;padding-top:4px}.btn{border:0;padding:10px 14px;border-radius:999px;font-weight:800}.btn.p{background:linear-gradient(135deg,var(--brand2),var(--brand),#f0a038);color:#fff}.btn.s{background:var(--bsoft);color:var(--blue)}.btn.g{background:#fff;border:1px solid var(--line)}.btn.d{background:#fff0f0;color:#b91c1c;border:1px solid #f4cccc}.btn:disabled{cursor:not-allowed;opacity:.48;box-shadow:none}
 .sceneGrid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.field{display:grid;gap:8px}.field.full{grid-column:1/-1}.field label{display:flex;justify-content:space-between;gap:10px;font-size:13px;font-weight:800}.field label span:last-child{color:var(--muted)}.field input,.field textarea{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:14px;background:#fff;color:var(--txt)}.field textarea{min-height:96px;resize:vertical;line-height:1.7}
-.editorSections{display:grid;gap:16px}.editorBlock{padding:18px;border:1px solid var(--line);border-radius:12px;background:#fff;display:grid;gap:16px;min-width:0}.editorHeader{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;padding-bottom:14px;border-bottom:1px solid #edf1f7}.editorHeader strong{display:block;font-size:18px;color:#1d2129}.editorHeader p{margin:6px 0 0;font-size:13px;line-height:1.7;color:var(--muted)}.editorBadgeRow{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}.editorGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.editorBody{display:grid;gap:14px}.editorBody.collapsed{display:none}.productEditorGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px}.productEditorCard{padding:16px;border:1px solid var(--line);border-radius:12px;background:#fff;display:grid;gap:14px;min-width:0;box-shadow:0 4px 14px rgba(15,35,95,.04)}.productEditorTop{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.productEditorTitle{display:grid;gap:6px;min-width:0}.productEditorTitle strong{font-size:16px;line-height:1.4;color:#1d2129;word-break:break-word}.productEditorMeta{font-size:12px;line-height:1.7;color:var(--muted);word-break:break-word}.productEditorFields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.productEditorFields .field textarea{min-height:88px}.productEditorFields .field.full textarea{min-height:108px}.productEffectRow{display:flex;gap:8px;flex-wrap:wrap}.effectChip{padding:6px 10px;border-radius:999px;background:#edf3ff;color:#3473ff;font-size:12px;font-weight:700;border:1px solid #d7e4ff}
-.productEditorPreview{display:grid;gap:10px;padding:12px 14px;border:1px solid #edf1f7;border-radius:10px;background:#fafcff}.productEditorPreview p{margin:0;font-size:13px;line-height:1.7;color:#4e5969}.productEditorToolbar{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap}.productEditorToggle{min-width:92px;align-self:start}
-.editorModal{position:fixed;inset:0;padding:24px;display:none;place-items:center;background:rgba(15,23,42,.26);backdrop-filter:blur(4px);z-index:60}.editorModal.open{display:grid}.editorModalPanel{width:min(900px,calc(100vw - 32px));max-height:calc(100vh - 48px);overflow:auto;padding:20px;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 20px 48px rgba(15,35,95,.16);display:grid;gap:16px}.editorModalTop{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.editorModalTitle{display:grid;gap:6px}.editorModalTitle h3{margin:0;font-size:22px;line-height:1.3;color:#1d2129}.editorModalTitle p{margin:0;font-size:13px;line-height:1.7;color:var(--muted)}
-.filterPanel{display:grid;gap:18px;padding:20px 22px;border:1px solid var(--line);border-radius:12px;background:#fff}.filterTop{display:flex;justify-content:space-between;gap:18px;align-items:flex-start;padding-bottom:14px;border-bottom:1px solid #edf1f7}.filterTop>div:first-child{display:grid;gap:4px}.filterTop strong{display:block;font-size:20px;line-height:1.2;color:#1d2129}.filterTop .hint,#productFilterSummary{margin:0;font-size:13px;line-height:1.65;color:var(--muted)}.filterMeta{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end;align-items:center}.filterMeta .chip{display:inline-flex;align-items:center;gap:8px;min-height:38px;padding:0 14px;border:1px solid #dce6f7;background:#f7faff;color:#4e5969;font-size:12px;font-weight:700}.filterMeta .chip strong{font-size:24px;line-height:1;color:var(--brand)}.filterActions{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}.filterMeta .btn.g,.filterMeta .btn.s{min-height:38px;padding:0 18px}.filterGroup{display:grid;grid-template-columns:126px minmax(0,1fr);gap:12px;align-items:start}.filterLabel{display:flex;align-items:center;min-height:36px;font-size:14px;line-height:1.5;font-weight:800;color:#1d2129}.filterOptions{display:flex;gap:10px;row-gap:10px;flex-wrap:wrap;align-items:center}.filterChip{display:inline-flex;align-items:center;justify-content:center;min-height:30px;padding:0 14px;border-radius:999px;border:1px solid #dce4f2;background:#fff;color:#4e5969;font-size:12px;line-height:1;font-weight:700;letter-spacing:.01em;cursor:pointer;transition:all .2s ease}.filterChip:hover{border-color:#9db9ff;background:#f7faff;color:#255ad6}.filterChip.active{border-color:#c7d7ff;background:#edf3ff;color:#255ad6;box-shadow:none}#productFilters{display:grid;gap:10px}.emptyState{padding:24px;border:1px dashed #dce4f2;border-radius:10px;background:#fbfcff;text-align:center;color:var(--muted);line-height:1.8}
-.selectedSummary{position:sticky;top:20px;display:grid;gap:14px;max-height:calc(100vh - 40px);overflow:hidden}.sideHeader{display:flex;justify-content:space-between;gap:10px;align-items:center}.sideHeader .chip{background:#edf3ff;color:var(--brand);border:1px solid #d7e4ff}.selectedProducts{display:grid;gap:10px;min-width:0;overflow:auto;padding-right:4px}.selectedProductItem{padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:#fff}.selectedProductRow{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.selectedProductItem strong{display:block;font-size:14px;color:#1d2129;word-break:break-word}.selectedProductMeta{margin-top:6px;font-size:12px;line-height:1.7;color:var(--muted);word-break:break-word}.sideRemoveBtn{padding:6px 10px;border-radius:6px;border:1px solid #f3c6c2;background:#fff2f0;color:#d92d20;font-size:12px;font-weight:800}.sideRemoveBtn:disabled{opacity:.45;cursor:not-allowed}
-.preview{padding:0;overflow:hidden}.module{padding:14px;border:1px solid var(--line);border-radius:10px;background:#fff}.module h4{margin:0 0 10px;font-size:16px}.list,.caps{display:grid;gap:10px}.item,.cap,.summary{padding:12px;border:1px solid var(--line);border-radius:10px;background:#fff}.item strong,.cap strong,.summary strong{display:block;font-size:14px;color:#1d2129}.capHead{display:flex;justify-content:space-between;gap:10px;align-items:start}.pill{padding:6px 9px;border-radius:999px;background:var(--gsoft);color:var(--green);font-size:11px;font-weight:800;white-space:nowrap}
-.deckShell{padding:16px;display:grid;grid-template-columns:220px minmax(0,1fr);gap:14px}.deckSidebar{display:grid;gap:10px;max-height:980px;overflow:auto;padding-right:4px}.thumb{padding:12px;border:1px solid var(--line);border-radius:10px;background:#fff;text-align:left;cursor:pointer}.thumb.active{border-color:#c7d7ff;background:#f7faff;box-shadow:0 0 0 1px rgba(52,115,255,.08)}.thumb strong{display:block;font-size:13px;color:#1d2129}.thumb small{display:block;margin-top:6px;line-height:1.55;color:var(--muted)}.deckStage{display:grid;gap:12px;min-width:0}.deckTools{display:grid;gap:12px;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:#fff}.deckToolsTop{display:flex;justify-content:space-between;gap:12px;align-items:center}.deckNav,.deckPageActions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.deckPageWrap{padding:18px;border:1px solid var(--line);border-radius:12px;background:#f8fbff;overflow:auto}
-.ppt{width:100%;min-height:0;border-radius:12px;overflow:visible;background:#fff;border:1px solid #dfe7f3;box-shadow:0 8px 24px rgba(15,35,95,.08);display:grid;grid-template-rows:auto 1fr}.pptTop{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:16px 22px;background:linear-gradient(90deg,#255ad6,#3473ff);color:#fff}.pptBrand{font:900 14px/1 "Bahnschrift","Segoe UI Variable","PingFang SC",sans-serif;letter-spacing:.08em}.pptNo{padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.18);font-size:12px;font-weight:800}.pptReplacedBody{padding:22px;display:grid;gap:14px}.pptReplacedVisual{border-radius:12px;overflow:hidden;border:1px solid #dfe7f3;background:#fbfdff;min-height:520px;display:grid;place-items:center}.pptReplacedVisual img{display:block;width:100%;height:100%;object-fit:contain}
+.editorSections{display:grid;gap:16px}.editorBlock{padding:18px;border:1px solid var(--line);border-radius:24px;background:linear-gradient(180deg,#fffdf9,#fff7ef);display:grid;gap:16px;min-width:0}.editorHeader{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;padding-bottom:14px;border-bottom:1px solid rgba(234,223,209,.9)}.editorHeader strong{display:block;font-size:18px;color:#162033}.editorHeader p{margin:6px 0 0;font-size:13px;line-height:1.7;color:var(--muted)}.editorBadgeRow{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}.editorGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.editorBody{display:grid;gap:14px}.editorBody.collapsed{display:none}.productEditorGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px}.productEditorCard{padding:16px;border:1px solid #ead9c8;border-radius:22px;background:#fff;display:grid;gap:14px;min-width:0;box-shadow:0 14px 30px rgba(17,24,39,.04)}.productEditorTop{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.productEditorTitle{display:grid;gap:6px;min-width:0}.productEditorTitle strong{font-size:16px;line-height:1.4;color:#162033;word-break:break-word}.productEditorMeta{font-size:12px;line-height:1.7;color:var(--muted);word-break:break-word}.productEditorFields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.productEditorFields .field textarea{min-height:88px}.productEditorFields .field.full textarea{min-height:108px}.productEffectRow{display:flex;gap:8px;flex-wrap:wrap}.effectChip{padding:6px 10px;border-radius:999px;background:#eef4ff;color:#1d4ed8;font-size:12px;font-weight:700}
+ .productEditorPreview{display:grid;gap:10px;padding:12px 14px;border:1px solid #f0e2d4;border-radius:18px;background:linear-gradient(180deg,#fffdfa,#fff7f0)}.productEditorPreview p{margin:0;font-size:13px;line-height:1.7;color:#5b6575}.productEditorToolbar{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap}.productEditorToggle{min-width:92px;align-self:start}.productEditorSummaryHero{display:flex;gap:14px;align-items:center;padding:14px;border-radius:20px;background:linear-gradient(180deg,rgba(255,255,255,.9),rgba(248,251,255,.95));border:1px solid #dce6f3}.productEditorSummaryMedia{width:84px;height:84px;flex:0 0 84px;border-radius:18px;overflow:hidden;border:1px solid #d8e4f0;background:linear-gradient(180deg,#fbfdff,#eff4fb);display:grid;place-items:center;padding:8px}.productEditorSummaryMedia img{display:block;width:100%;height:100%;object-fit:contain}.productEditorSummaryCopy{display:grid;gap:8px;min-width:0}.productEditorSummaryCopy strong{display:block;font-size:15px;color:#162033}
+.editorModal{position:fixed;inset:0;padding:24px;display:none;place-items:center;background:rgba(15,23,42,.42);backdrop-filter:blur(6px);z-index:60}.editorModal.open{display:grid}.editorModalPanel{width:min(900px,calc(100vw - 32px));max-height:calc(100vh - 48px);overflow:auto;padding:20px;background:rgba(255,250,245,.99);border:1px solid var(--line);border-radius:28px;box-shadow:0 30px 80px rgba(17,24,39,.22);display:grid;gap:16px}.editorModalTop{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.editorModalTitle{display:grid;gap:6px}.editorModalTitle h3{margin:0;font-size:22px;line-height:1.3;color:#162033}.editorModalTitle p{margin:0;font-size:13px;line-height:1.7;color:var(--muted)}
+ .filterPanel{display:grid;gap:18px;padding:20px 22px;border:1px solid #e8d9c8;border-radius:24px;background:linear-gradient(180deg,rgba(255,253,249,.98),rgba(255,247,238,.94));box-shadow:inset 0 1px 0 rgba(255,255,255,.6)}.filterTop{display:flex;justify-content:space-between;gap:18px;align-items:flex-start;padding-bottom:14px;border-bottom:1px solid rgba(232,217,200,.8)}.filterTop>div:first-child{display:grid;gap:4px}.filterTop strong{display:block;font-size:20px;line-height:1.2;color:#162033}.filterTop .hint,#productFilterSummary{margin:0;font-size:13px;line-height:1.65;color:#7a6d61}.filterMeta{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end;align-items:center}.filterMeta .chip{display:inline-flex;align-items:center;gap:8px;min-height:42px;padding:0 14px;border:1px solid #ead9c6;background:linear-gradient(180deg,#fbf4ea,#f4ebdf);color:#7a573b;font-size:12px;font-weight:700}.filterMeta .chip strong{font-size:28px;line-height:1;color:#8f4a1d}.filterActions{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}.filterMeta .btn.g{min-height:42px;padding:0 18px;border-color:#dfd1c2;background:rgba(255,255,255,.9);color:#7a6d61}.filterMeta .btn.g:hover{border-color:#cfb59a;color:#8f4a1d}.filterMeta .btn.s{min-height:42px;padding:0 18px;border:1px solid #c9ddff;background:linear-gradient(180deg,#f8fbff,#eaf2ff);color:#1e56bf}.filterCompactGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;align-items:stretch}.filterCompactCard{display:grid;gap:12px;padding:16px 18px;border:1px solid #dfe7f3;border-radius:18px;background:linear-gradient(180deg,#ffffff,#f7fafe);box-shadow:0 10px 24px rgba(34,88,246,.05)}.filterCompactLabel{display:flex;align-items:center;font-size:13px;font-weight:800;color:#304760}.filterGroup,.filterSearchGroup{display:grid;grid-template-columns:126px minmax(0,1fr);gap:12px;align-items:start}.filterLabel{display:flex;align-items:center;min-height:36px;font-size:14px;line-height:1.5;font-weight:800;color:#3f2d21}.filterOptions{display:flex;gap:10px;row-gap:10px;flex-wrap:wrap;align-items:center}.filterCompactCard .filterOptions{gap:8px}.filterSearchBox{display:flex;align-items:center;min-height:42px}.filterCompactCard .filterSearchBox{min-height:auto}.filterSearchInput{width:min(420px,100%);min-height:42px;padding:0 16px;border-radius:14px;border:1px solid #d7e3ff;background:linear-gradient(180deg,#ffffff,#f7fafe);color:#31465f;outline:none;box-shadow:0 8px 18px rgba(34,88,246,.06)}.filterCompactCard .filterSearchInput{width:100%}.filterSearchInput:focus{border-color:#b7cdfd;box-shadow:0 0 0 4px rgba(34,88,246,.10)}.filterChip{display:inline-flex;align-items:center;justify-content:center;min-height:30px;padding:0 14px;border-radius:999px;border:1px solid #dccfbe;background:#fff;color:#556274;font-size:12px;line-height:1;font-weight:700;letter-spacing:.01em;cursor:pointer;transition:all .2s ease}.filterChip:hover{border-color:#ccb295;background:#fff8f1;color:#8f4a1d}.filterChip.active{border-color:#e5bf91;background:linear-gradient(180deg,#fff7ed,#ffe9d2);color:#a24b16;box-shadow:0 8px 20px rgba(210,96,30,.12)}.filterCollapseRow{display:flex;justify-content:flex-start}#productFilters{display:grid;gap:10px}.emptyState{padding:24px;border:1px dashed #e8d6c2;border-radius:20px;background:#fff;text-align:center;color:var(--muted);line-height:1.8}
+ .selectedSummary{position:sticky;top:20px;display:grid;gap:14px;max-height:calc(100vh - 40px);overflow:hidden}.sideHeader{display:flex;justify-content:space-between;gap:10px;align-items:center}.sideHeader .chip{background:#fff4ea;color:#a24b16}.selectedSummaryMeta{display:grid;gap:10px;padding:12px 14px;border:1px solid #dfe8f2;border-radius:16px;background:linear-gradient(180deg,#fbfdff,#f4f8fd)}.selectedSummaryMeta .line{margin:0;font-size:12px;line-height:1.7}.selectedSummaryMeta .actions{margin:0}.selectedProducts{display:grid;gap:10px;min-width:0;overflow:auto;padding-right:4px}.selectedProductItem{padding:12px 14px;border:1px solid #eadfd1;border-radius:16px;background:linear-gradient(180deg,#fffdf9,#fff8f2)}.selectedProductRow{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.selectedProductMain{display:grid;gap:6px;min-width:0}.selectedProductItem strong{display:block;font-size:14px;color:#162033;word-break:break-word}.selectedProductMeta{margin-top:0;font-size:12px;line-height:1.7;color:var(--muted);word-break:break-word}.selectedProductTags{display:flex;gap:8px;flex-wrap:wrap}.selectedProductTag{display:inline-flex;align-items:center;min-height:24px;padding:0 10px;border-radius:999px;background:#eef4ff;color:#2159d6;font-size:11px;font-weight:800}.sideRemoveBtn{min-width:72px;min-height:42px;padding:0 14px;border-radius:14px;border:1px solid #f0d3d3;background:#fff4f4;color:#b42318;font-size:12px;font-weight:800;line-height:1;white-space:nowrap;word-break:keep-all;align-self:flex-start;flex:0 0 auto}.sideRemoveBtn:disabled{opacity:.45;cursor:not-allowed}
+.preview{padding:0;overflow:hidden}.module{padding:14px;border:1px solid var(--line);border-radius:20px;background:#fff}.module h4{margin:0 0 10px;font-size:16px}.list,.caps{display:grid;gap:10px}.item,.cap,.summary{padding:12px;border:1px solid var(--line);border-radius:18px;background:#fffdf9}.item strong,.cap strong,.summary strong{display:block;font-size:14px}.capHead{display:flex;justify-content:space-between;gap:10px;align-items:start}.pill{padding:6px 9px;border-radius:999px;background:var(--gsoft);color:var(--green);font-size:11px;font-weight:800;white-space:nowrap}
+ .deckShell{padding:16px;display:grid;grid-template-columns:280px minmax(0,1fr);gap:16px}.deckSidebar{display:grid;gap:12px;min-width:0}.deckSidebarPanel,.deckDeletedPanel{display:grid;gap:12px;padding:14px;border:1px solid #d7e2ef;border-radius:20px;background:linear-gradient(180deg,rgba(255,255,255,.98),rgba(244,249,255,.94));box-shadow:var(--shadow-soft)}.deckSidebarHead{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.deckSidebarHead strong{display:block;font-size:15px;color:#162033}.deckSidebarHead .hint{margin-top:4px;line-height:1.6}.deckThumbs{display:grid;gap:10px;max-height:780px;overflow:auto;padding-right:4px}.thumb{display:grid;gap:10px;padding:12px 13px;border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,#fffdf9,#fff8f0);text-align:left;cursor:pointer}.thumb.active{border-color:#f0b37e;background:#fff4ea}.thumbHead{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.thumb strong{display:block;font-size:13px}.thumbMeta{display:grid;gap:4px}.thumb small{display:block;line-height:1.55;color:var(--muted)}.thumbBadges{display:flex;gap:6px;flex-wrap:wrap}.thumbBadge{display:inline-flex;align-items:center;min-height:22px;padding:0 8px;border-radius:999px;background:#eff4fb;color:#4b607a;font-size:11px;font-weight:800}.thumbBadge.primary{background:#eaf1ff;color:#2258f6}.thumbBadge.warn{background:#fff1e5;color:#b85a13}.thumbBadge.danger{background:#fff0f0;color:#c03221}.thumbBadge.success{background:#e9f8f2;color:#12825d}.deckStage{display:grid;gap:12px;min-width:0}.deckTools{display:grid;gap:14px;padding:14px 16px;border:1px solid var(--line);border-radius:18px;background:#fffdf9}.deckToolsTop{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.deckStateRow{display:flex;gap:8px;flex-wrap:wrap}.deckNav,.deckPageActions,.deckPageActionGroup{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.deckPageActions{justify-content:space-between}.deckPageActionGroup.dangerGroup{justify-content:flex-end}.deletedList{display:grid;gap:10px;max-height:220px;overflow:auto;padding-right:4px}.deletedItem{display:grid;gap:8px;padding:12px;border:1px dashed #d9c7c7;border-radius:16px;background:#fffafb}.deletedItem strong{display:block;font-size:13px;color:#162033}.deletedItemMeta{display:grid;gap:4px}.deletedItem small{display:block;line-height:1.55;color:var(--muted)}.deckPageWrap{padding:18px;border:1px solid var(--line);border-radius:24px;background:linear-gradient(180deg,#fffdf9,#fff6ef);overflow:auto}
+.ppt{width:100%;min-height:0;border-radius:24px;overflow:visible;background:#fff;border:1px solid #f1ddc8;box-shadow:0 18px 40px rgba(17,24,39,.08);display:grid;grid-template-rows:auto 1fr}.pptTop{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:16px 22px;background:linear-gradient(90deg,#8f3810,#d2601e 50%,#f0a33d);color:#fff}.pptBrand{font:900 14px/1 "Bahnschrift","Segoe UI Variable","PingFang SC",sans-serif;letter-spacing:.08em}.pptNo{padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.16);font-size:12px;font-weight:800}.pptReplacedBody{padding:22px;display:grid;gap:14px}.pptReplacedVisual{border-radius:22px;overflow:hidden;border:1px solid #efdac4;background:#fff9f2;min-height:520px;display:grid;place-items:center}.pptReplacedVisual img{display:block;width:100%;height:100%;object-fit:contain}
 .pptBody{padding:clamp(16px,2vw,26px);display:grid;gap:18px;align-content:start}.ppt.cover .pptBody,.ppt.divider .pptBody{align-content:center;justify-items:start;background:
-radial-gradient(circle at right top, rgba(52,115,255,.08), transparent 28%),
-linear-gradient(180deg,#fbfdff,#fff)}
-.pptTitle{margin:0;font:900 clamp(28px,3vw,38px)/1.08 "Bahnschrift","Segoe UI Variable","PingFang SC",sans-serif;color:#1d2129;word-break:break-word}.pptSub{margin:0;font-size:clamp(15px,2vw,18px);color:#3473ff;font-weight:800}.pptDesc{margin:0;max-width:900px;font-size:14px;line-height:1.85;color:#4e5969;word-break:break-word}
-.pptCols{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;align-items:start}.pptBox{padding:16px;border:1px solid var(--line);border-radius:10px;background:#fff;min-width:0}.pptBox h5{margin:0 0 10px;font-size:16px;color:#1d2129}.pptBox ul{margin:0;padding-left:18px}.pptBox li{margin:6px 0;line-height:1.75;color:#4e5969;word-break:break-word}
-.pptStats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}.pptStat{padding:14px;border:1px solid var(--line);border-radius:10px;background:#fbfdff;min-width:0}.pptStat span{display:block;font-size:12px;color:var(--muted)}.pptStat strong{display:block;margin-top:5px;font-size:clamp(18px,2vw,20px);color:#1d2129;word-break:break-word}
-.pptTags{display:flex;flex-wrap:wrap;gap:8px}.pptTag{padding:7px 10px;border-radius:999px;background:#f2f5fa;color:#4e5969;font-size:12px;font-weight:700;border:1px solid #e6ebf2}.pptEffectRow{display:flex;flex-wrap:wrap;gap:8px}.pptEffect{padding:7px 10px;border-radius:999px;background:#edf3ff;color:#255ad6;font-size:12px;font-weight:800;border:1px solid #d7e4ff}.pptTable{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}.pptCell{padding:12px;border:1px solid var(--line);border-radius:10px;background:#fff;min-width:0}.pptCell span{display:block;font-size:12px;color:var(--muted)}.pptCell strong{display:block;margin-top:5px;font-size:14px;word-break:break-word}
-.pptClosing{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}.pptChannel{padding:16px;border:1px dashed #c7d7ff;border-radius:10px;background:#f8fbff;text-align:center}.pptChannel strong{display:block;font-size:15px;word-break:break-word}.pptChannel small{display:block;margin-top:8px;color:var(--muted);line-height:1.7}
-.nav{display:flex;justify-content:space-between;gap:10px;align-items:center}.drawer{position:fixed;inset:0;padding:24px;display:none;place-items:center;background:rgba(15,23,42,.26);backdrop-filter:blur(4px);z-index:50}.drawer.open{display:grid}.drawerPanel{width:min(980px,calc(100vw - 32px));max-height:calc(100vh - 48px);overflow:auto;padding:20px;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 20px 48px rgba(15,35,95,.16);display:grid;gap:14px}.drawerCloseRow{display:flex;justify-content:flex-end}.drawerTitle{margin:0;font-size:24px;line-height:1.25;color:#1d2129}.drawerHeader{display:grid;gap:6px}.drawerMain{display:grid;grid-template-columns:280px minmax(0,1fr);gap:16px;align-items:start}.drawerVisual{display:grid;gap:12px}.drawerInfo{display:grid;gap:12px}
-.qr{width:146px;height:146px;padding:10px;border-radius:12px;background:#fff;border:1px solid var(--line);display:grid;grid-template-columns:repeat(9,1fr);gap:3px}.qr i{background:#111827;border-radius:2px}.qr i:nth-child(2n){opacity:.12}.shareGrid{display:grid;grid-template-columns:1fr 220px;gap:14px}.linkbox{padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:#fff;word-break:break-all}.devicePreview{display:grid;gap:12px;margin-top:14px}.deviceSwitch{display:flex;gap:8px;flex-wrap:wrap}.switchBtn{border:1px solid var(--line);background:#fff;padding:9px 12px;border-radius:6px;font-weight:800;color:#4e5969}.switchBtn.active{background:#edf3ff;border-color:#c7d7ff;color:#255ad6}.previewStage{padding:16px;border:1px solid var(--line);border-radius:12px;background:#fff;overflow:auto}.previewViewport{margin:0 auto;transition:width .2s ease}.previewViewport.desktop{width:100%;max-width:1180px}.previewViewport.tablet{width:820px;max-width:100%}.previewViewport.mobile{width:390px;max-width:100%;border:10px solid #0f172a;border-radius:20px;overflow:hidden;background:#0f172a}.previewViewport iframe{display:block;width:100%;height:760px;border:0;background:#fff}.previewViewport.mobile iframe{height:740px}
-.dishMedia,.drawerCover,.pptVisual{position:relative;overflow:hidden;border:1px solid #dfe7f3;background:radial-gradient(circle at top right,rgba(52,115,255,.14),transparent 38%),linear-gradient(180deg,#fbfdff,#f4f8ff)}
+radial-gradient(circle at right top, rgba(210,96,30,.10), transparent 26%),
+linear-gradient(180deg,#fffaf6,#fff)}
+.pptTitle{margin:0;font:900 clamp(28px,3vw,38px)/1.08 "Bahnschrift","Segoe UI Variable","PingFang SC",sans-serif;color:#162033;word-break:break-word}.pptSub{margin:0;font-size:clamp(15px,2vw,18px);color:#9a4a20;font-weight:800}.pptDesc{margin:0;max-width:900px;font-size:14px;line-height:1.85;color:#445065;word-break:break-word}
+.pptCols{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;align-items:start}.pptBox{padding:16px;border:1px solid var(--line);border-radius:20px;background:linear-gradient(180deg,#fffdf9,#fff8f2);min-width:0}.pptBox h5{margin:0 0 10px;font-size:16px}.pptBox ul{margin:0;padding-left:18px}.pptBox li{margin:6px 0;line-height:1.75;color:#4b5563;word-break:break-word}
+.pptStats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}.pptStat{padding:14px;border:1px solid var(--line);border-radius:18px;background:#fff;min-width:0}.pptStat span{display:block;font-size:12px;color:var(--muted)}.pptStat strong{display:block;margin-top:5px;font-size:clamp(18px,2vw,20px);color:#162033;word-break:break-word}
+.pptTags{display:flex;flex-wrap:wrap;gap:8px}.pptTag{padding:7px 10px;border-radius:999px;background:#f7efe5;color:#6c4f3a;font-size:12px;font-weight:700}.pptEffectRow{display:flex;flex-wrap:wrap;gap:8px}.pptEffect{padding:7px 10px;border-radius:999px;background:#eef4ff;color:#1d4ed8;font-size:12px;font-weight:800}.pptTable{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}.pptCell{padding:12px;border:1px solid var(--line);border-radius:16px;background:#fff;min-width:0}.pptCell span{display:block;font-size:12px;color:var(--muted)}.pptCell strong{display:block;margin-top:5px;font-size:14px;word-break:break-word}
+.pptClosing{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}.pptChannel{padding:16px;border:1px dashed #efc89b;border-radius:20px;background:#fff8ef;text-align:center}.pptChannel strong{display:block;font-size:15px;word-break:break-word}.pptChannel small{display:block;margin-top:8px;color:var(--muted);line-height:1.7}
+.nav{display:flex;justify-content:space-between;gap:10px;align-items:center}.drawer{position:fixed;inset:0;padding:24px;display:none;place-items:center;background:rgba(15,23,42,.34);backdrop-filter:blur(6px);z-index:50}.drawer.open{display:grid}.drawerPanel{width:min(980px,calc(100vw - 32px));max-height:calc(100vh - 48px);overflow:auto;padding:20px;background:rgba(255,250,245,.98);border:1px solid var(--line);border-radius:28px;box-shadow:0 30px 80px rgba(17,24,39,.22);display:grid;gap:14px}.drawerCloseRow{display:flex;justify-content:flex-end}.drawerTitle{margin:0;font-size:24px;line-height:1.25;color:#162033}.drawerHeader{display:grid;gap:6px}.drawerMain{display:grid;grid-template-columns:280px minmax(0,1fr);gap:16px;align-items:start}.drawerVisual{display:grid;gap:12px}.drawerInfo{display:grid;gap:12px}
+.qr{width:146px;height:146px;padding:10px;border-radius:16px;background:#fff;border:1px solid var(--line);display:grid;grid-template-columns:repeat(9,1fr);gap:3px}.qr i{background:#111;border-radius:2px}.qr i:nth-child(2n){opacity:.12}.shareGrid{display:grid;grid-template-columns:1fr 220px;gap:14px}.linkbox{padding:12px 14px;border:1px solid var(--line);border-radius:16px;background:#fff;word-break:break-all}.devicePreview{display:grid;gap:12px;margin-top:14px}.deviceSwitch{display:flex;gap:8px;flex-wrap:wrap}.switchBtn{border:1px solid var(--line);background:#fff;padding:9px 12px;border-radius:999px;font-weight:800}.switchBtn.active{background:#fff4ea;border-color:#f0b37e;color:#a54412}.previewStage{padding:16px;border:1px solid var(--line);border-radius:22px;background:#fffdf9;overflow:auto}.previewViewport{margin:0 auto;transition:width .2s ease}.previewViewport.desktop{width:100%;max-width:1180px}.previewViewport.tablet{width:820px;max-width:100%}.previewViewport.mobile{width:390px;max-width:100%;border:10px solid #0f172a;border-radius:28px;overflow:hidden;background:#0f172a}.previewViewport iframe{display:block;width:100%;height:760px;border:0;background:#fff}.previewViewport.mobile iframe{height:740px}
+.dishMedia,.drawerCover,.pptVisual{position:relative;overflow:hidden;border:1px solid #efdac4;background:radial-gradient(circle at top right,rgba(240,163,61,.34),transparent 38%),linear-gradient(180deg,#fffaf4,#fff2e3)}
 .dishMedia{margin:-4px -4px 12px;border-radius:18px;aspect-ratio:16/10;display:grid;place-items:center;padding:12px}
 .dishMedia img,.drawerCover img,.pptVisual img{display:block;width:100%;height:100%;object-fit:contain}
 .dishBadge,.pptVisualBadge{position:absolute;left:12px;top:12px;background:rgba(143,56,16,.88);color:#fff}
@@ -55,7 +55,7 @@ linear-gradient(180deg,#fbfdff,#fff)}
 .pptHero{display:grid;grid-template-columns:minmax(280px,360px) minmax(0,1fr);gap:18px;align-items:stretch}
 .pptVisual{min-height:360px;border-radius:28px;padding:26px}
 .pptHeroCard{display:grid;gap:14px;padding:4px 0;min-width:0}
-.pptLead{padding:14px 16px;border-radius:10px;background:#f7faff;border:1px solid #dbe7ff;color:#4e5969;line-height:1.8}
+.pptLead{padding:14px 16px;border-radius:18px;background:#fff7ee;border:1px solid #efd9c1;color:#4b5563;line-height:1.8}
 .pptFocus{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}
 .pptFocusItem{padding:12px;border-radius:16px;background:#fff;border:1px solid var(--line)}
 .pptFocusItem span{display:block;font-size:12px;color:var(--muted)}
@@ -126,46 +126,61 @@ linear-gradient(180deg,#fbfdff,#fff)}
  .hero{
   position:relative;
   overflow:hidden;
-  padding:34px 34px 30px;
+  display:grid;
+  grid-template-columns:minmax(0,1.35fr) minmax(320px,.95fr);
+  grid-template-areas:
+   "title stats"
+   "desc stats";
+  column-gap:24px;
+  row-gap:10px;
+  align-items:center;
+  padding:24px 26px;
   border-color:rgba(47,110,235,.22);
   background:
-   radial-gradient(circle at 85% 18%,rgba(255,255,255,.18),transparent 18%),
-   radial-gradient(circle at 78% 0%,rgba(130,233,255,.14),transparent 22%),
-   linear-gradient(135deg,#0e1c38 0%,#17356a 42%,#1d64c8 100%);
-  box-shadow:0 28px 80px rgba(16,40,90,.22);
+   radial-gradient(circle at 88% 16%,rgba(255,255,255,.16),transparent 20%),
+   radial-gradient(circle at 76% 8%,rgba(130,233,255,.12),transparent 24%),
+   linear-gradient(135deg,#102144 0%,#173a74 46%,#1f63cc 100%);
+  box-shadow:0 24px 64px rgba(16,40,90,.18);
  }
  .hero::before{
   content:"";
   position:absolute;
-  inset:auto -120px -160px auto;
-  width:420px;
-  height:420px;
+  inset:auto -90px -150px auto;
+  width:320px;
+  height:320px;
   border-radius:50%;
-  background:radial-gradient(circle,rgba(255,255,255,.18),rgba(255,255,255,0) 64%);
+  background:radial-gradient(circle,rgba(255,255,255,.16),rgba(255,255,255,0) 66%);
  }
  .hero::after{
   content:"";
   position:absolute;
-  inset:18px;
-  border-radius:18px;
-  border:1px solid rgba(255,255,255,.12);
+  inset:14px;
+  border-radius:16px;
+  border:1px solid rgba(255,255,255,.1);
   pointer-events:none;
  }
  .hero h1{
   position:relative;
-  margin:14px 0 10px;
-  max-width:920px;
-  font-size:44px;
-  line-height:1.04;
-  letter-spacing:-.05em;
+  grid-area:title;
+  margin:0;
+  max-width:none;
+  font-size:30px;
+  line-height:1.16;
+  letter-spacing:-.03em;
   color:#fff;
  }
  .hero p{
   position:relative;
-  max-width:980px;
+  grid-area:desc;
+  margin:0;
+  max-width:none;
   color:rgba(240,246,255,.8);
-  font-size:15px;
-  line-height:1.9;
+  font-size:13px;
+  line-height:1.7;
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2;
+  overflow:hidden;
  }
  .badge{
   position:relative;
@@ -180,27 +195,37 @@ linear-gradient(180deg,#fbfdff,#fff)}
   text-transform:uppercase;
   backdrop-filter:blur(14px);
  }
- .stats{margin-top:22px;gap:14px}
+ .stats{
+  grid-area:stats;
+  margin-top:0;
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;
+  align-self:stretch;
+ }
  .stat{
   position:relative;
-  padding:16px 18px;
-  border-radius:18px;
+  display:grid;
+  align-content:space-between;
+  min-height:84px;
+  padding:14px 16px 13px;
+  border-radius:16px;
   border:1px solid rgba(255,255,255,.16);
-  background:rgba(255,255,255,.10);
+  background:linear-gradient(180deg,rgba(255,255,255,.14),rgba(255,255,255,.08));
   backdrop-filter:blur(14px);
  }
  .stat::before{
   content:"";
   position:absolute;
-  left:18px;
-  top:12px;
-  width:32px;
+  left:16px;
+  top:11px;
+  width:24px;
   height:2px;
   border-radius:999px;
   background:rgba(255,255,255,.4);
  }
- .stat span{padding-top:8px;color:rgba(232,240,255,.72);font-size:11px;letter-spacing:.08em;text-transform:uppercase}
- .stat strong{margin-top:8px;color:#fff;font-size:24px;line-height:1.25}
+ .stat span{padding-top:6px;color:rgba(232,240,255,.74);font-size:11px;line-height:1.35;letter-spacing:.06em;text-transform:uppercase}
+ .stat strong{margin-top:6px;color:#fff;font-size:17px;line-height:1.35}
  .panel{
   position:relative;
   padding:22px;
@@ -214,13 +239,13 @@ linear-gradient(180deg,#fbfdff,#fff)}
   pointer-events:none;
  }
  .topbar{
-  margin-bottom:18px;
-  align-items:flex-start;
+  margin-bottom:14px;
+  align-items:center;
  }
  .topbar h2,.filterTop strong,.drawerTitle,.editorModalTitle h3{
-  font-size:24px;
-  line-height:1.18;
-  letter-spacing:-.03em;
+  font-size:21px;
+  line-height:1.2;
+  letter-spacing:-.02em;
   color:#11203a;
  }
  .topbar p,.drawerMeta,.mini,.line,.hint,#productFilterSummary,.selectedProductMeta,.editorHeader p,.editorModalTitle p,.productEditorMeta,.pptDesc,.pptLead,.pptBox li,.pptChannel small,.thumb small{
@@ -231,10 +256,22 @@ linear-gradient(180deg,#fbfdff,#fff)}
   line-height:1.7;
   letter-spacing:.01em;
  }
- .stepper{gap:12px}
+ .stepper{
+  display:grid;
+  gap:10px;
+ }
  .step{
   position:relative;
-  padding:16px;
+  display:grid;
+  grid-template-columns:32px minmax(0,1fr);
+  grid-template-areas:
+   "badge title"
+   "badge desc";
+  column-gap:12px;
+  row-gap:2px;
+  align-items:center;
+  min-height:74px;
+  padding:12px 14px;
   border-color:#d7e2ef;
   background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(247,250,254,.9));
   transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease,background-color .22s ease;
@@ -249,17 +286,34 @@ linear-gradient(180deg,#fbfdff,#fff)}
   box-shadow:0 18px 36px rgba(33,91,246,.10),0 0 0 1px rgba(33,91,246,.06);
  }
  .step b{
-  width:34px;
-  height:34px;
-  margin-bottom:12px;
-  border-radius:12px;
+  grid-area:badge;
+  width:32px;
+  height:32px;
+  margin:0;
+  align-self:center;
+  border-radius:10px;
   background:linear-gradient(135deg,#0f2b73,#2265ff 70%,#58a2ff);
   box-shadow:0 12px 20px rgba(34,88,246,.24);
+  font-size:15px;
+ }
+ .step strong{
+  grid-area:title;
+  display:block;
+  align-self:end;
+  font-size:15px;
+  line-height:1.18;
  }
  .step strong,.dish h3,.scene h3,.module h4,.item strong,.cap strong,.summary strong,.selectedProductItem strong,.thumb strong,.productEditorTitle strong,.pptBox h5,.pptCell strong,.pptFocusItem strong,.drawerDetailItem strong{
   color:#12223a;
  }
- .step small{margin-top:8px}
+ .step small{
+  grid-area:desc;
+  display:block;
+  margin:0;
+  align-self:start;
+  font-size:12px;
+  line-height:1.35;
+ }
  .cards,.sceneGrid,.grid,.pptCols,.pptStats,.pptClosing,.pptTable,.pptFocus{gap:14px}
  .card,.dish,.scene,.summary,.module,.selectedProductItem,.productEditorCard,.editorBlock,.filterPanel,.thumb{
   position:relative;
@@ -274,53 +328,52 @@ linear-gradient(180deg,#fbfdff,#fff)}
   border-color:rgba(194,211,229,.92);
  }
  .chip,.pptTag,.effectChip{
-  min-height:30px;
+  min-height:34px;
   display:inline-flex;
   align-items:center;
-  padding:0 12px;
+  padding:0 14px;
   border-radius:999px;
-  background:linear-gradient(180deg,#f9fbff,#eef4fb);
-  color:#47607e;
-  border:1px solid #dce6f2;
+  background:linear-gradient(180deg,#ffffff,#f4f8ff);
+  color:#2b5fd6;
+  border:1px solid #d7e3ff;
+  box-shadow:0 8px 18px rgba(34,88,246,.08);
   font-size:12px;
-  font-weight:700;
+  font-weight:800;
  }
  .effectChip,.pptEffect{
-  background:linear-gradient(180deg,#f2f7ff,#e9f2ff);
-  color:var(--brand);
-  border-color:#d5e3ff;
+  background:linear-gradient(180deg,#ffffff,#f3f8ff);
+  color:#2157d8;
+  border-color:#cfe0ff;
+  box-shadow:0 8px 18px rgba(34,88,246,.08);
  }
  .actions,.filterActions,.deviceSwitch,.deckNav,.deckPageActions,.productEffectRow,.editorBadgeRow,.filterMeta{gap:10px}
  .btn,.switchBtn,.sideRemoveBtn{
-  min-height:40px;
-  padding:0 16px;
-  border-radius:12px;
-  border:1px solid transparent;
+  min-height:42px;
+  padding:0 18px;
+  border-radius:14px;
+  border:1px solid #d5e2ff;
+  background:linear-gradient(180deg,#ffffff,#f4f8ff);
+  color:#245ad6;
+  box-shadow:0 10px 22px rgba(34,88,246,.08);
   font-weight:800;
   letter-spacing:.01em;
   transition:transform .18s ease,box-shadow .18s ease,background-color .18s ease,border-color .18s ease,color .18s ease;
  }
- .btn:hover,.switchBtn:hover,.sideRemoveBtn:hover{transform:translateY(-1px)}
- .btn.p{
-  background:linear-gradient(135deg,#12317a,#2258f6 58%,#5aa7ff);
-  border-color:rgba(18,49,122,.32);
-  color:#fff;
-  box-shadow:0 14px 28px rgba(34,88,246,.24);
+ .btn:hover,.switchBtn:hover,.sideRemoveBtn:hover{
+  transform:translateY(-1px);
+  border-color:#bdd2ff;
+  box-shadow:0 14px 24px rgba(34,88,246,.12);
  }
- .btn.s{
-  background:linear-gradient(180deg,#f6faff,#ecf3ff);
-  border-color:#d5e3ff;
-  color:#1f57ea;
- }
- .btn.g,.switchBtn{
-  background:linear-gradient(180deg,#ffffff,#f4f8fc);
-  border-color:#d6e0ec;
-  color:#31465f;
+ .btn.p,.btn.s,.btn.g,.switchBtn{
+  background:linear-gradient(180deg,#ffffff,#f4f8ff);
+  border-color:#d5e2ff;
+  color:#245ad6;
  }
  .btn.d,.sideRemoveBtn{
-  background:linear-gradient(180deg,#fff7f6,#fff0ef);
-  border-color:#f2d0cd;
-  color:#cd4940;
+  background:linear-gradient(180deg,#ffffff,#fff5f5);
+  border-color:#f0d5d5;
+  color:#cb4d4d;
+  box-shadow:0 10px 22px rgba(203,77,77,.08);
  }
  .btn:disabled,.switchBtn:disabled,.sideRemoveBtn:disabled{transform:none;box-shadow:none}
  .layout{gap:20px;align-items:start}
@@ -344,10 +397,12 @@ linear-gradient(180deg,#fbfdff,#fff)}
  .filterMeta .chip{
   min-height:42px;
   padding:0 16px;
-  background:linear-gradient(180deg,#ffffff,#f5f9ff);
-  border-color:#d7e3f1;
+  background:linear-gradient(180deg,#ffffff,#f4f8ff);
+  border-color:#d7e3ff;
+  color:#2b5fd6;
+  box-shadow:0 10px 20px rgba(34,88,246,.08);
  }
- .filterMeta .chip strong{font-size:26px}
+ .filterMeta .chip strong{font-size:26px;color:#245ad6}
  .filterGroup{
   grid-template-columns:136px minmax(0,1fr);
   gap:14px;
@@ -361,9 +416,10 @@ linear-gradient(180deg,#fbfdff,#fff)}
  .filterChip{
   min-height:34px;
   padding:0 16px;
-  border-color:#d7e1ee;
-  background:linear-gradient(180deg,#ffffff,#f7fafe);
-  color:#4a607b;
+  border-color:#d7e3ff;
+  background:linear-gradient(180deg,#ffffff,#f4f8ff);
+  color:#2f5fca;
+  box-shadow:0 8px 18px rgba(34,88,246,.06);
  }
  .filterChip:hover{
   border-color:#a8c2fb;
@@ -433,13 +489,93 @@ linear-gradient(180deg,#fbfdff,#fff)}
   gap:18px;
  }
  .deckSidebar{
-  padding:18px 10px 18px 0;
+  padding:18px 12px 18px 0;
   max-height:1060px;
  }
- .thumb{
-  padding:14px 15px;
-  background:linear-gradient(180deg,#ffffff,#f5f9fd);
+ .deckSidebarPanel{
+  padding:16px 14px 14px;
+  gap:14px;
+  }
+ .deckSidebarHead{
+  padding:0 6px 12px;
+  border-bottom:1px solid #e4edf8;
+  }
+ .deckThumbs{
+  gap:10px;
+  padding:2px 4px 4px;
+  scrollbar-width:thin;
+  scrollbar-color:#c8d8ed transparent;
  }
+ .deckThumbs::-webkit-scrollbar{
+  width:6px;
+ }
+ .deckThumbs::-webkit-scrollbar-thumb{
+  border-radius:999px;
+  background:linear-gradient(180deg,#d9e5f6,#bdd2ec);
+ }
+ .deckThumbs::-webkit-scrollbar-track{
+  background:transparent;
+  }
+ .thumb{
+  width:100%;
+  margin:0 auto;
+  min-height:74px;
+  align-content:center;
+  place-items:center;
+  justify-items:center;
+  text-align:center;
+  gap:5px;
+  padding:10px 16px;
+  border-radius:22px;
+  border-color:#d8e5f3;
+  background:
+   radial-gradient(circle at top,rgba(34,88,246,.08),transparent 26%),
+   linear-gradient(180deg,#ffffff,#f6faff);
+  box-shadow:0 8px 18px rgba(15,40,90,.04),inset 0 1px 0 rgba(255,255,255,.92);
+   }
+ .thumbHead{
+  min-height:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  width:100%;
+  }
+ .thumbMeta{
+  display:grid;
+  align-content:center;
+  justify-items:center;
+  text-align:center;
+  gap:0;
+  padding:0;
+  width:100%;
+   }
+ .thumb strong{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:0;
+  font-size:14px;
+  line-height:1.22;
+  font-weight:900;
+  letter-spacing:-.01em;
+  color:#11223d;
+  text-align:center;
+   }
+ .thumb small{
+  display:none;
+   }
+ .thumbBadges{
+  justify-content:center;
+  align-items:center;
+  margin-top:2px;
+  gap:6px;
+ }
+ .thumb .thumbBadge{
+  min-height:26px;
+  padding:0 10px;
+  font-size:11px;
+  box-shadow:none;
+  }
  .deckTools{
   padding:16px 18px;
   border-radius:20px;
@@ -547,12 +683,41 @@ linear-gradient(180deg,#fbfdff,#fff)}
   color:#917f6f;
  }
  .sideHeader .chip{
-  background:linear-gradient(180deg,#f8fbff,#ecf3ff);
-  color:#255ad6;
-  border-color:#d6e4ff;
+  background:linear-gradient(180deg,#ffffff,#f4f8ff);
+  color:#245ad6;
+  border-color:#d7e3ff;
+  box-shadow:0 8px 18px rgba(34,88,246,.08);
  }
  .switchBtn.active{
   color:#1e57eb;
+  border-color:#bcd1ff;
+  background:linear-gradient(180deg,#ffffff,#edf4ff);
+  box-shadow:0 14px 24px rgba(34,88,246,.12);
+ }
+ .selectedProductTag,.pill,.thumbBadge{
+  min-height:32px;
+  padding:0 14px;
+  border-radius:999px;
+  border:1px solid #d7e3ff;
+  background:linear-gradient(180deg,#ffffff,#f4f8ff);
+  color:#245ad6;
+  box-shadow:0 8px 18px rgba(34,88,246,.08);
+  font-weight:800;
+ }
+ .thumbBadge.primary{
+  border-color:#bfd3ff;
+  background:linear-gradient(180deg,#ffffff,#eef4ff);
+  color:#2258f6;
+ }
+ .thumbBadge.warn{
+  border-color:#d7e3ff;
+  background:linear-gradient(180deg,#ffffff,#f4f8ff);
+  color:#245ad6;
+ }
+ .thumbBadge.success{
+  border-color:#d7e3ff;
+  background:linear-gradient(180deg,#ffffff,#f4f8ff);
+  color:#245ad6;
  }
  .previewViewport.mobile{
   background:#101e37;
@@ -566,9 +731,10 @@ linear-gradient(180deg,#fbfdff,#fff)}
   border-radius:20px;
  }
  .dishBadge,.pptVisualBadge{
-  background:linear-gradient(135deg,#7a3513,#b65f1f);
-  border:1px solid rgba(255,255,255,.16);
-  box-shadow:0 8px 16px rgba(122,53,19,.22);
+  background:linear-gradient(180deg,#ffffff,#f4f8ff);
+  color:#245ad6;
+  border:1px solid #d4e1ff;
+  box-shadow:0 10px 20px rgba(34,88,246,.10);
  }
  .nav{
   padding:6px 4px 0;
@@ -591,10 +757,10 @@ linear-gradient(180deg,#fbfdff,#fff)}
   min-width:0;
  }
  .stats{
-  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  grid-template-columns:repeat(2,minmax(0,1fr));
  }
  .stepper{
-  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  grid-template-columns:repeat(5,minmax(0,1fr));
  }
  .cards{
   grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
@@ -659,6 +825,14 @@ linear-gradient(180deg,#fbfdff,#fff)}
   overscroll-behavior:contain;
  }
  @media (max-width:1024px){
+  .hero{
+   grid-template-columns:1fr;
+   grid-template-areas:
+    "title"
+    "desc"
+    "stats";
+   padding:22px;
+  }
   .layout{
    grid-template-columns:1fr;
   }
@@ -685,23 +859,39 @@ linear-gradient(180deg,#fbfdff,#fff)}
  }
  @media (max-width:1280px){
   .app{padding:22px 18px 32px}
-  .hero{padding:28px}
-  .hero h1{font-size:38px}
+  .hero{
+   grid-template-columns:minmax(0,1.15fr) minmax(280px,.95fr);
+   padding:22px 24px;
+  }
+  .hero h1{font-size:28px}
+  .stepper{grid-template-columns:repeat(3,minmax(0,1fr))}
   .deckShell{grid-template-columns:1fr}
   .deckSidebar{max-height:none;padding:0}
+ }
+ @media (max-width:1024px){
+  .hero{
+   grid-template-columns:1fr;
+   grid-template-areas:
+    "title"
+    "desc"
+    "stats";
+   padding:22px;
+  }
+  .stepper{grid-template-columns:repeat(2,minmax(0,1fr))}
  }
  @media (max-width:760px){
   .app{padding:16px 14px 24px;gap:16px}
   .panel,.filterPanel,.editorBlock,.drawerPanel,.editorModalPanel,.summary{padding:16px}
-  .hero{padding:24px 20px}
-  .hero h1{font-size:30px}
-  .hero p{font-size:14px;line-height:1.75}
+  .hero{padding:18px 16px;gap:12px}
+  .hero h1{font-size:24px}
+  .hero p{font-size:12px;line-height:1.65;-webkit-line-clamp:3}
   .stats{grid-template-columns:1fr 1fr;gap:10px}
-  .stat{padding:14px}
-  .stat strong{font-size:20px}
+  .stat{min-height:72px;padding:12px 13px}
+  .stat strong{font-size:15px}
   .badge{min-height:30px;padding:0 12px}
-  .step{padding:14px 12px}
-  .topbar h2,.filterTop strong,.drawerTitle,.editorModalTitle h3{font-size:20px}
+  .stepper{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .step{min-height:70px;padding:12px}
+  .topbar h2,.filterTop strong,.drawerTitle,.editorModalTitle h3{font-size:18px}
   .deckTools,.deckPageWrap,.previewStage{padding:14px}
   .pptBody,.pptReplacedBody{padding:18px}
   .field input,.field textarea{padding:12px 14px;border-radius:14px}
@@ -712,10 +902,10 @@ linear-gradient(180deg,#fbfdff,#fff)}
  }
  @media (max-width:520px){
   .hero{
-   padding:20px 16px;
+   padding:16px 14px;
   }
   .hero h1{
-   font-size:26px;
+   font-size:22px;
   }
   .stats{
    grid-template-columns:1fr;
@@ -748,7 +938,6 @@ linear-gradient(180deg,#fbfdff,#fff)}
 <body>
 <div class="app">
 <section class="hero">
-  <span class="badge">Wizard Flow</span>
   <h1>脱骨侠产品手册生成流程原型</h1>
   <p>按业务流程分 5 步推进：选商品、选场景、编辑内容、预览确认、导出或分享。数据来源为 `外包商品列表.xls`，结构参考 `脱骨侠产品手册.pdf`，最终输出清晰的脱骨侠产品手册预览和移动端分享页。</p>
   <div class="stats">
@@ -780,10 +969,12 @@ linear-gradient(180deg,#fbfdff,#fff)}
             <strong>筛选条件</strong>
             <div class="hint" id="productFilterSummary">未启用筛选，当前展示全部商品</div>
           </div>
-          <div class="filterMeta">
-            <span class="chip">匹配商品 <strong id="productMatchCount">0</strong></span>
-            <div class="filterActions">
+           <div class="filterMeta">
+             <span class="chip">匹配商品 <strong id="productMatchCount">0</strong></span>
+             <span class="chip">已选商品 <strong id="productSelectedCount">0</strong></span>
+           <div class="filterActions">
               <button class="btn s" type="button" id="toggleProductSelection">全选当前结果</button>
+              <button class="btn g" type="button" id="toggleProductFilters">展开全部筛选</button>
               <button class="btn g" type="button" id="clearProductFilters">清空筛选</button>
             </div>
           </div>
@@ -856,7 +1047,28 @@ linear-gradient(180deg,#fbfdff,#fff)}
       </div>
       <div class="preview">
         <div class="deckShell">
-          <div class="deckSidebar" id="deckThumbs"></div>
+          <div class="deckSidebar">
+            <div class="deckSidebarPanel">
+              <div class="deckSidebarHead">
+                <div>
+                  <strong>页面目录</strong>
+                  <div class="hint" id="deckSidebarHint">按当前导出顺序展示页面</div>
+                </div>
+                <span class="chip" id="deckSidebarCount">0 页</span>
+              </div>
+              <div class="deckThumbs" id="deckThumbs"></div>
+            </div>
+            <div class="deckDeletedPanel">
+              <div class="deckSidebarHead">
+                <div>
+                  <strong>已删除页面</strong>
+                  <div class="hint">删除后不参与导出，可在这里恢复</div>
+                </div>
+                <span class="chip" id="deletedPageCount">0</span>
+              </div>
+              <div class="deletedList" id="deletedPagesList"></div>
+            </div>
+          </div>
           <div class="deckStage">
             <div class="deckTools">
               <div class="deckToolsTop">
@@ -864,6 +1076,7 @@ linear-gradient(180deg,#fbfdff,#fff)}
                   <strong id="deckTitle">脱骨侠产品手册在线预览</strong>
                   <div class="hint" id="deckSub">固定页 + 自动插入商品页</div>
                   <div class="hint" id="pageActionHint">按原 PDF 单页尺寸自动分页</div>
+                  <div class="deckStateRow" id="deckCurrentBadges"></div>
                 </div>
                 <div class="deckNav">
                   <button class="btn g" id="deckPrevBtn">上一页</button>
@@ -872,11 +1085,15 @@ linear-gradient(180deg,#fbfdff,#fff)}
                 </div>
               </div>
               <div class="deckPageActions">
-                <button class="btn s" id="pageReplaceBtn" type="button">替换页面</button>
-                <button class="btn g" id="pageRestoreBtn" type="button">恢复原页</button>
-                <button class="btn g" id="pageMoveUpBtn" type="button">上移</button>
-                <button class="btn g" id="pageMoveDownBtn" type="button">下移</button>
-                <button class="btn d" id="pageDeleteBtn" type="button">删除页面</button>
+                <div class="deckPageActionGroup">
+                  <button class="btn s" id="pageReplaceBtn" type="button">替换页面</button>
+                  <button class="btn g" id="pageRestoreBtn" type="button">恢复原页</button>
+                  <button class="btn g" id="pageMoveUpBtn" type="button">上移</button>
+                  <button class="btn g" id="pageMoveDownBtn" type="button">下移</button>
+                </div>
+                <div class="deckPageActionGroup dangerGroup">
+                  <button class="btn d" id="pageDeleteBtn" type="button">删除页面</button>
+                </div>
               </div>
             </div>
             <div class="deckPageWrap">
@@ -939,6 +1156,9 @@ linear-gradient(180deg,#fbfdff,#fff)}
       <div class="sideHeader">
         <strong>当前选择商品</strong>
         <span class="chip">已选 <strong id="sideProductCount">0</strong></span>
+      </div>
+      <div class="selectedSummaryMeta">
+        <div class="line">支持在右侧直接移除已选商品，系统至少保留 1 个商品避免整份手册为空。</div>
       </div>
       <div class="selectedProducts" id="sideProductsList"></div>
     </div>
@@ -1080,9 +1300,9 @@ function createDefaultProductContent(product){
     tags:uniqueTags([...(product.tags||[]),product.category,product.channel]).slice(0,6).join("，")
   };
 }
-let state={step:1,selected:[],filters:createEmptyProductFilters(),scene:"",manualTitle:"",manualSummary:"",stat1:"",stat2:"",stat3:"",shareMode:"分享链接",tags:"",caps:"",version:"V1.0",deckIndex:0,productContent:{},fixedContentCollapsed:false,activeProductEditorId:"",pageOverrides:{},pageOrder:[],deletedPageIds:[],pendingReplacePageId:""};
+let state={step:1,selected:[],filters:createEmptyProductFilters(),productKeyword:"",filterExpanded:false,scene:"",manualTitle:"",manualSummary:"",stat1:"",stat2:"",stat3:"",shareMode:"分享链接",tags:"",caps:"",version:"V1.0",deckIndex:0,productContent:{},fixedContentCollapsed:false,activeProductEditorId:"",pageOverrides:{},pageOrder:[],deletedPageIds:[],pendingReplacePageId:""};
 const $=id=>document.getElementById(id);
-const descs=["多选并查看详情","加载业务模板","补充手册信息","确认生成结果","导出或扫码查看"];
+const descs=["多选查看","加载模板","补充信息","确认结果","导出查看"];
 function stepTitle(n){return["选择商品","选择场景","编辑内容","预览确认","导出/分享"][n-1]}
 function maxStep(){if(!state.selected.length)return 1;if(!state.scene)return 2;return 5}
 function go(n){state.step=n;if(n===4){const pages=buildDeckPages();const firstProductIndex=pages.findIndex(page=>page.source==="product");state.deckIndex=firstProductIndex>=0?firstProductIndex:Math.min(state.deckIndex,Math.max(0,pages.length-1))}document.querySelectorAll(".view").forEach(v=>v.classList.toggle("active",+v.dataset.step===n));renderStepper();renderNav();if(n===4)renderDeck()}
@@ -1100,14 +1320,16 @@ function getProductContent(product){ensureProductContentDefaults();return {...cr
 function enrichedProduct(product){const content=getProductContent(product);return {...product,promoSubtitle:content.subtitle,promoSummary:content.summary,promoBullets:parseListText(content.sellingPoints),promoScenes:parseListText(content.scenes),promoEffects:parseListText(content.effects),promoTags:parseListText(content.tags)}}
 function currentEditingProduct(){return products.find(product=>product.id===state.activeProductEditorId)||null}
 function removeSelectedProduct(productId,{keepOne=false}={}){if(keepOne&&state.selected.length<=1)return;setSelectedProducts(state.selected.filter(id=>id!==productId))}
-function filteredProducts(){return products.filter(p=>productFilterDefs.every(def=>{const active=state.filters[def.key]||[];if(!active.length)return true;const values=getFilterValues(p[def.key]);return active.some(item=>values.includes(item))}))}
-function activeFilterCount(){return productFilterDefs.reduce((sum,def)=>sum+(state.filters[def.key]||[]).length,0)}
+function filteredProducts(){const keyword=(state.productKeyword||"").trim().toLowerCase();return products.filter(p=>{const keywordMatched=!keyword||[p.name,p.category,p.flavor,p.spec,p.channel].filter(Boolean).some(value=>String(value).toLowerCase().includes(keyword));if(!keywordMatched)return false;return productFilterDefs.every(def=>{const active=state.filters[def.key]||[];if(!active.length)return true;const values=getFilterValues(p[def.key]);return active.some(item=>values.includes(item))})})}
+function activeFilterCount(){return productFilterDefs.reduce((sum,def)=>sum+(state.filters[def.key]||[]).length,0)+((state.productKeyword||"").trim()?1:0)}
 function matchedSelectedCount(list=filteredProducts()){const visibleIds=new Set(list.map(p=>p.id));return state.selected.filter(id=>visibleIds.has(id)).length}
 function setSelectedProducts(next){state.selected=[...new Set(next)];if(state.activeProductEditorId&&!state.selected.includes(state.activeProductEditorId))closeProductEditorModal();ensureProductContentDefaults();renderProducts();renderProductFilters();renderProductEditors();renderNav();renderPreview()}
 function toggleProductFilter(key,value){const current=state.filters[key]||[];state.filters[key]=current.includes(value)?current.filter(item=>item!==value):[...current,value];renderProductFilters();renderProducts()}
-function clearProductFilters(){state.filters=createEmptyProductFilters();renderProductFilters();renderProducts()}
+function clearProductFilters(){state.filters=createEmptyProductFilters();state.productKeyword="";renderProductFilters();renderProducts()}
+function setProductKeyword(value){state.productKeyword=value;renderProductFilters();renderProducts()}
+function toggleProductFilters(){state.filterExpanded=!state.filterExpanded;renderProductFilters()}
 function toggleVisibleProducts(){const list=filteredProducts();if(!list.length)return;const ids=list.map(p=>p.id);const allSelected=ids.every(id=>state.selected.includes(id));setSelectedProducts(allSelected?state.selected.filter(id=>!ids.includes(id)):[...state.selected,...ids])}
-function renderProductFilters(){const list=filteredProducts();const activeCount=activeFilterCount();const matched=list.length;const selectedMatched=matchedSelectedCount(list);const allMatchedSelected=matched>0&&selectedMatched===matched;$("productFilterSummary").textContent=activeCount?`已启用 ${activeCount} 个筛选项，当前匹配 ${matched} 个商品`:"未启用筛选，当前展示全部商品";$("productMatchCount").textContent=matched;$("toggleProductSelection").textContent=allMatchedSelected?"取消当前结果":"全选当前结果";$("toggleProductSelection").disabled=!matched;$("toggleProductSelection").title=matched?`当前结果中已选择 ${selectedMatched} / ${matched}`:"当前没有可选择的商品";const wrap=$("productFilters");wrap.innerHTML=productFilterDefs.map(def=>`<div class="filterGroup"><div class="filterLabel">${def.label}</div><div class="filterOptions">${def.options.map(option=>`<button type="button" class="filterChip${(state.filters[def.key]||[]).includes(option)?" active":""}" data-key="${def.key}" data-value="${option}">${option}</button>`).join("")}</div></div>`).join("");Array.from(wrap.querySelectorAll(".filterChip")).forEach(btn=>btn.onclick=()=>toggleProductFilter(btn.dataset.key,btn.dataset.value));$("clearProductFilters").disabled=!activeCount}
+function renderProductFilters(){const list=filteredProducts();const activeCount=activeFilterCount();const matched=list.length;const selectedMatched=matchedSelectedCount(list);const allMatchedSelected=matched>0&&selectedMatched===matched;const visibleDefs=state.filterExpanded?productFilterDefs:productFilterDefs.filter(def=>def.key==="channels");$("productFilterSummary").textContent=activeCount?`已启用 ${activeCount} 个筛选项，当前匹配 ${matched} 个商品`:(state.filterExpanded?"未启用筛选，当前展示全部商品":"默认展示渠道筛选，展开后查看全部条件");$("productMatchCount").textContent=matched;$("toggleProductSelection").textContent=allMatchedSelected?"取消当前结果":"全选当前结果";$("toggleProductSelection").disabled=!matched;$("toggleProductSelection").title=matched?`当前结果中已选择 ${selectedMatched} / ${matched}`:"当前没有可选择的商品";$("toggleProductFilters").textContent=state.filterExpanded?"收起筛选":"展开全部筛选";const wrap=$("productFilters");wrap.innerHTML=visibleDefs.map(def=>`<div class="filterGroup"><div class="filterLabel">${def.label}</div><div class="filterOptions">${def.options.map(option=>`<button type="button" class="filterChip${(state.filters[def.key]||[]).includes(option)?" active":""}" data-key="${def.key}" data-value="${option}">${option}</button>`).join("")}</div></div>`).join("");Array.from(wrap.querySelectorAll(".filterChip")).forEach(btn=>btn.onclick=()=>toggleProductFilter(btn.dataset.key,btn.dataset.value));$("clearProductFilters").disabled=!activeCount}
 function renderProducts(){const list=filteredProducts();$("productGrid").innerHTML="";if(!list.length){$("productGrid").innerHTML='<div class="emptyState">当前筛选条件下没有匹配商品。<br>可以减少筛选项，或点击“清空筛选”恢复全部商品。</div>'}else{list.forEach(p=>{const sel=state.selected.includes(p.id);const d=document.createElement("div");d.className="card dish"+(sel?" sel":"");d.innerHTML=`<div class="dishMedia"><img src="${p.image}" alt="${p.name}" loading="lazy"><span class="chip dishBadge">${formatPrice(p.price)}</span></div><h3>${p.name}</h3><div class="meta">${p.tags.map(t=>`<span class="chip">${t}</span>`).join("")}</div><p>${p.desc}</p><div class="mini">${p.spec} · ${p.store} · ${p.channel}</div><div class="mini">69码：${p.barcode69||"-"}</div><div class="actions"><button class="btn ${sel?"d":"p"}">${sel?"移除":"加入手册"}</button><button class="btn g">查看详情</button></div>`;d.querySelectorAll("button")[0].onclick=()=>setSelectedProducts(sel?state.selected.filter(x=>x!==p.id):[...state.selected,p.id]);d.querySelectorAll("button")[1].onclick=()=>openDrawer(p);$("productGrid").appendChild(d)})}$("productCount").textContent=state.selected.length}
 function productDetailItems(p){return[["商品标准名称",p.standardName||p.name],["联合编码",p.jointCode||"-"],["商品品牌",p.brand||"脱骨侠"],["商品分类",p.category],["版本信息",p.version||"v1"],["商品口味",p.tasteLabel||p.flavor||"-"],["运行状态",p.status||"运行中"],["商品单位",p.unitLabel||p.unit||"-"],["出厂价",p.factoryPrice?`${p.factoryPrice} 元`:"-"],["建议零售价",p.retailPrice?`${p.retailPrice} 元`:(p.price&&p.price!=="0.00"?`${p.price} 元`:"-")],["克重",p.weightLabel||p.weight||"-"],["含骨",p.boneLabel||p.boneType||"-"],["温层",p.temperatureLabel||p.temperature||"-"],["固形物含量",p.solidContentLabel||p.solidContent||"-"],["保质期",p.shelfLifeLabel||p.shelfLife||"-"],["辣度",p.spicyLevel||"无区分"],["销售渠道",p.salesChannelLabel||p.channel||"-"],["69码",p.barcode69||"-"]]}
 function closeDrawer(){$("drawer").classList.remove("open");document.body.style.overflow=""}
@@ -1116,6 +1338,7 @@ $("closeDrawer").onclick=closeDrawer;
 $("drawer").onclick=e=>{if(e.target===$("drawer"))closeDrawer()};
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&$("drawer").classList.contains("open"))closeDrawer();if(e.key==="Escape"&&$("productEditorModal").classList.contains("open"))closeProductEditorModal()});
 $("clearProductFilters").onclick=clearProductFilters;
+$("toggleProductFilters").onclick=toggleProductFilters;
 $("toggleProductSelection").onclick=toggleVisibleProducts;
 $("toggleFixedContent").onclick=toggleFixedContent;
 $("closeProductEditorModal").onclick=closeProductEditorModal;
@@ -1160,6 +1383,16 @@ function renderPreview(){renderDeck();renderSide();persist()}
 function renderSide(){const list=picked();$("sideProductCount").textContent=list.length;if(!list.length){$("sideProductsList").innerHTML='<div class="emptyState">当前还没有选择商品。<br>可在左侧商品卡片中逐个加入，或使用“全选当前结果”快速勾选。</div>';return}$("sideProductsList").innerHTML=list.map(p=>`<div class="selectedProductItem"><div class="selectedProductRow"><strong>${p.name}</strong><button type="button" class="sideRemoveBtn" data-remove-side="${p.id}" ${list.length===1?"disabled":""}>移除</button></div><div class="selectedProductMeta">${p.spec} · ${p.store} · ${p.channel}</div></div>`).join("");Array.from($("sideProductsList").querySelectorAll("[data-remove-side]")).forEach(btn=>btn.onclick=()=>removeSelectedProduct(btn.dataset.removeSide,{keepOne:true}))}
 function renderNav(){const map={1:"请选择商品后继续",2:"请选择用户场景后继续",3:"补充手册内容后进入预览",4:"确认预览后进入导出/分享",5:"可以导出或打开移动端查看"};$("navHint").textContent=map[state.step];$("prevBtn").disabled=state.step===1;$("nextBtn").disabled=(state.step===1&&!state.selected.length)||(state.step===2&&!state.scene)||state.step===5;$("nextBtn").textContent=state.step===5?"已完成":"下一步"}
 function persist(){const s=scenes[state.scene]||null;const selected=picked().map(product=>{const enriched=enrichedProduct(product);return {...enriched,priceLabel:formatPrice(enriched.price),focus:enriched.promoBullets&&enriched.promoBullets.length?enriched.promoBullets.slice(0,3):productFocus(enriched)}});const deckPages=buildDeckPages();const mobile={brand:"脱骨侠",activeScene:"manual",scenes:{manual:{sceneKey:state.scene||"",sceneName:s?s.name:"未选择场景",audience:s?s.audience:"未选择",output:s?s.output:"未生成",title:state.manualTitle||"产品手册",summary:state.manualSummary||"",s1:state.stat1||"-",s2:state.stat2||"-",s3:state.stat3||"-",share:state.shareMode||"分享链接",tags:state.tags||"",insertedCount:selected.length,totalPages:deckPages.length,products:selected,services:parseCaps().map(cap=>({title:cap[0],desc:cap[1],label:cap[2]}))}},lastSyncAt:new Date().toLocaleString("zh-CN",{hour12:false})};localStorage.setItem(KEY,JSON.stringify(mobile));const frame=$("previewFrame");if(frame&&frame.contentWindow)frame.contentWindow.postMessage({type:MOBILE_SYNC_EVENT,payload:mobile},"*");$("shareLink").textContent=`https://manual.demo/share/${encodeURIComponent((state.manualTitle||"产品手册").replace(/\s+/g,"-"))}`;$("versionText").textContent=state.version}
+function renderProductFilters(){const list=filteredProducts();const activeCount=activeFilterCount();const matched=list.length;const selectedMatched=matchedSelectedCount(list);const allMatchedSelected=matched>0&&selectedMatched===matched;const visibleDefs=state.filterExpanded?productFilterDefs:productFilterDefs.filter(def=>def.key==="channels");$("productFilterSummary").textContent=activeCount?`已启用 ${activeCount} 个筛选项，当前匹配 ${matched} 个商品`:(state.filterExpanded?"未启用筛选，当前展示全部商品":"默认展示名称搜索和渠道选择，展开后查看全部条件");$("productMatchCount").textContent=matched;$("productSelectedCount").textContent=state.selected.length;$("toggleProductSelection").textContent=allMatchedSelected?"取消当前结果":"全选当前结果";$("toggleProductSelection").disabled=!matched;$("toggleProductSelection").title=matched?`当前结果中已选择 ${selectedMatched} / ${matched}`:"当前没有可选择的商品";$("toggleProductFilters").textContent=state.filterExpanded?"收起筛选":"展开全部筛选";const wrap=$("productFilters");const keywordBlock=`<div class="filterCompactCard"><div class="filterCompactLabel">名称搜索</div><div class="filterSearchBox"><input id="productKeywordInput" class="filterSearchInput" type="text" placeholder="请输入商品名称关键词" value="${escapeAttr(state.productKeyword||"")}"></div></div>`;const compactChannelBlock=`<div class="filterCompactCard"><div class="filterCompactLabel">渠道</div><div class="filterOptions">${visibleDefs.map(def=>def.options.map(option=>`<button type="button" class="filterChip${(state.filters[def.key]||[]).includes(option)?" active":""}" data-key="${def.key}" data-value="${option}">${option}</button>`).join("")).join("")}</div></div>`;const filterBlocks=visibleDefs.map(def=>`<div class="filterGroup"><div class="filterLabel">${def.label}</div><div class="filterOptions">${def.options.map(option=>`<button type="button" class="filterChip${(state.filters[def.key]||[]).includes(option)?" active":""}" data-key="${def.key}" data-value="${option}">${option}</button>`).join("")}</div></div>`).join("");wrap.innerHTML=state.filterExpanded?`<div class="filterSearchGroup"><div class="filterLabel">名称搜索</div><div class="filterSearchBox"><input id="productKeywordInput" class="filterSearchInput" type="text" placeholder="请输入商品名称关键词" value="${escapeAttr(state.productKeyword||"")}"></div></div>`+filterBlocks:`<div class="filterCompactGrid">${keywordBlock}${compactChannelBlock}</div>`;const keywordInput=$("productKeywordInput");if(keywordInput)keywordInput.addEventListener("input",e=>setProductKeyword(e.target.value));Array.from(wrap.querySelectorAll(".filterChip")).forEach(btn=>btn.onclick=()=>toggleProductFilter(btn.dataset.key,btn.dataset.value));$("clearProductFilters").disabled=!activeCount}
+function renderProductEditors(){ensureProductContentDefaults();const list=picked();$("productEditorCount").textContent=`${list.length} 个商品`;if(!list.length){$("productEditors").innerHTML='<div class="emptyState">请先在第 1 步选择商品，系统会在这里按商品生成内容编辑卡片。</div>';return}$("productEditors").innerHTML=list.map(product=>{const content=getProductContent(product);const effects=parseListText(content.effects);const tags=parseListText(content.tags);const scenes=parseListText(content.scenes);const sellingPoints=parseListText(content.sellingPoints);return `<article class="productEditorCard" data-product-editor="${product.id}"><div class="productEditorTop"><div class="productEditorTitle"><strong>${escapeHtml(product.name)}</strong><div class="productEditorMeta">${escapeHtml(product.spec)} 路 ${escapeHtml(product.store)} 路 ${escapeHtml(product.channel)}</div></div><span class="chip">${escapeHtml(product.flavor || product.category)}</span></div><div class="productEditorPreview"><div class="productEditorSummaryHero"><div class="productEditorSummaryMedia"><img src="${escapeAttr(product.image)}" alt="${escapeAttr(product.name)}" loading="lazy"></div><div class="productEditorSummaryCopy"><strong>移动端摘要预览</strong><p>${escapeHtml(content.subtitle || "点击编辑后补充一句话优势")}</p><div class="productEditorMeta">标签：${escapeHtml((tags.slice(0,4).join(" / ")) || "待补充")}</div></div></div><div class="productEffectRow">${effects.length?effects.slice(0,3).map(effect=>`<span class="effectChip">${escapeHtml(effect)}</span>`).join(""):'<span class="effectChip">待补充特效</span>'}</div><div class="productEditorMeta">场景：${escapeHtml((scenes.slice(0,3).join(" / ")) || "待补充")} 路 卖点：${escapeHtml((sellingPoints.slice(0,2).join(" / ")) || "待补充")}</div><div class="productEditorToolbar"><span class="hint">点击编辑后可维护卖点、场景、特效、标签，并同步到移动端详情</span><button type="button" class="btn s productEditorToggle" data-open-editor="${product.id}">编辑</button></div></div></article>`}).join("");Array.from($("productEditors").querySelectorAll("[data-open-editor]")).forEach(btn=>btn.addEventListener("click",()=>openProductEditorModal(btn.dataset.openEditor)))}
+function pageTypeLabel(page){if(page.kind==="cover")return"封面";if(page.kind==="divider")return"章节页";if(page.kind==="closing")return"封底";if(page.kind==="product")return"商品页";return"固定页"}
+function pageTypeTone(page){if(page.kind==="product")return"primary";if(page.kind==="closing")return"warn";if(page.kind==="cover"||page.kind==="divider")return"success";return""}
+function renderThumbBadges(page){const badges=[`<span class="thumbBadge ${pageTypeTone(page)}">${pageTypeLabel(page)}</span>`];if(page.kind==="product"&&page.totalSegments>1)badges.push(`<span class="thumbBadge warn">分页 ${page.pageIndex+1}/${page.totalSegments}</span>`);if(state.pageOverrides[page.id])badges.push('<span class="thumbBadge primary">已替换</span>');return badges.join("")}
+function resolveDeletedPages(){const basePages=buildBaseDeckPages();const pageMap=new Map(basePages.map(page=>[page.id,page]));state.deletedPageIds=state.deletedPageIds.filter(id=>pageMap.has(id));return state.deletedPageIds.map(id=>{const page=pageMap.get(id);return {...page,orderIndex:state.pageOrder.indexOf(id)}}).filter(page=>page&&page.orderIndex>=0).sort((a,b)=>a.orderIndex-b.orderIndex)}
+function restoreDeletedPage(pageId){state.deletedPageIds=state.deletedPageIds.filter(id=>id!==pageId);const pages=buildDeckPages();const targetIndex=pages.findIndex(page=>page.id===pageId);if(targetIndex>=0)state.deckIndex=targetIndex;renderPreview()}
+function renderDeck(){const pages=buildDeckPages();const deletedPages=resolveDeletedPages();$("deckSidebarCount").textContent=`${pages.length} 页`;$("deletedPageCount").textContent=String(deletedPages.length);$("deckSidebarHint").textContent=pages.length?`当前导出顺序共 ${pages.length} 页`:"当前没有可展示页面";$("deletedPagesList").innerHTML=deletedPages.length?deletedPages.map(page=>`<div class="deletedItem"><div class="deletedItemMeta"><strong>${page.title}</strong><small>原排序 ${page.orderIndex+1} 路 ${pageTypeLabel(page)}</small></div><button type="button" class="btn g" data-restore-deleted="${page.id}">恢复</button></div>`).join(""):'<div class="emptyState">当前没有已删除页面。</div>';Array.from($("deletedPagesList").querySelectorAll("[data-restore-deleted]")).forEach(btn=>btn.onclick=()=>restoreDeletedPage(btn.dataset.restoreDeleted));if(!pages.length){$("deckTitle").textContent=state.manualTitle||"脱骨侠产品手册在线预览";$("deckSub").textContent="当前没有可展示页面";$("pageActionHint").textContent=`原 PDF 单页尺寸 ${PDF_PAGE_SIZE.width} × ${PDF_PAGE_SIZE.height}，当前已无可导出页面`;$("deckCurrentBadges").innerHTML=deletedPages.length?'<span class="thumbBadge danger">全部页面已隐藏</span>':'<span class="thumbBadge">暂无页面</span>';$("deckThumbs").innerHTML="";$("deckPage").innerHTML='<div class="emptyState">当前页面已全部删除。<br>可在左侧“已删除页面”中恢复。</div>';$("deckIndicator").textContent="0 / 0";["deckPrevBtn","deckNextBtn","pageReplaceBtn","pageRestoreBtn","pageMoveUpBtn","pageMoveDownBtn","pageDeleteBtn"].forEach(id=>$(id).disabled=true);return}if(state.deckIndex>=pages.length)state.deckIndex=pages.length-1;if(state.deckIndex<0)state.deckIndex=0;const current=pages[state.deckIndex];const replaced=Boolean(state.pageOverrides[current.id]);$("deckTitle").textContent=state.manualTitle||"脱骨侠产品手册在线预览";$("deckSub").textContent=`固定页保留，商品页按 ${PDF_PAGE_SIZE.width} × ${PDF_PAGE_SIZE.height} 自动分页，当前共 ${pages.length} 页`;$("pageActionHint").textContent=`当前页：${current.pageNo} 路 ${current.title}${deletedPages.length?`；已隐藏 ${deletedPages.length} 页`:""}`;$("deckCurrentBadges").innerHTML=[renderThumbBadges(current),state.deckIndex===0?'<span class="thumbBadge">首页位置</span>':"",state.deckIndex===pages.length-1?'<span class="thumbBadge">末页位置</span>':""].filter(Boolean).join("");$("deckThumbs").innerHTML=pages.map((page,idx)=>`<button type="button" class="thumb${idx===state.deckIndex?" active":""}" data-idx="${idx}"><div class="thumbHead"><div class="thumbMeta"><strong>${page.pageNo} 路 ${page.thumb}</strong></div></div><div class="thumbBadges">${renderThumbBadges(page)}</div></button>`).join("");$("deckPage").innerHTML=renderDeckPage(current);$("deckIndicator").textContent=`${state.deckIndex+1} / ${pages.length}`;Array.from($("deckThumbs").querySelectorAll(".thumb")).forEach(btn=>btn.onclick=()=>{state.deckIndex=+btn.dataset.idx;renderDeck()});$("deckPrevBtn").disabled=state.deckIndex===0;$("deckNextBtn").disabled=state.deckIndex===pages.length-1;$("pageMoveUpBtn").disabled=state.deckIndex===0;$("pageMoveDownBtn").disabled=state.deckIndex===pages.length-1;$("pageDeleteBtn").disabled=false;$("pageReplaceBtn").disabled=false;$("pageRestoreBtn").disabled=!replaced}
+function renderSide(){const list=picked();$("sideProductCount").textContent=list.length;if(!list.length){$("sideProductsList").innerHTML='<div class="emptyState">当前还没有选择商品。<br>可在左侧商品卡片中逐个加入，或使用“全选当前结果”快速勾选。</div>';return}$("sideProductsList").innerHTML=list.map((p,index)=>`<div class="selectedProductItem"><div class="selectedProductRow"><div class="selectedProductMain"><strong>${index+1}. ${p.name}</strong><div class="selectedProductMeta">${p.spec} 路 ${p.store} 路 ${p.channel}</div></div><button type="button" class="sideRemoveBtn" data-remove-side="${p.id}" ${list.length===1?"disabled":""}>移除</button></div><div class="selectedProductTags"><span class="selectedProductTag">${p.flavor||p.category}</span><span class="selectedProductTag">${p.channel}</span></div></div>`).join("");Array.from($("sideProductsList").querySelectorAll("[data-remove-side]")).forEach(btn=>btn.onclick=()=>removeSelectedProduct(btn.dataset.removeSide,{keepOne:true}))}
+function renderNav(){const map={1:"请选择商品后继续",2:"请选择用户场景后继续",3:"补充手册内容后进入预览",4:"确认预览后进入导出 / 分享",5:"可以导出或打开移动端查看"};$("navHint").textContent=map[state.step];$("prevBtn").disabled=state.step===1;$("nextBtn").disabled=(state.step===1&&!state.selected.length)||(state.step===2&&!state.scene)||state.step===5;$("nextBtn").textContent=state.step===5?"已完成":"下一步"}
 function qr(){for(let i=0;i<81;i++){const c=document.createElement("i");if(Math.random()>.58||[0,1,2,9,18,10,20,27,28,29,53,54,55,60,61,62,69,78,70,80].includes(i))c.style.opacity="1";$("qr").appendChild(c)}}
 ["manualTitle","manualSummary","stat1","stat2","stat3","shareMode","tags","caps"].forEach(id=>$(id).addEventListener("input",renderPreview));
 $("deckPrevBtn").onclick=()=>{if(state.deckIndex>0){state.deckIndex-=1;renderDeck()}};$("deckNextBtn").onclick=()=>{const total=buildDeckPages().length;if(state.deckIndex<total-1){state.deckIndex+=1;renderDeck()}};

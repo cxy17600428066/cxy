@@ -1,0 +1,488 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
+  <w:body>
+    
+    <w:p>
+      <w:pPr>
+        <w:jc w:val="center"/>
+        <w:spacing w:after="220"/>
+      </w:pPr>
+      <w:r>
+        <w:rPr>
+          <w:rFonts w:ascii="SimSun" w:hAnsi="SimSun" w:eastAsia="SimSun"/>
+          <w:b/>
+          <w:sz w:val="36"/>
+          <w:szCs w:val="36"/>
+        </w:rPr>
+        <w:t xml:space="preserve">从业人员基本情况登记表</w:t>
+      </w:r>
+    </w:p>
+  
+    <w:tbl>
+      <w:tblPr>
+        <w:tblW w:w="8000" w:type="dxa"/>
+        <w:jc w:val="center"/>
+        <w:tblLayout w:type="fixed"/>
+        <w:tblBorders>
+          <w:top w:val="single" w:sz="8" w:space="0" w:color="auto"/>
+          <w:left w:val="single" w:sz="8" w:space="0" w:color="auto"/>
+          <w:bottom w:val="single" w:sz="8" w:space="0" w:color="auto"/>
+          <w:right w:val="single" w:sz="8" w:space="0" w:color="auto"/>
+          <w:insideH w:val="single" w:sz="8" w:space="0" w:color="auto"/>
+          <w:insideV w:val="single" w:sz="8" w:space="0" w:color="auto"/>
+        </w:tblBorders>
+      </w:tblPr>
+      <w:tblGrid>
+        <w:gridCol w:w="900"/>
+        <w:gridCol w:w="1100"/>
+        <w:gridCol w:w="1000"/>
+        <w:gridCol w:w="900"/>
+        <w:gridCol w:w="1000"/>
+        <w:gridCol w:w="1100"/>
+        <w:gridCol w:w="2000"/>
+      </w:tblGrid>
+      
+    <w:tr>
+      <w:trPr>
+        <w:trHeight w:val="650" w:hRule="atLeast"/>
+      </w:trPr>
+      
+    <w:tc>
+      <w:tcPr>
+        <w:tcW w:w="900" w:type="dxa"/>
+        
+        
+        <w:vAlign w:val="center"/>
+      </w:tcPr>
+      
+    <w:p>
+      <w:pPr>
+        <w:jc w:val="center"/>
+        
+      </w:pPr>
+      <w:r>
+        <w:rPr>
+          <w:rFonts w:ascii="SimSun" w:hAnsi="SimSun" w:eastAsia="SimSun"/>
+          
+          <w:sz w:val="24"/>
+          <w:szCs w:val="24"/>
+        </w:rPr>
+        <w:t xml:space="preserve">姓  名</w:t>
+      </w:r>
+    </w:p>
+  
+    </w:tc>
+  
+    <w:tc>
+      <w:tcPr>
+        <w:tcW w:w="1100" w:type="dxa"/>
+        
+        
+        <w:vAlign w:val="center"/>
+      </w:tcPr>
+      <w:p/>
+    </w:tc>
+  
+    <w:tc>
+      <w:tcPr>
+        <w:tcW w:w="1000" w:type="dxa"/>
+        
+        
+        <w:vAlign w:val="center"/>
+      </w:tcPr>
+      
+    <w:p>
+      <w:pPr>
+        <w:jc w:val="center"/>
+        
+      </w:pPr>
+      <w:r>
+        <w:rPr>
+          <w:rFonts w:ascii="SimSun" w:hAnsi="SimSun" w:eastAsia="SimSun"/>
+          
+          <w:sz w:val="24"/>
+          <w:szCs w:val="24"/>
+        </w:rPr>
+        <w:t xml:space="preserve">性  别</w:t>
+      </w:r>
+    </w:p>
+  
+    </w:tc>
+  
+    <w:tc>
+      <w:tcPr>
+        <w:tcW w:w="900" w:type="dxa"/>
+        
+        
+        <w:vAlign w:val="center"/>
+      </w:tcPr>
+      <w:p/>
+    </w:tc>
+  
+    <w:tc>
+      <w:tcPr>
+        <w:tcW w:w="1000" w:type="dxa"/>
+        
+        
+        <w:vAlign w:val="center"/>
+      </w:tcPr>
+      
+    <w:p>
+      <w:pPr>
+        <w:jc w:val="center"/>
+        
+      </w:pPr>
+      <w:r>
+        <w:rPr>
+          <w:rFonts w:ascii="SimSun" w:hAnsi="SimSun" w:eastAsia="SimSun"/>
+          
+          <w:sz w:val="24"/>
+          <w:szCs w:val="24"/>
+        </w:rPr>
+        <w:t xml:space="preserve">年  龄</w:t>
+      </w:r>
+    </w:p>
+  
+    </w:tc>
+  
+    <w:tc>
+      <w:tcPr>
+        <w:tcW w:w="1100" w:type="dxa"/>
+        
+        
+        <w:vAlign w:val="center"/>
+      </w:tcPr>
+      <w:p/>
+    </w:tc>
+  
+    <w:tc>
+      <w:tcPr>
+        <w:tcW w:w="2000" w:type="dxa"/>
+        
+        
+        <w:vAlign w:val="center"/>
+      </w:tcPr>
+      <w:p/>
+    </w:tc>
+  
+    </w:tr>
+  
+      
+    <w:tr>
+      <w:trPr>
+        <w:trHeight w:val="760" w:hRule="atLeast"/>
+      </w:trPr>
+      
+    <w:tc>
+      <w:tcPr>
+        <w:tcW w:w="900" w:type="dxa"/>
+        
+        
+        <w:vAlign w:val="center"/>
+      </w:tcPr>
+      
+    <w:p>
+      <w:pPr>
+        <w:jc w:val="center"/>
+        
+      </w:pPr>
+      <w:r>
+        <w:rPr>
+          <w:rFonts w:ascii="SimSun" w:hAnsi="SimSun" w:eastAsia="SimSun"/>
+          
+          <w:sz w:val="24"/>
+          <w:szCs w:val="24"/>
+        </w:rPr>
+        <w:t xml:space="preserve">职务</w:t>
+      </w:r>
+    </w:p>
+  
+    </w:tc>
+  
+    <w:tc>
+      <w:tcPr>
+        <w:tcW w:w="1100" w:type="dxa"/>
+        
+        
+        <w:vAlign w:val="center"/>
+      </w:tcPr>
+      <w:p/>
+    </w:tc>
+  
+    <w:tc>
+      <w:tcPr>
+        <w:tcW w:w="1900" w:type="dxa"/>
+        <w:gridSpan w:val="2"/>
+        
+        <w:vAlign w:val="center"/>
+      </w:tcPr>
+      
+    <w:p>
+      <w:pPr>
+        <w:jc w:val="center"/>
+        
+      </w:pPr>
+      <w:r>
+        <w:rPr>
+          <w:rFonts w:ascii="SimSun" w:hAnsi="SimSun" w:eastAsia="SimSun"/>
+          
+          <w:sz w:val="24"/>
+          <w:szCs w:val="24"/>
+        </w:rPr>
+        <w:t xml:space="preserve">工作岗位</w:t>
+      </w:r>
+    </w:p>
+  
+    </w:tc>
+  
+    <w:tc>
+      <w:tcPr>
+        <w:tcW w:w="2100" w:type="dxa"/>
+        <w:gridSpan w:val="2"/>
+        
+        <w:vAlign w:val="center"/>
+      </w:tcPr>
+      <w:p/>
+    </w:tc>
+  
+    <w:tc>
+      <w:tcPr>
+        <w:tcW w:w="2000" w:type="dxa"/>
+        
+        <w:vMerge w:val="restart"/>
+        <w:vAlign w:val="center"/>
+      </w:tcPr>
+      
+    <w:p>
+      <w:pPr>
+        <w:jc w:val="center"/>
+        
+      </w:pPr>
+      <w:r>
+        <w:rPr>
+          <w:rFonts w:ascii="SimSun" w:hAnsi="SimSun" w:eastAsia="SimSun"/>
+          
+          <w:sz w:val="24"/>
+          <w:szCs w:val="24"/>
+        </w:rPr>
+        <w:t xml:space="preserve">照片</w:t>
+      </w:r>
+    </w:p>
+  
+    </w:tc>
+  
+    </w:tr>
+  
+      
+    <w:tr>
+      <w:trPr>
+        <w:trHeight w:val="700" w:hRule="atLeast"/>
+      </w:trPr>
+      
+    <w:tc>
+      <w:tcPr>
+        <w:tcW w:w="900" w:type="dxa"/>
+        
+        
+        <w:vAlign w:val="center"/>
+      </w:tcPr>
+      
+    <w:p>
+      <w:pPr>
+        <w:jc w:val="center"/>
+        
+      </w:pPr>
+      <w:r>
+        <w:rPr>
+          <w:rFonts w:ascii="SimSun" w:hAnsi="SimSun" w:eastAsia="SimSun"/>
+          
+          <w:sz w:val="24"/>
+          <w:szCs w:val="24"/>
+        </w:rPr>
+        <w:t xml:space="preserve">籍贯</w:t>
+      </w:r>
+    </w:p>
+  
+    </w:tc>
+  
+    <w:tc>
+      <w:tcPr>
+        <w:tcW w:w="5100" w:type="dxa"/>
+        <w:gridSpan w:val="5"/>
+        
+        <w:vAlign w:val="center"/>
+      </w:tcPr>
+      <w:p/>
+    </w:tc>
+  
+    <w:tc>
+      <w:tcPr>
+        <w:tcW w:w="2000" w:type="dxa"/>
+        
+        <w:vMerge/>
+        <w:vAlign w:val="center"/>
+      </w:tcPr>
+      <w:p/>
+    </w:tc>
+  
+    </w:tr>
+  
+      
+    <w:tr>
+      <w:trPr>
+        <w:trHeight w:val="700" w:hRule="atLeast"/>
+      </w:trPr>
+      
+    <w:tc>
+      <w:tcPr>
+        <w:tcW w:w="900" w:type="dxa"/>
+        
+        
+        <w:vAlign w:val="center"/>
+      </w:tcPr>
+      
+    <w:p>
+      <w:pPr>
+        <w:jc w:val="center"/>
+        
+      </w:pPr>
+      <w:r>
+        <w:rPr>
+          <w:rFonts w:ascii="SimSun" w:hAnsi="SimSun" w:eastAsia="SimSun"/>
+          
+          <w:sz w:val="24"/>
+          <w:szCs w:val="24"/>
+        </w:rPr>
+        <w:t xml:space="preserve">住址</w:t>
+      </w:r>
+    </w:p>
+  
+    </w:tc>
+  
+    <w:tc>
+      <w:tcPr>
+        <w:tcW w:w="5100" w:type="dxa"/>
+        <w:gridSpan w:val="5"/>
+        
+        <w:vAlign w:val="center"/>
+      </w:tcPr>
+      <w:p/>
+    </w:tc>
+  
+    <w:tc>
+      <w:tcPr>
+        <w:tcW w:w="2000" w:type="dxa"/>
+        
+        <w:vMerge/>
+        <w:vAlign w:val="center"/>
+      </w:tcPr>
+      <w:p/>
+    </w:tc>
+  
+    </w:tr>
+  
+      
+    <w:tr>
+      <w:trPr>
+        <w:trHeight w:val="650" w:hRule="atLeast"/>
+      </w:trPr>
+      
+    <w:tc>
+      <w:tcPr>
+        <w:tcW w:w="2000" w:type="dxa"/>
+        <w:gridSpan w:val="2"/>
+        
+        <w:vAlign w:val="center"/>
+      </w:tcPr>
+      
+    <w:p>
+      <w:pPr>
+        <w:jc w:val="center"/>
+        
+      </w:pPr>
+      <w:r>
+        <w:rPr>
+          <w:rFonts w:ascii="SimSun" w:hAnsi="SimSun" w:eastAsia="SimSun"/>
+          
+          <w:sz w:val="24"/>
+          <w:szCs w:val="24"/>
+        </w:rPr>
+        <w:t xml:space="preserve">联系电话</w:t>
+      </w:r>
+    </w:p>
+  
+    </w:tc>
+  
+    <w:tc>
+      <w:tcPr>
+        <w:tcW w:w="1900" w:type="dxa"/>
+        <w:gridSpan w:val="2"/>
+        
+        <w:vAlign w:val="center"/>
+      </w:tcPr>
+      <w:p/>
+    </w:tc>
+  
+    <w:tc>
+      <w:tcPr>
+        <w:tcW w:w="1000" w:type="dxa"/>
+        
+        
+        <w:vAlign w:val="center"/>
+      </w:tcPr>
+      
+    <w:p>
+      <w:pPr>
+        <w:jc w:val="center"/>
+        
+      </w:pPr>
+      <w:r>
+        <w:rPr>
+          <w:rFonts w:ascii="SimSun" w:hAnsi="SimSun" w:eastAsia="SimSun"/>
+          
+          <w:sz w:val="24"/>
+          <w:szCs w:val="24"/>
+        </w:rPr>
+        <w:t xml:space="preserve">身份证号</w:t>
+      </w:r>
+    </w:p>
+  
+    </w:tc>
+  
+    <w:tc>
+      <w:tcPr>
+        <w:tcW w:w="3100" w:type="dxa"/>
+        <w:gridSpan w:val="2"/>
+        
+        <w:vAlign w:val="center"/>
+      </w:tcPr>
+      <w:p/>
+    </w:tc>
+  
+    </w:tr>
+  
+      
+    <w:tr>
+      <w:trPr>
+        <w:trHeight w:val="3800" w:hRule="atLeast"/>
+      </w:trPr>
+      
+    <w:tc>
+      <w:tcPr>
+        <w:tcW w:w="8000" w:type="dxa"/>
+        <w:gridSpan w:val="7"/>
+        
+        <w:vAlign w:val="center"/>
+      </w:tcPr>
+      <w:p/>
+    </w:tc>
+  
+    </w:tr>
+  
+    </w:tbl>
+    <w:sectPr>
+      <w:pgSz w:w="11906" w:h="16838"/>
+      <w:pgMar w:top="1134" w:right="1134" w:bottom="1134" w:left="1134" w:header="708" w:footer="708" w:gutter="0"/>
+    </w:sectPr>
+  </w:body>
+</w:document>

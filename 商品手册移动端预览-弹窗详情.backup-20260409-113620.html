@@ -907,32 +907,6 @@
       min-width: 72px;
     }
 
-    .modal-ghost,
-    .modal-primary {
-      min-height: 42px;
-      padding: 0 16px;
-      border-radius: 14px;
-      font-size: 13px;
-      font-weight: 900;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-    }
-
-    .modal-ghost {
-      background: rgba(238, 244, 255, 0.92);
-      color: var(--brand-deep);
-      border: 1px solid rgba(34, 88, 246, 0.14);
-      box-shadow: 0 10px 20px rgba(34, 88, 246, 0.06);
-    }
-
-    .modal-primary {
-      background: linear-gradient(135deg, var(--brand-deep) 0%, var(--brand) 58%, #5a9fff 100%);
-      color: #fff;
-      box-shadow: 0 12px 24px rgba(34, 88, 246, 0.12);
-    }
-
     .detail-modal-gallery {
       display: grid;
       gap: 10px;
@@ -944,10 +918,8 @@
       max-height: 240px;
       border-radius: 22px;
       overflow: hidden;
-      background:
-        radial-gradient(circle at top right, rgba(34, 88, 246, 0.14), transparent 34%),
-        linear-gradient(180deg, #fbfdff, #eef4fb);
-      border: 1px solid rgba(34, 88, 246, 0.1);
+      background: linear-gradient(180deg, #fff8f0, #f4eadc);
+      border: 1px solid rgba(85, 44, 25, 0.08);
       display: grid;
       place-items: center;
       padding: 14px;
@@ -979,8 +951,7 @@
     }
 
     .detail-modal-thumb.active {
-      border-color: rgba(34, 88, 246, 0.26);
-      box-shadow: 0 8px 18px rgba(34, 88, 246, 0.08);
+      border-color: rgba(184, 61, 30, 0.28);
     }
 
     .detail-modal-thumb img {
@@ -1005,10 +976,8 @@
       width: 100%;
       border-radius: 18px;
       overflow: hidden;
-      background:
-        radial-gradient(circle at top right, rgba(34, 88, 246, 0.12), transparent 30%),
-        linear-gradient(180deg, #fbfdff, #eef4fb);
-      border: 1px solid rgba(34, 88, 246, 0.1);
+      background: linear-gradient(180deg, #fff8f0, #f4eadc);
+      border: 1px solid rgba(85, 44, 25, 0.08);
     }
 
     .detail-longimg img {
@@ -1033,12 +1002,11 @@
       height: 180px;
       border-radius: 18px;
       background:
-        linear-gradient(90deg, rgba(34, 88, 246, 0.08) 50%, transparent 50%),
-        linear-gradient(rgba(34, 88, 246, 0.08) 50%, transparent 50%),
-        radial-gradient(circle at top right, rgba(34, 88, 246, 0.14), transparent 34%),
-        linear-gradient(180deg, #fbfdff, #eef4fb);
+        linear-gradient(90deg, rgba(35, 21, 17, 0.08) 50%, transparent 50%),
+        linear-gradient(rgba(35, 21, 17, 0.08) 50%, transparent 50%),
+        linear-gradient(135deg, rgba(184, 61, 30, 0.12), rgba(216, 161, 77, 0.14));
       background-size: 18px 18px, 18px 18px, auto;
-      border: 1px solid rgba(34, 88, 246, 0.1);
+      border: 1px solid rgba(85, 44, 25, 0.1);
       display: grid;
       place-items: center;
       text-align: center;
@@ -1313,7 +1281,7 @@
           <h4 id="modalProductTitle">商品详情</h4>
           <p class="section-copy" id="modalProductIntro">点击商品后查看完整图文详情与重点卖点说明。</p>
         </div>
-        <button class="ghost-btn modal-ghost detail-close" id="closeProductDetail" type="button">关闭</button>
+        <button class="ghost-btn detail-close" id="closeProductDetail" type="button" style="color:var(--brand-deep); background:rgba(184,61,30,0.08); border:1px solid rgba(184,61,30,0.14);">关闭</button>
       </div>
       <div class="detail-modal-gallery">
         <div class="detail-modal-image"><img id="modalProductImage" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="商品详情图" /></div>
@@ -1343,8 +1311,8 @@
       <p>当前为招商企微展示占位，正式上线时建议直接替换为真实企业微信二维码或官方企微链接，便于客户完成进一步咨询。</p>
       <div class="qr-placeholder">企业微信活码展示位<br />上线时替换为正式招商企微</div>
       <div class="contact-actions">
-        <button class="ghost-btn modal-ghost" id="copyPlaceholder">复制示例企微号</button>
-        <button class="cta modal-primary" id="closeModal">关闭</button>
+        <button class="ghost-btn" id="copyPlaceholder" style="color:var(--brand-deep); background:rgba(184,61,30,0.08); border-color:rgba(184,61,30,0.14);">复制示例企微号</button>
+        <button class="cta" id="closeModal">关闭</button>
       </div>
     </div>
   </div>
