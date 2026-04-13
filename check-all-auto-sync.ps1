@@ -1,8 +1,8 @@
-$ErrorActionPreference = "Stop"
-
 param(
   [switch]$SyncPending
 )
+
+$ErrorActionPreference = "Stop"
 
 $repos = @(
   @{
