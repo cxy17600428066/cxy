@@ -1,5 +1,9 @@
 $ErrorActionPreference = "Stop"
 
+param(
+  [switch]$SyncPending
+)
+
 $repos = @(
   @{
     Name = "cxy"
@@ -74,16 +78,75 @@ function Get-RepoStatus {
   }
 }
 
+function Show-Results {
+  param(
+    [object[]]$Items
+  )
+
+  $Items | Format-Table Repo,Watcher,Action,WatcherPid,Changes,Branch -AutoSize
+
+  Write-Host ""
+  foreach ($result in $Items) {
+    Write-Host ("[{0}] {1}" -f $result.Repo, $result.Path)
+    if ($result.LastLog) {
+      Write-Host ("  LastLog: {0}" -f $result.LastLog)
+    }
+  }
+}
+
+function Sync-PendingRepos {
+  param(
+    [object[]]$Items
+  )
+
+  $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+  foreach ($item in $Items) {
+    Write-Host ("[{0}] syncing..." -f $item.Repo)
+    Push-Location $item.Path
+    try {
+      git quick ("Manual sync " + $timestamp)
+    }
+    finally {
+      Pop-Location
+    }
+  }
+}
+
 $results = foreach ($repo in $repos) {
   Get-RepoStatus -Repo $repo
 }
 
-$results | Format-Table Repo,Watcher,Action,WatcherPid,Changes,Branch -AutoSize
+Show-Results -Items $results
 
-Write-Host ""
-foreach ($result in $results) {
-  Write-Host ("[{0}] {1}" -f $result.Repo, $result.Path)
-  if ($result.LastLog) {
-    Write-Host ("  LastLog: {0}" -f $result.LastLog)
+$pendingRepos = @($results | Where-Object { $_.Changes -gt 0 })
+
+if ($pendingRepos.Count -gt 0) {
+  Write-Host ""
+  Write-Host "Pending repos:"
+  foreach ($repo in $pendingRepos) {
+    Write-Host ("- {0} ({1} changes)" -f $repo.Repo, $repo.Changes)
+  }
+
+  $shouldSync = $false
+  if ($SyncPending) {
+    $shouldSync = $true
+  }
+  else {
+    $answer = Read-Host "发现待同步改动，是否立即一键推送以上仓库？输入 Y 继续"
+    if ($answer -match '^(?i)y(?:es)?$') {
+      $shouldSync = $true
+    }
+  }
+
+  if ($shouldSync) {
+    Write-Host ""
+    Sync-PendingRepos -Items $pendingRepos
+
+    Write-Host ""
+    Write-Host "Updated status:"
+    $results = foreach ($repo in $repos) {
+      Get-RepoStatus -Repo $repo
+    }
+    Show-Results -Items $results
   }
 }
