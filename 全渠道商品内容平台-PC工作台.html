@@ -1266,12 +1266,20 @@ linear-gradient(180deg,#fffaf6,#fff)}
       <button class="btn g" id="closeProductEditorModal" type="button">关闭</button>
     </div>
     <div class="productEffectRow" id="productEditorModalEffects"></div>
-    <div class="productSceneMix" id="productEditorModalSceneMix"></div>
     <div class="productEditorFields">
       <div class="field full"><label><span>一句话优势</span><span>展示在商品主标题下方</span></label><input id="editorSubtitle"></div>
       <div class="field full"><label><span>商品优势说明</span><span>概括商品价值和推荐理由</span></label><textarea id="editorSummary"></textarea></div>
       <div class="field full"><label><span>核心卖点</span><span>每行一条，适合同步到预览和移动端</span></label><textarea id="editorSellingPoints"></textarea></div>
-      <div class="field"><label><span>推荐场景</span><span>逗号分隔，如直播间、商超端架</span></label><input id="editorScenes"></div>
+      <div class="field full"><label><span>推荐场景</span><span>输入一个文字场景，如直播间</span></label><input id="editorScenes"></div>
+      <div class="field full sceneImageEditor">
+        <label><span>场景图片</span><span>上传 1 张图片用于场景编辑</span></label>
+        <div class="actions">
+          <button type="button" class="btn g" id="editorSceneImagePick">选择图片</button>
+          <button type="button" class="btn g" id="editorSceneImageClear">清空图片</button>
+        </div>
+        <input id="editorSceneImageInput" type="file" accept="image/*" hidden>
+        <div class="sceneImagePreview" id="editorSceneImagePreview"></div>
+      </div>
       <div class="field"><label><span>内容特效</span><span>逗号分隔，如风味高亮、规格放大</span></label><input id="editorEffects"></div>
       <div class="field full"><label><span>强化标签</span><span>逗号分隔，会补充到商品标签区</span></label><input id="editorTags"></div>
     </div>
@@ -1352,7 +1360,8 @@ function createDefaultProductContent(product){
     subtitle:`${product.channel}重点推荐，突出${product.flavor || product.category}与${product.spec}组合表达`,
     summary:`围绕 ${product.name} 集中展示风味特色、规格优势、适配渠道与转化卖点，帮助客户快速判断商品价值。`,
     sellingPoints:(product.highlights||[]).slice(0,4).join("\n"),
-    scenes:(product.scene||"").replace(/、/g,"，"),
+    scenes:((product.scene||"").replace(/、/g,"，").split(/[，,]/)[0]||"").trim(),
+    sceneImage:"",
     effects:[product.flavor?`${product.flavor}高亮`:"风味高亮",product.channel?`${product.channel}角标`:"渠道角标",product.spec?`${product.spec}规格放大`:"规格放大"].filter(Boolean).join("，"),
     tags:uniqueTags([...(product.tags||[]),product.category,product.channel]).slice(0,6).join("，")
   };
@@ -1374,7 +1383,7 @@ function escapeAttr(text){return escapeHtml(text).replace(/"/g,"&quot;")}
 function getFilterValues(value){return Array.isArray(value)?value:[value].filter(Boolean)}
 function ensureProductContentDefaults(){picked().forEach(product=>{if(!state.productContent[product.id])state.productContent[product.id]=createDefaultProductContent(product)})}
 function getProductContent(product){ensureProductContentDefaults();return {...createDefaultProductContent(product),...(state.productContent[product.id]||{})}}
-function enrichedProduct(product){const content=getProductContent(product);return {...product,promoSubtitle:content.subtitle,promoSummary:content.summary,promoBullets:parseListText(content.sellingPoints),promoScenes:parseListText(content.scenes),promoEffects:parseListText(content.effects),promoTags:parseListText(content.tags)}}
+function enrichedProduct(product){const content=getProductContent(product);return {...product,promoSubtitle:content.subtitle,promoSummary:content.summary,promoBullets:parseListText(content.sellingPoints),promoScenes:content.scenes?[content.scenes.trim()].filter(Boolean):[],promoEffects:parseListText(content.effects),promoTags:parseListText(content.tags),sceneImage:content.sceneImage||""}}
 function currentEditingProduct(){return products.find(product=>product.id===state.activeProductEditorId)||null}
 function removeSelectedProduct(productId,{keepOne=false}={}){if(keepOne&&state.selected.length<=1)return;setSelectedProducts(state.selected.filter(id=>id!==productId))}
 function filteredProducts(){const keyword=(state.productKeyword||"").trim().toLowerCase();return products.filter(p=>{const keywordMatched=!keyword||[p.name,p.category,p.flavor,p.spec,p.channel].filter(Boolean).some(value=>String(value).toLowerCase().includes(keyword));if(!keywordMatched)return false;return productFilterDefs.every(def=>{const active=state.filters[def.key]||[];if(!active.length)return true;const values=getFilterValues(p[def.key]);return active.some(item=>values.includes(item))})})}
