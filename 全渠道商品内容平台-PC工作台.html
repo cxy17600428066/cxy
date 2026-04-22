@@ -1104,14 +1104,188 @@ linear-gradient(180deg,#fffaf6,#fff)}
  body.embedded-shell .editorModalPanel{
   border-radius:10px;
  }
+ body.embedded-shell .system-shell{
+  min-height:100vh;
+  display:grid;
+  grid-template-rows:56px minmax(0,1fr);
+ }
+ body.embedded-shell .sys-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  padding:0 14px;
+  background:#fff;
+  border-bottom:1px solid #dbe4ee;
+ }
+ body.embedded-shell .sys-brand{
+  font-size:18px;
+  font-weight:700;
+  color:#1f2937;
+  white-space:nowrap;
+ }
+ body.embedded-shell .sys-topnav{
+  flex:1;
+  min-width:0;
+  display:flex;
+  align-items:center;
+  gap:2px;
+  overflow:auto;
+ }
+ body.embedded-shell .sys-topnav a{
+  display:inline-flex;
+  align-items:center;
+  min-height:40px;
+  padding:0 14px;
+  color:#334155;
+  text-decoration:none;
+  border-radius:6px;
+  white-space:nowrap;
+  font-size:14px;
+ }
+ body.embedded-shell .sys-topnav a.active{
+  background:#eaf2ff;
+  color:#1d4ed8;
+  font-weight:700;
+ }
+ body.embedded-shell .sys-user{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  color:#475569;
+  font-size:13px;
+  white-space:nowrap;
+ }
+ body.embedded-shell .sys-avatar{
+  width:30px;
+  height:30px;
+  border-radius:50%;
+  background:#cbd5e1;
+  display:inline-block;
+ }
+ body.embedded-shell .sys-main{
+  min-height:0;
+  display:grid;
+  grid-template-columns:180px minmax(0,1fr);
+ }
+ body.embedded-shell .sys-sidebar{
+  border-right:1px solid #dbe4ee;
+  background:#f8fafc;
+  padding:8px 0;
+  overflow:auto;
+ }
+ body.embedded-shell .sys-menu{
+  margin:0;
+  padding:0;
+  list-style:none;
+  display:grid;
+  gap:2px;
+ }
+ body.embedded-shell .sys-menu a{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  min-height:38px;
+  padding:0 16px;
+  color:#334155;
+  text-decoration:none;
+  font-size:14px;
+ }
+ body.embedded-shell .sys-menu a.active{
+  background:#e8f0fe;
+  color:#1d4ed8;
+  font-weight:700;
+ }
+ body.embedded-shell .sys-content{
+  min-width:0;
+  display:grid;
+  grid-template-rows:auto minmax(0,1fr);
+  background:#f2f4f7;
+ }
+ body.embedded-shell .sys-tabs{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 12px;
+  background:#fff;
+  border-bottom:1px solid #dbe4ee;
+ }
+ body.embedded-shell .sys-tab{
+  display:inline-flex;
+  align-items:center;
+  min-height:28px;
+  padding:0 10px;
+  border:1px solid #dbe4ee;
+  border-radius:4px;
+  background:#f8fafc;
+  color:#334155;
+  font-size:12px;
+  white-space:nowrap;
+ }
+ body.embedded-shell .sys-tab.active{
+  background:#3b82f6;
+  border-color:#3b82f6;
+  color:#fff;
+ }
+ body.embedded-shell .app{
+  max-width:none;
+  width:100%;
+  padding:12px;
+ }
  @media (max-width:1400px){
   body.embedded-shell .layout{
    grid-template-columns:1fr;
   }
  }
+ @media (max-width:1024px){
+  body.embedded-shell .sys-main{
+   grid-template-columns:1fr;
+  }
+  body.embedded-shell .sys-sidebar{
+   display:none;
+  }
+ }
 </style>
 </head>
 <body class="embedded-shell">
+<div class="system-shell">
+<header class="sys-header">
+  <div class="sys-brand">卓番数字化信息服务平台</div>
+  <nav class="sys-topnav" aria-label="顶部导航">
+    <a href="javascript:void(0)">首页</a>
+    <a href="javascript:void(0)">OMS订单系统</a>
+    <a href="javascript:void(0)" class="active">标准库系统</a>
+    <a href="javascript:void(0)">CRM系统</a>
+    <a href="javascript:void(0)">绩效系统</a>
+    <a href="javascript:void(0)">项目任务系统</a>
+    <a href="javascript:void(0)">BI报表系统</a>
+    <a href="javascript:void(0)">基础系统</a>
+  </nav>
+  <div class="sys-user"><span class="sys-avatar"></span><span>陈薪宇</span></div>
+</header>
+<div class="sys-main">
+<aside class="sys-sidebar" aria-label="侧边菜单">
+  <ul class="sys-menu">
+    <li><a href="javascript:void(0)">首页</a></li>
+    <li><a href="javascript:void(0)" class="active">商品信息</a></li>
+    <li><a href="javascript:void(0)">研发体系</a></li>
+    <li><a href="javascript:void(0)">生产体系</a></li>
+    <li><a href="javascript:void(0)">品牌体系</a></li>
+    <li><a href="javascript:void(0)">财务体系</a></li>
+    <li><a href="javascript:void(0)">品控体系</a></li>
+    <li><a href="javascript:void(0)">采购体系</a></li>
+    <li><a href="javascript:void(0)">市场销售</a></li>
+    <li><a href="javascript:void(0)">物流体系</a></li>
+    <li><a href="javascript:void(0)">售后体系</a></li>
+    <li><a href="javascript:void(0)">基础信息</a></li>
+  </ul>
+</aside>
+<section class="sys-content">
+<div class="sys-tabs">
+  <span class="sys-tab active">首页</span>
+  <span class="sys-tab">商品列表</span>
+  <span class="sys-tab">外包商品详情</span>
+</div>
 <div class="app">
 <section class="hero">
   <h1>脱骨侠产品手册生成流程原型</h1>
@@ -1340,6 +1514,9 @@ linear-gradient(180deg,#fffaf6,#fff)}
     </div>
   </aside>
 </section>
+</div>
+</section>
+</div>
 </div>
 
 <div class="drawer" id="drawer" role="dialog" aria-modal="true">
