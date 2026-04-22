@@ -1051,6 +1051,9 @@ linear-gradient(180deg,#fffaf6,#fff)}
   padding:10px;
   border-radius:8px;
   gap:8px;
+  display:flex;
+  flex-direction:column;
+  height:100%;
  }
  body.embedded-shell .view[data-step="1"] .dishMedia{
   margin:0 0 8px;
@@ -1084,11 +1087,17 @@ linear-gradient(180deg,#fffaf6,#fff)}
  body.embedded-shell .view[data-step="1"] .dish .actions{
   gap:6px;
   margin-top:8px;
+  margin-top:auto;
+  padding-top:8px;
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
  }
  body.embedded-shell .view[data-step="1"] .dish .btn{
-  padding:7px 10px;
+  width:100%;
+  padding:7px 8px;
   font-size:12px;
   border-radius:8px;
+  min-height:34px;
  }
  body.embedded-shell .view[data-step="1"] .filterPanel{
   gap:10px;
