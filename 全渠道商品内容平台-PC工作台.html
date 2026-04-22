@@ -1280,6 +1280,8 @@ linear-gradient(180deg,#fffaf6,#fff)}
         <input id="editorSceneImageInput" type="file" accept="image/*" hidden>
         <div class="sceneImagePreview" id="editorSceneImagePreview"></div>
       </div>
+      <div class="field full"><label><span>配料表信息</span><span>支持粘贴完整配料表</span></label><textarea id="editorIngredients"></textarea></div>
+      <div class="field full"><label><span>营养成分信息</span><span>支持粘贴营养成分表</span></label><textarea id="editorNutrition"></textarea></div>
       <div class="field"><label><span>内容特效</span><span>逗号分隔，如风味高亮、规格放大</span></label><input id="editorEffects"></div>
       <div class="field full"><label><span>强化标签</span><span>逗号分隔，会补充到商品标签区</span></label><input id="editorTags"></div>
     </div>
@@ -1362,6 +1364,8 @@ function createDefaultProductContent(product){
     sellingPoints:(product.highlights||[]).slice(0,4).join("\n"),
     scenes:((product.scene||"").replace(/、/g,"，").split(/[，,]/)[0]||"").trim(),
     sceneImage:"",
+    ingredientInfo:"",
+    nutritionInfo:"",
     effects:[product.flavor?`${product.flavor}高亮`:"风味高亮",product.channel?`${product.channel}角标`:"渠道角标",product.spec?`${product.spec}规格放大`:"规格放大"].filter(Boolean).join("，"),
     tags:uniqueTags([...(product.tags||[]),product.category,product.channel]).slice(0,6).join("，")
   };
@@ -1383,7 +1387,7 @@ function escapeAttr(text){return escapeHtml(text).replace(/"/g,"&quot;")}
 function getFilterValues(value){return Array.isArray(value)?value:[value].filter(Boolean)}
 function ensureProductContentDefaults(){picked().forEach(product=>{if(!state.productContent[product.id])state.productContent[product.id]=createDefaultProductContent(product)})}
 function getProductContent(product){ensureProductContentDefaults();return {...createDefaultProductContent(product),...(state.productContent[product.id]||{})}}
-function enrichedProduct(product){const content=getProductContent(product);return {...product,promoSubtitle:content.subtitle,promoSummary:content.summary,promoBullets:parseListText(content.sellingPoints),promoScenes:content.scenes?[content.scenes.trim()].filter(Boolean):[],promoEffects:parseListText(content.effects),promoTags:parseListText(content.tags),sceneImage:content.sceneImage||""}}
+function enrichedProduct(product){const content=getProductContent(product);return {...product,promoSubtitle:content.subtitle,promoSummary:content.summary,promoBullets:parseListText(content.sellingPoints),promoScenes:content.scenes?[content.scenes.trim()].filter(Boolean):[],promoEffects:parseListText(content.effects),promoTags:parseListText(content.tags),sceneImage:content.sceneImage||"",ingredientInfo:content.ingredientInfo||"",nutritionInfo:content.nutritionInfo||""}}
 function currentEditingProduct(){return products.find(product=>product.id===state.activeProductEditorId)||null}
 function removeSelectedProduct(productId,{keepOne=false}={}){if(keepOne&&state.selected.length<=1)return;setSelectedProducts(state.selected.filter(id=>id!==productId))}
 function filteredProducts(){const keyword=(state.productKeyword||"").trim().toLowerCase();return products.filter(p=>{const keywordMatched=!keyword||[p.name,p.category,p.flavor,p.spec,p.channel].filter(Boolean).some(value=>String(value).toLowerCase().includes(keyword));if(!keywordMatched)return false;return productFilterDefs.every(def=>{const active=state.filters[def.key]||[];if(!active.length)return true;const values=getFilterValues(p[def.key]);return active.some(item=>values.includes(item))})})}
@@ -1410,7 +1414,7 @@ $("toggleProductSelection").onclick=toggleVisibleProducts;
 $("toggleFixedContent").onclick=toggleFixedContent;
 $("closeProductEditorModal").onclick=closeProductEditorModal;
 $("productEditorModal").onclick=e=>{if(e.target===$("productEditorModal"))closeProductEditorModal()};
-["editorSubtitle","editorSummary","editorSellingPoints","editorScenes","editorEffects","editorTags"].forEach(id=>$(id).addEventListener("input",e=>{const map={editorSubtitle:"subtitle",editorSummary:"summary",editorSellingPoints:"sellingPoints",editorScenes:"scenes",editorEffects:"effects",editorTags:"tags"};syncProductEditorModal(map[id],id==="editorScenes"?String(e.target.value||"").trim():e.target.value)}));
+["editorSubtitle","editorSummary","editorSellingPoints","editorScenes","editorIngredients","editorNutrition","editorEffects","editorTags"].forEach(id=>$(id).addEventListener("input",e=>{const map={editorSubtitle:"subtitle",editorSummary:"summary",editorSellingPoints:"sellingPoints",editorScenes:"scenes",editorIngredients:"ingredientInfo",editorNutrition:"nutritionInfo",editorEffects:"effects",editorTags:"tags"};syncProductEditorModal(map[id],id==="editorScenes"?String(e.target.value||"").trim():e.target.value)}));
 $("editorSceneImagePick").onclick=()=>$("editorSceneImageInput").click();
 $("editorSceneImageClear").onclick=clearSceneImage;
 $("editorSceneImageInput").addEventListener("change",e=>handleSceneImageUpload(e.target.files&&e.target.files[0]));
@@ -1429,7 +1433,7 @@ function toggleFixedContent(){state.fixedContentCollapsed=!state.fixedContentCol
 function renderSceneImagePreview(product,src){$("editorSceneImagePreview").innerHTML=src?`<img src="${escapeAttr(src)}" alt="${escapeAttr(product.name)}" loading="lazy"><small>当前图片：已上传</small>`:'<img src="'+escapeAttr(product.image)+'" alt="'+escapeAttr(product.name)+'" loading="lazy"><small>当前图片：使用商品图（未单独上传）</small>'}
 function handleSceneImageUpload(file){const product=currentEditingProduct();if(!product||!file)return;const reader=new FileReader();reader.onload=()=>{syncProductEditorModal("sceneImage",String(reader.result||""))};reader.readAsDataURL(file)}
 function clearSceneImage(){const input=$("editorSceneImageInput");if(input)input.value="";syncProductEditorModal("sceneImage","")}
-function fillProductEditorModal(product){const content=getProductContent(product);$("productEditorModalTitle").textContent=`编辑商品内容 · ${product.name}`;$("productEditorModalMeta").textContent=`${product.spec} · ${product.store} · ${product.channel}`;$("editorSubtitle").value=content.subtitle;$("editorSummary").value=content.summary;$("editorSellingPoints").value=content.sellingPoints;$("editorScenes").value=content.scenes;$("editorEffects").value=content.effects;$("editorTags").value=content.tags;const effects=parseListText(content.effects);$("productEditorModalEffects").innerHTML=effects.length?effects.map(effect=>`<span class="effectChip">${escapeHtml(effect)}</span>`).join(""):'<span class="effectChip">待补充特效</span>';renderSceneImagePreview(product,content.sceneImage)}
+function fillProductEditorModal(product){const content=getProductContent(product);$("productEditorModalTitle").textContent=`编辑商品内容 · ${product.name}`;$("productEditorModalMeta").textContent=`${product.spec} · ${product.store} · ${product.channel}`;$("editorSubtitle").value=content.subtitle;$("editorSummary").value=content.summary;$("editorSellingPoints").value=content.sellingPoints;$("editorScenes").value=content.scenes;$("editorIngredients").value=content.ingredientInfo||"";$("editorNutrition").value=content.nutritionInfo||"";$("editorEffects").value=content.effects;$("editorTags").value=content.tags;const effects=parseListText(content.effects);$("productEditorModalEffects").innerHTML=effects.length?effects.map(effect=>`<span class="effectChip">${escapeHtml(effect)}</span>`).join(""):'<span class="effectChip">待补充特效</span>';renderSceneImagePreview(product,content.sceneImage)}
 function openProductEditorModal(productId){const product=products.find(item=>item.id===productId);if(!product)return;state.activeProductEditorId=productId;fillProductEditorModal(product);$("productEditorModal").classList.add("open");document.body.style.overflow="hidden"}
 function closeProductEditorModal(){state.activeProductEditorId="";$("productEditorModal").classList.remove("open");document.body.style.overflow=""}
 function syncProductEditorModal(field,value){const product=currentEditingProduct();if(!product)return;if(!state.productContent[product.id])state.productContent[product.id]=createDefaultProductContent(product);state.productContent[product.id][field]=value;if(field==="effects"){const effects=parseListText(value);$("productEditorModalEffects").innerHTML=effects.length?effects.map(effect=>`<span class="effectChip">${escapeHtml(effect)}</span>`).join(""):'<span class="effectChip">待补充特效</span>'}if(field==="sceneImage")renderSceneImagePreview(product,String(value||""));renderProductEditors();renderPreview()}
