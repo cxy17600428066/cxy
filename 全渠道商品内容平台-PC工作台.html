@@ -986,8 +986,132 @@ linear-gradient(180deg,#fffaf6,#fff)}
   }
  }
 </style>
+<style>
+ body.embedded-shell{
+  min-height:auto;
+  background:#f2f4f7;
+ }
+ body.embedded-shell::before{
+  display:none;
+ }
+ body.embedded-shell .app{
+  max-width:none;
+  padding:12px 14px 16px;
+  gap:12px;
+ }
+ body.embedded-shell .hero{
+  display:none;
+ }
+ body.embedded-shell .panel,
+ body.embedded-shell .filterPanel,
+ body.embedded-shell .editorBlock,
+ body.embedded-shell .productEditorCard,
+ body.embedded-shell .selectedProductItem,
+ body.embedded-shell .summary,
+ body.embedded-shell .module,
+ body.embedded-shell .thumb,
+ body.embedded-shell .step,
+ body.embedded-shell .ppt{
+  border-radius:8px;
+  box-shadow:none;
+  backdrop-filter:none;
+  border:1px solid #e2e8f0;
+  background:#fff;
+ }
+ body.embedded-shell .panel{
+  padding:14px;
+ }
+ body.embedded-shell .topbar{
+  margin-bottom:12px;
+ }
+ body.embedded-shell .topbar h2{
+  font-size:18px;
+ }
+ body.embedded-shell .topbar p{
+  margin-top:4px;
+  font-size:12px;
+  line-height:1.6;
+ }
+ body.embedded-shell .hint{
+  font-size:12px;
+ }
+ body.embedded-shell .layout{
+  gap:12px;
+  grid-template-columns:minmax(0,1fr) 320px;
+ }
+ body.embedded-shell .cards{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;
+ }
+ body.embedded-shell .sceneGrid{
+  grid-template-columns:repeat(3,minmax(0,1fr));
+ }
+ body.embedded-shell .stepper{
+  gap:8px;
+ }
+ body.embedded-shell .step{
+  min-height:70px;
+  padding:9px 10px;
+  border-radius:8px;
+  grid-template-columns:30px minmax(0,1fr);
+  column-gap:8px;
+ }
+ body.embedded-shell .step b{
+  width:30px;
+  height:30px;
+  border-radius:8px;
+  font-size:14px;
+  box-shadow:none;
+ }
+ body.embedded-shell .step strong{
+  font-size:14px;
+ }
+ body.embedded-shell .step small{
+  font-size:11px;
+ }
+ body.embedded-shell .selectedSummary{
+  position:static;
+  top:auto;
+  max-height:none;
+ }
+ body.embedded-shell .selectedProducts{
+  max-height:420px;
+ }
+ body.embedded-shell .deckShell{
+  gap:12px;
+  grid-template-columns:250px minmax(0,1fr);
+  padding:12px;
+ }
+ body.embedded-shell .deckSidebarPanel,
+ body.embedded-shell .deckDeletedPanel,
+ body.embedded-shell .deckTools,
+ body.embedded-shell .deckPageWrap{
+  border-radius:8px;
+  box-shadow:none;
+ }
+ body.embedded-shell .deckPageWrap{
+  padding:12px;
+ }
+ body.embedded-shell .thumb{
+  border-radius:8px;
+  padding:10px;
+ }
+ body.embedded-shell .previewStage{
+  border-radius:8px;
+  padding:12px;
+ }
+ body.embedded-shell .drawerPanel,
+ body.embedded-shell .editorModalPanel{
+  border-radius:10px;
+ }
+ @media (max-width:1400px){
+  body.embedded-shell .layout{
+   grid-template-columns:1fr;
+  }
+ }
+</style>
 </head>
-<body>
+<body class="embedded-shell">
 <div class="app">
 <section class="hero">
   <h1>脱骨侠产品手册生成流程原型</h1>
