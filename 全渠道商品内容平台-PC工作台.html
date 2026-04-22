@@ -1121,6 +1121,49 @@ linear-gradient(180deg,#fffaf6,#fff)}
   top:auto;
   max-height:none;
  }
+ body.embedded-shell .selectedSummary,
+ body.embedded-shell .selectedSummary *{
+  text-align:left;
+ }
+ body.embedded-shell .selectedSummary .sideHeader{
+  justify-content:space-between;
+  align-items:center;
+ }
+ body.embedded-shell .selectedSummary .selectedProductItem{
+  padding:9px 10px;
+  border-radius:8px;
+ }
+ body.embedded-shell .selectedSummary .selectedProductRow{
+  align-items:center;
+  gap:8px;
+ }
+ body.embedded-shell .selectedSummary .selectedProductMain{
+  min-width:0;
+  flex:1;
+ }
+ body.embedded-shell .selectedSummary .selectedProductMain strong{
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  line-height:1.4;
+ }
+ body.embedded-shell .selectedSummary .selectedProductMeta{
+  margin-top:3px;
+  font-size:11px;
+  line-height:1.35;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+ }
+ body.embedded-shell .selectedSummary .sideRemoveBtn{
+  min-width:56px;
+  min-height:30px;
+  padding:0 10px;
+  border-radius:10px;
+  font-size:11px;
+  line-height:1;
+  flex:0 0 auto;
+ }
  body.embedded-shell .selectedProducts{
   max-height:420px;
  }
