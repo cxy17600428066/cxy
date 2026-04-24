@@ -29,6 +29,27 @@
  }
 }
 @media (max-width:720px){
+ .drawer-layout{
+  grid-template-columns:1fr;
+  gap:12px;
+ }
+ .drawer-gallery{
+  order:1;
+  gap:0;
+ }
+ .drawer-content{
+  order:2;
+  gap:12px;
+ }
+ .drawer-cover{
+  aspect-ratio:1/1;
+  padding:12px;
+  border-radius:16px;
+ }
+ .drawer-thumb-row,
+ .drawer-visual-grid{
+  display:none;
+ }
  .drawer-header{
   position:relative;
   display:block;
