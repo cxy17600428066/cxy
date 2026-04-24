@@ -19,6 +19,14 @@
 @media (max-width:1260px){.hero-grid{grid-template-columns:1fr}}@media (max-width:1024px){.app{padding:14px 14px 128px}.drawer-layout,.drawer-detail-grid,.drawer-copy-grid{grid-template-columns:1fr}.drawer-visual-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}@media (max-width:720px){.topbar{position:static}.hero,.service-panel,.control-panel,.catalog,.sales-section,.drawer-panel{padding:16px}.section-head{display:grid;gap:8px}.section-meta{text-align:left}.search-row{grid-template-columns:1fr}.filter-row{grid-template-columns:1fr;gap:8px}.filter-label{min-height:auto}.product-grid{grid-template-columns:1fr}.card-meta,.sales-lines,.drawer-thumb-row,.drawer-visual-grid,.drawer-copy-grid,.drawer-detail-grid{display:grid;grid-template-columns:1fr}.card-actions{grid-template-columns:1fr}.drawer-header{display:grid}}@media (max-width:480px){.app{padding:12px 12px 126px}.topbar,.hero,.service-panel,.control-panel,.catalog,.sales-section,.drawer-panel{border-radius:22px}.hero{padding:14px}.hero-metrics,.control-summary,.card-actions{grid-template-columns:1fr}.sales-top,.sales-main{display:grid}.search-box{padding:0 14px;gap:10px}.search-box span{font-size:11px}}
 </style>
 <style>
+@media (max-width:1024px){
+ .drawer-content{
+  order:1;
+ }
+ .drawer-gallery{
+  order:2;
+ }
+}
 @media (max-width:720px){
  .product-grid{
   grid-template-columns:repeat(2,minmax(0,1fr));
