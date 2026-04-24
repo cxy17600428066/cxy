@@ -20,6 +20,7 @@
 </style>
 <style>
 .hero-side{display:none !important}
+.drawer-main-hero{display:none}
 @media (max-width:1024px){
  .drawer-content{
   order:1;
@@ -29,6 +30,19 @@
  }
 }
 @media (max-width:720px){
+ .drawer-main-hero{
+  display:block;
+  aspect-ratio:1/1;
+  padding:12px;
+  border:1px solid var(--line);
+  border-radius:20px;
+  background:radial-gradient(circle at top right,rgba(33,87,245,.12),transparent 34%),linear-gradient(180deg,#fff8f2,#f2f7ff);
+ }
+ .drawer-main-hero img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+ }
  .drawer-header{
   position:relative;
   display:block;
