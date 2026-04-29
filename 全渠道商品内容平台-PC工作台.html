@@ -1679,29 +1679,34 @@ linear-gradient(180deg,#fffaf6,#fff)}
 
     <section class="panel view" data-step="5">
       <div class="topbar">
-        <div><h2>第 5 步：导出产品手册或生成分享链接</h2><p>支持导出手册、复制链接、生成二维码，并可直接预览产品手册在 PC、iPad、手机上的展示效果。</p></div>
-        <div class="hint">本页演示交付结果与分发方式。</div>
+        <div><h2>第 5 步：交付产品手册并预览移动端</h2><p>汇总当前商品、手册页和移动端页面，可导出 PDF、复制访问地址，并直接打开最终预览页核对展示效果。</p></div>
+        <div class="hint">预览地址：<code>商品手册移动端预览-弹窗详情.html</code></div>
       </div>
       <div class="shareGrid">
-        <div class="card">
-          <div class="summary"><strong>导出与分享</strong><div class="line">导出格式：PDF / 长图 / H5 分享页</div><div class="line">版本：<span id="versionText">V1.0</span></div></div>
-          <div class="summary" style="margin-top:12px"><strong>生成分享链接</strong><div class="linkbox" id="shareLink"></div></div>
-          <div class="actions" style="margin-top:12px">
+        <div class="card deliveryCard sharePanel">
+          <div class="deliveryHero"><strong>交付包已根据当前选择生成</strong><p>内容会同步到右侧移动端预览页，包含商品基础信息、箱规详情、配料表、营养成分、推荐场景和商品图片内容。</p></div>
+          <div class="deliveryStats">
+            <div class="deliveryStat"><span>交付格式</span><strong>PDF / H5 预览页</strong></div>
+            <div class="deliveryStat"><span>移动端页面</span><strong>同目录预览文件</strong></div>
+            <div class="deliveryStat"><span>当前版本</span><strong id="versionText">V1.0</strong></div>
+          </div>
+          <div class="summary"><strong>最终预览地址</strong><div class="linkbox" id="shareLink"></div></div>
+          <div class="actions">
             <button class="btn p" id="exportBtn">导出 PDF</button>
             <button class="btn s" id="copyLinkBtn">复制分享链接</button>
             <button class="btn g" id="openMobileBtn">打开最终预览页</button>
           </div>
         </div>
-        <div class="summary" style="display:grid;justify-items:center;gap:12px">
+        <div class="summary qrPanel">
           <strong>扫码查看手册</strong>
           <div class="qr" id="qr"></div>
-          <div class="line" style="text-align:center">正式开发可接真实二维码服务。</div>
+          <div class="line">二维码区域预留给最终发布地址，当前可通过左侧预览地址查看。</div>
         </div>
       </div>
       <div class="devicePreview">
         <div class="summary">
           <strong>终端预览</strong>
-          <div class="line">同一份 H5 查看页，支持 PC、iPad、手机三种展示宽度预览。</div>
+          <div class="line">同一份移动端预览页支持 PC、iPad、手机三种宽度核对，商品详情以移动端最终展示为准。</div>
         </div>
         <div class="deviceSwitch">
           <button class="switchBtn active" data-device="desktop">PC端</button>
