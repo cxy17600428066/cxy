@@ -1,0 +1,696 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>现代简约装修类VR看房</title>
+  <style>
+    :root {
+      --bg: #f4f1ec;
+      --panel: #fffaf3;
+      --panel-2: #ebe5dc;
+      --ink: #24211e;
+      --muted: #766f66;
+      --line: #d7cec2;
+      --accent: #2f756a;
+      --accent-2: #b46d46;
+      --shadow: 0 18px 48px rgba(54, 45, 37, .16);
+      font-family: "Microsoft YaHei", "PingFang SC", "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, .72), rgba(255, 255, 255, 0) 38%),
+        var(--bg);
+      min-height: 100vh;
+    }
+
+    .app {
+      display: grid;
+      grid-template-columns: minmax(310px, 390px) minmax(0, 1fr);
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding: 22px;
+      border-right: 1px solid var(--line);
+      background: rgba(255, 250, 243, .92);
+    }
+
+    .brand {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 22px;
+      line-height: 1.25;
+      letter-spacing: 0;
+    }
+
+    .subtitle {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .pill {
+      flex: 0 0 auto;
+      padding: 6px 9px;
+      border: 1px solid #cfc4b7;
+      border-radius: 999px;
+      color: #4e443b;
+      background: #f8f2e9;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .plan-wrap {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: 0 12px 28px rgba(69, 55, 43, .09);
+    }
+
+    .plan-wrap img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .hotspot {
+      position: absolute;
+      left: var(--x);
+      top: var(--y);
+      width: var(--w);
+      height: var(--h);
+      transform: translate(-50%, -50%);
+      border: 1px solid rgba(47, 117, 106, .8);
+      border-radius: 7px;
+      background: rgba(47, 117, 106, .16);
+      color: #123f38;
+      cursor: pointer;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .48);
+      transition: background .2s ease, border-color .2s ease, transform .2s ease;
+    }
+
+    .hotspot span {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      min-width: 38px;
+      padding: 3px 6px;
+      border-radius: 999px;
+      background: rgba(255, 250, 243, .9);
+      font-size: 11px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .hotspot:hover,
+    .hotspot.active {
+      z-index: 2;
+      border-color: var(--accent-2);
+      background: rgba(180, 109, 70, .22);
+      transform: translate(-50%, -50%) scale(1.03);
+    }
+
+    .room-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 9px;
+    }
+
+    .room-btn {
+      min-height: 58px;
+      padding: 9px 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fffdf9;
+      color: var(--ink);
+      text-align: left;
+      cursor: pointer;
+      transition: border-color .2s ease, background .2s ease, transform .2s ease;
+    }
+
+    .room-btn strong,
+    .room-btn span {
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .room-btn strong {
+      font-size: 13px;
+      line-height: 1.25;
+    }
+
+    .room-btn span {
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .room-btn:hover,
+    .room-btn.active {
+      border-color: rgba(47, 117, 106, .65);
+      background: #eef7f4;
+      transform: translateY(-1px);
+    }
+
+    .main {
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr) auto;
+      min-width: 0;
+      padding: 22px;
+      gap: 16px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .room-title {
+      min-width: 0;
+    }
+
+    .room-title h2 {
+      margin: 0;
+      font-size: 28px;
+      line-height: 1.18;
+      letter-spacing: 0;
+    }
+
+    .room-title p {
+      margin: 7px 0 0;
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    .toolbar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .icon-btn {
+      display: inline-grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fffaf3;
+      color: var(--ink);
+      cursor: pointer;
+      transition: background .2s ease, border-color .2s ease;
+    }
+
+    .icon-btn:hover {
+      border-color: rgba(47, 117, 106, .55);
+      background: #eef7f4;
+    }
+
+    .icon-btn svg {
+      width: 19px;
+      height: 19px;
+      stroke: currentColor;
+      stroke-width: 2;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .viewer-shell {
+      position: relative;
+      min-height: 460px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #1f1d1a;
+      box-shadow: var(--shadow);
+      user-select: none;
+      touch-action: none;
+    }
+
+    .scene {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      will-change: transform;
+      transform-origin: center center;
+      filter: saturate(1.02) contrast(1.01);
+    }
+
+    .viewer-glass {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 50% 52%, rgba(255, 255, 255, 0) 45%, rgba(0, 0, 0, .18) 100%),
+        linear-gradient(90deg, rgba(0, 0, 0, .22), rgba(0, 0, 0, 0) 12%, rgba(0, 0, 0, 0) 88%, rgba(0, 0, 0, .18));
+    }
+
+    .viewer-tag {
+      position: absolute;
+      left: 16px;
+      top: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      border-radius: 8px;
+      background: rgba(255, 250, 243, .88);
+      color: #2d2823;
+      font-size: 13px;
+      box-shadow: 0 8px 20px rgba(20, 18, 16, .15);
+      backdrop-filter: blur(8px);
+    }
+
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 99px;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px rgba(47, 117, 106, .14);
+    }
+
+    .zoom {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 13px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 250, 243, .9);
+    }
+
+    .zoom label {
+      color: var(--muted);
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    input[type="range"] {
+      width: min(260px, 34vw);
+      accent-color: var(--accent);
+    }
+
+    .notes {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .note {
+      min-height: 88px;
+      padding: 13px 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 250, 243, .86);
+    }
+
+    .note b {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 14px;
+    }
+
+    .note span {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 980px) {
+      .app {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .plan-wrap {
+        max-width: 640px;
+      }
+
+      .main {
+        padding-top: 8px;
+      }
+
+      .viewer-shell {
+        min-height: 52vh;
+      }
+
+      .notes {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .sidebar,
+      .main {
+        padding: 14px;
+      }
+
+      .topbar,
+      .brand {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .toolbar {
+        justify-content: flex-start;
+      }
+
+      .room-list {
+        grid-template-columns: 1fr;
+      }
+
+      .room-title h2 {
+        font-size: 23px;
+      }
+
+      input[type="range"] {
+        width: 100%;
+      }
+
+      .zoom {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div>
+          <h1>现代简约类VR看房</h1>
+          <p class="subtitle">三房两卫双阳台方案，浅木色、暖白、浅灰为主，按原户型面积控制家具尺度。</p>
+        </div>
+        <span class="pill">约63㎡方案</span>
+      </div>
+
+      <div class="plan-wrap" id="planWrap">
+        <img src="assets/floor-plan.jpg" alt="户型图">
+      </div>
+
+      <div class="room-list" id="roomList"></div>
+    </aside>
+
+    <section class="main">
+      <div class="topbar">
+        <div class="room-title">
+          <h2 id="roomName"></h2>
+          <p id="roomDesc"></p>
+        </div>
+        <div class="toolbar">
+          <button class="icon-btn" id="prevRoom" aria-label="上一个房间" title="上一个房间">
+            <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"></path></svg>
+          </button>
+          <button class="icon-btn" id="resetView" aria-label="复位视角" title="复位视角">
+            <svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7"></path><path d="M3 4v5h5"></path></svg>
+          </button>
+          <button class="icon-btn" id="fullScreen" aria-label="全屏" title="全屏">
+            <svg viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3"></path><path d="M16 3h3a2 2 0 0 1 2 2v3"></path><path d="M8 21H5a2 2 0 0 1-2-2v-3"></path><path d="M16 21h3a2 2 0 0 0 2-2v-3"></path></svg>
+          </button>
+          <button class="icon-btn" id="nextRoom" aria-label="下一个房间" title="下一个房间">
+            <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"></path></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="viewer-shell" id="viewer">
+        <img class="scene" id="scene" alt="">
+        <div class="viewer-glass"></div>
+        <div class="viewer-tag"><span class="dot"></span><span id="viewerTag"></span></div>
+      </div>
+
+      <div class="zoom">
+        <label for="zoomRange">视角</label>
+        <input id="zoomRange" type="range" min="1" max="1.9" value="1.2" step="0.01">
+      </div>
+
+      <div class="notes">
+        <div class="note">
+          <b>拆改重点</b>
+          <span>优先确认厨房门洞、客厅阳台垭口和卧室A周边墙体属性；厨卫管井和粗黑承重墙不建议改动。</span>
+        </div>
+        <div class="note">
+          <b>收纳策略</b>
+          <span>卧室做通顶柜，过道做薄柜，阳台做洗烘和高柜，减少外露杂物。</span>
+        </div>
+        <div class="note">
+          <b>风格控制</b>
+          <span>暖白墙面、浅木柜体、浅灰砖面和少量黑色五金，避免厚重造型。</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const rooms = [
+      {
+        id: "living-room",
+        name: "客厅",
+        area: "19.8㎡",
+        img: "assets/living-room.jpg",
+        desc: "紧凑L型沙发、悬浮电视柜和阳台采光连通，保留中部活动尺度。",
+        x: "31%", y: "52%", w: "22%", h: "31%"
+      },
+      {
+        id: "kitchen",
+        name: "厨房",
+        area: "4.4㎡",
+        img: "assets/kitchen.jpg",
+        desc: "白色吊柜配浅木地柜，L型操作台和玻璃门洞让小厨房更轻。",
+        x: "40%", y: "28%", w: "16%", h: "17%"
+      },
+      {
+        id: "bath-a",
+        name: "卫生间A",
+        area: "3.4㎡",
+        img: "assets/bath-a.jpg",
+        desc: "公共卫采用镜柜、小浴室柜和玻璃隔断，浅灰砖面放大空间。",
+        x: "50%", y: "39%", w: "11%", h: "16%"
+      },
+      {
+        id: "bath-b",
+        name: "卫生间B",
+        area: "3.9㎡",
+        img: "assets/bath-b.jpg",
+        desc: "靠卧室的独立卫做酒店式灰调，控制洁具尺寸并强化收纳。",
+        x: "71%", y: "39%", w: "11%", h: "16%"
+      },
+      {
+        id: "bedroom-a",
+        name: "卧室A",
+        area: "6.5㎡",
+        img: "assets/bedroom-a.jpg",
+        desc: "小房间做榻榻米、书桌和吊柜一体，更适合作为儿童房或书房。",
+        x: "61%", y: "31%", w: "15%", h: "18%"
+      },
+      {
+        id: "bedroom-b",
+        name: "卧室B",
+        area: "10.9㎡",
+        img: "assets/bedroom-b.jpg",
+        desc: "主卧放标准双人床和通顶衣柜，床头用暖光和浅木面弱化压迫。",
+        x: "72%", y: "56%", w: "17%", h: "21%"
+      },
+      {
+        id: "bedroom-c",
+        name: "卧室C",
+        area: "9.4㎡",
+        img: "assets/bedroom-c.jpg",
+        desc: "次卧保留睡眠、衣柜和书桌位，适合老人房或长期次卧使用。",
+        x: "54%", y: "66%", w: "17%", h: "20%"
+      },
+      {
+        id: "corridor",
+        name: "过道",
+        area: "2.8㎡",
+        img: "assets/corridor.jpg",
+        desc: "过道做薄柜、端景和线性灯，不占通行宽度。",
+        x: "56%", y: "51%", w: "18%", h: "8%"
+      },
+      {
+        id: "balcony-a",
+        name: "阳台A",
+        area: "2.7㎡",
+        img: "assets/balcony-a.jpg",
+        desc: "小阳台安排洗烘叠放和高柜，作为独立家政角。",
+        x: "72%", y: "74%", w: "15%", h: "8%"
+      },
+      {
+        id: "balcony-b",
+        name: "阳台B",
+        area: "5.3㎡",
+        img: "assets/balcony-b.jpg",
+        desc: "大阳台做休闲和补充收纳，窄吧台、绿植和高柜形成轻生活区。",
+        x: "30%", y: "77%", w: "25%", h: "10%"
+      }
+    ];
+
+    const scene = document.getElementById("scene");
+    const viewer = document.getElementById("viewer");
+    const zoomRange = document.getElementById("zoomRange");
+    const roomName = document.getElementById("roomName");
+    const roomDesc = document.getElementById("roomDesc");
+    const viewerTag = document.getElementById("viewerTag");
+    const roomList = document.getElementById("roomList");
+    const planWrap = document.getElementById("planWrap");
+
+    let activeIndex = 0;
+    let zoom = Number(zoomRange.value);
+    let offsetX = 0;
+    let offsetY = 0;
+    let isDragging = false;
+    let dragStart = { x: 0, y: 0, ox: 0, oy: 0 };
+
+    function clamp(value, min, max) {
+      return Math.min(max, Math.max(min, value));
+    }
+
+    function maxOffset() {
+      const rect = viewer.getBoundingClientRect();
+      return {
+        x: rect.width * (zoom - 1) / 2 + 90,
+        y: rect.height * (zoom - 1) / 2 + 38
+      };
+    }
+
+    function applyTransform() {
+      const limit = maxOffset();
+      offsetX = clamp(offsetX, -limit.x, limit.x);
+      offsetY = clamp(offsetY, -limit.y, limit.y);
+      scene.style.transform = `translate3d(${offsetX}px, ${offsetY}px, 0) scale(${zoom})`;
+    }
+
+    function resetView() {
+      offsetX = 0;
+      offsetY = 0;
+      zoom = 1.2;
+      zoomRange.value = zoom;
+      applyTransform();
+    }
+
+    function setRoom(index) {
+      activeIndex = (index + rooms.length) % rooms.length;
+      const room = rooms[activeIndex];
+      scene.src = room.img;
+      scene.alt = `${room.name} ${room.area} 装修效果`;
+      roomName.textContent = `${room.name} ${room.area}`;
+      roomDesc.textContent = room.desc;
+      viewerTag.textContent = `${room.name} · ${room.area}`;
+
+      document.querySelectorAll("[data-room]").forEach((item) => {
+        item.classList.toggle("active", item.dataset.room === room.id);
+      });
+
+      resetView();
+    }
+
+    function createRoomControls() {
+      rooms.forEach((room, index) => {
+        const button = document.createElement("button");
+        button.className = "room-btn";
+        button.dataset.room = room.id;
+        button.innerHTML = `<strong>${room.name}</strong><span>${room.area}</span>`;
+        button.addEventListener("click", () => setRoom(index));
+        roomList.appendChild(button);
+
+        const hot = document.createElement("button");
+        hot.className = "hotspot";
+        hot.dataset.room = room.id;
+        hot.style.setProperty("--x", room.x);
+        hot.style.setProperty("--y", room.y);
+        hot.style.setProperty("--w", room.w);
+        hot.style.setProperty("--h", room.h);
+        hot.innerHTML = `<span>${room.name}</span>`;
+        hot.setAttribute("aria-label", `${room.name} ${room.area}`);
+        hot.addEventListener("click", () => setRoom(index));
+        planWrap.appendChild(hot);
+      });
+    }
+
+    viewer.addEventListener("pointerdown", (event) => {
+      isDragging = true;
+      viewer.setPointerCapture(event.pointerId);
+      dragStart = { x: event.clientX, y: event.clientY, ox: offsetX, oy: offsetY };
+    });
+
+    viewer.addEventListener("pointermove", (event) => {
+      if (!isDragging) return;
+      offsetX = dragStart.ox + event.clientX - dragStart.x;
+      offsetY = dragStart.oy + event.clientY - dragStart.y;
+      applyTransform();
+    });
+
+    viewer.addEventListener("pointerup", () => {
+      isDragging = false;
+    });
+
+    viewer.addEventListener("pointercancel", () => {
+      isDragging = false;
+    });
+
+    viewer.addEventListener("wheel", (event) => {
+      event.preventDefault();
+      zoom = clamp(zoom - event.deltaY * 0.0015, 1, 1.9);
+      zoomRange.value = zoom.toFixed(2);
+      applyTransform();
+    }, { passive: false });
+
+    zoomRange.addEventListener("input", () => {
+      zoom = Number(zoomRange.value);
+      applyTransform();
+    });
+
+    document.getElementById("prevRoom").addEventListener("click", () => setRoom(activeIndex - 1));
+    document.getElementById("nextRoom").addEventListener("click", () => setRoom(activeIndex + 1));
+    document.getElementById("resetView").addEventListener("click", resetView);
+    document.getElementById("fullScreen").addEventListener("click", () => {
+      if (!document.fullscreenElement) {
+        viewer.requestFullscreen?.();
+      } else {
+        document.exitFullscreen?.();
+      }
+    });
+
+    window.addEventListener("resize", applyTransform);
+
+    createRoomControls();
+    setRoom(0);
+  </script>
+</body>
+</html>
