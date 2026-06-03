@@ -115,17 +115,12 @@ def new_doc(title, subtitle):
     return doc
 
 
-def save_by_title(title_startswith, doc):
-    for path in BASE.glob("*.docx"):
-        try:
-            old = Document(path)
-            title = old.paragraphs[0].text.strip() if old.paragraphs else ""
-        except Exception:
-            continue
-        if title.startswith(title_startswith):
-            doc.save(path)
-            return path
-    raise FileNotFoundError(title_startswith)
+def save_by_name(filename, doc):
+    path = BASE / filename
+    if not path.exists():
+        raise FileNotFoundError(path)
+    doc.save(path)
+    return path
 
 
 def build_policy_doc():
@@ -307,9 +302,9 @@ def build_update_log():
 
 
 def main():
-    save_by_title("2026年杭州买房全政策详细分析", build_policy_doc())
-    save_by_title("2026年杭州市全域房产政策及房产补贴大全", build_subsidy_doc())
-    save_by_title("2026年杭州二手房交易流程", build_resale_doc())
+    save_by_name("2026年杭州买房全政策详细分析.docx", build_policy_doc())
+    save_by_name("2026年杭州市全域房产政策及房产补贴大全.docx", build_subsidy_doc())
+    save_by_name("2026年杭州二手房交易流程1.docx", build_resale_doc())
 
     planning_note = (
         "【联网校正】截至2026-06-03，公开报道显示杭州二手房成交活跃度回升："
