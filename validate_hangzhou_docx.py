@@ -9,6 +9,17 @@ sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 base = Path.cwd() / "杭州楼市26年物料"
 ok = True
 
+
+def all_text(doc):
+    paragraph_text = [p.text for p in doc.paragraphs]
+    table_text = [
+        cell.text
+        for table in doc.tables
+        for row in table.rows
+        for cell in row.cells
+    ]
+    return "\n".join(paragraph_text + table_text)
+
 for p in sorted(base.glob("*.docx")):
     if not zipfile.is_zipfile(p):
         print("BAD_ZIP", p.name)
@@ -20,7 +31,7 @@ for p in sorted(base.glob("*.docx")):
         print("BAD_DOCX", p.name, exc)
         ok = False
         continue
-    text = "\n".join(x.text for x in doc.paragraphs)
+    text = all_text(doc)
     if not text.strip():
         print("EMPTY", p.name)
         ok = False
@@ -30,7 +41,7 @@ for p in sorted(base.glob("*.docx")):
     print("OK", p.name, "paragraphs", len(doc.paragraphs), "tables", len(doc.tables))
 
 policy = Document(base / "2026年杭州买房全政策详细分析.docx")
-policy_text = "\n".join(p.text for p in policy.paragraphs)
+policy_text = all_text(policy)
 required = [
     "不再审核购房资格",
     "最高额度由130万元提高到180万元",
