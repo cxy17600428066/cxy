@@ -19,8 +19,8 @@ SOURCES = [
     ("个人购房契税政策", "国家税务总局热点问答，2024-12-13", "https://shanxi.chinatax.gov.cn/web/detail/sx-11400-548-1802372"),
     ("个人销售住房增值税政策", "财政部、税务总局公告2025年第17号，2025-12-29", "https://guizhou.chinatax.gov.cn/wjjb/zcfgk/szfl/zzs/202512/t20251231_89105624.html"),
     ("2026年5月LPR", "中新网据央行网站，2026-05-20", "https://www.chinanews.com.cn/cj/2026/05-20/10624697.shtml"),
-    ("2026年5月杭州二手房成交", "第一财经，2026-06-02", "https://www.yicai.com/news/103211762.html"),
-    ("2026年4月杭州二手房成交", "杭州网房产频道，2026-05-30", "https://house.hangzhou.com.cn/content/2026-05/30/content_9231466.html"),
+    ("2026年5月杭州二手房成交", "杭州网/都市快报，2026-06-02", "https://hznews.hangzhou.com.cn/chengshi/content/2026-06/02/content_9232622.htm"),
+    ("2026年4月杭州二手房成交", "杭州网房产频道/都市快报，2026-05-05", "https://house.hangzhou.com.cn/content/2026-05/05/content_9216540.html"),
 ]
 
 
