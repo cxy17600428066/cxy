@@ -76,13 +76,6 @@ summary.getRange("A4:A15").format.columnWidth = 16;
 summary.getRange("B4:F15").format.columnWidth = 13;
 summary.freezePanes.freezeRows(4);
 
-const chart = summary.charts.add("bar", summary.getRange("A4:F14"));
-chart.title = "各板块需求状态分布";
-chart.hasLegend = true;
-chart.xAxis = { axisType: "textAxis", textStyle: { fontSize: 9 } };
-chart.yAxis = { numberFormatCode: "0" };
-chart.setPosition("H4", "Q20");
-
 const headers = ["需求编号", "需求名称", "需求描述", "提出人", "提出日期", "优先级", "当前状态", "负责人", "计划上线日期", "实际上线日期", "备注"];
 for (const name of modules) {
   const sh = wb.worksheets.getItem(name);
@@ -146,7 +139,7 @@ const errors = await wb.inspect({ kind: "match", searchTerm: "#REF!|#DIV/0!|#VAL
 console.log(errors.ndjson);
 
 for (const name of ["需求总览", ...modules]) {
-  const blob = await wb.render({ sheetName: name, range: name === "需求总览" ? "A1:Q20" : "A1:K14", scale: 1, format: "png" });
+  const blob = await wb.render({ sheetName: name, range: name === "需求总览" ? "A1:F15" : "A1:K14", scale: 1, format: "png" });
   await fs.writeFile(path.join(outputDir, `preview_${name}.png`), new Uint8Array(await blob.arrayBuffer()));
 }
 
