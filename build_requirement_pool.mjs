@@ -138,12 +138,12 @@ console.log(inspect.ndjson);
 const errors = await wb.inspect({ kind: "match", searchTerm: "#REF!|#DIV/0!|#VALUE!|#NAME\\?|#N/A", options: { useRegex: true, maxResults: 100 }, summary: "formula errors" });
 console.log(errors.ndjson);
 
-for (const name of ["需求总览", ...modules]) {
-  const blob = await wb.render({ sheetName: name, range: name === "需求总览" ? "A1:F15" : "A1:K14", scale: 1, format: "png" });
-  await fs.writeFile(path.join(outputDir, `preview_${name}.png`), new Uint8Array(await blob.arrayBuffer()));
-}
-
 const file = await SpreadsheetFile.exportXlsx(wb);
 const outputPath = path.join(outputDir, "需求池模板.xlsx");
 await file.save(outputPath);
 console.log(`OUTPUT=${outputPath}`);
+
+for (const name of ["需求总览", ...modules]) {
+  const blob = await wb.render({ sheetName: name, range: name === "需求总览" ? "A1:F15" : "A1:K14", scale: 1, format: "png" });
+  await fs.writeFile(path.join(outputDir, `preview_${name}.png`), new Uint8Array(await blob.arrayBuffer()));
+}
