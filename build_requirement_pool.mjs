@@ -19,9 +19,6 @@ detail.getRange("M5:N504").format={borders:{preset:"all",style:"thin",color:"#E7
 detail.getRange("M4:M504").format.columnWidth=16;
 detail.getRange("N4:N504").format.columnWidth=17;
 detail.getRange("N5:N504").format.numberFormat="yyyy-mm-dd";
-for(const table of detail.tables.items) table.delete();
-detail.tables.add("A4:N504",true,"RequirementDetailsWeekly");
-
 const weekly=wb.worksheets.add("开发周任务");
 weekly.showGridLines=false;
 weekly.getRange("A1:J1").merge(); weekly.getRange("A1").values=[["开发人员每周任务统计"]];
