@@ -13,12 +13,18 @@ const navy="#17324D",blue="#2F75B5",light="#DCE6F1";
 detail.getRange("A1:L1").unmerge(); detail.getRange("A1:N1").merge();
 detail.getRange("A2:L2").unmerge(); detail.getRange("A2:N2").merge();
 detail.getRange("A2").values=[["所有板块在此统一填写；所属板块、优先级、当前状态请使用下拉选项；版本号和计划周用于开发周任务统计。"]];
-detail.getRange("M4:N4").values=[["版本号","计划周（周一）"]];
-detail.getRange("M4:N4").format={fill:blue,font:{bold:true,color:"#FFFFFF"},horizontalAlignment:"center",verticalAlignment:"center",wrapText:true,borders:{preset:"all",style:"thin",color:"#B4C7E7"}};
-detail.getRange("M5:N504").format={borders:{preset:"all",style:"thin",color:"#E7E6E6"},verticalAlignment:"center"};
-detail.getRange("M4:M504").format.columnWidth=16;
-detail.getRange("N4:N504").format.columnWidth=17;
-detail.getRange("N5:N504").format.numberFormat="yyyy-mm-dd";
+detail.getRange("M3:N3").values=[["版本号","计划周（周一）"]];
+detail.getRange("M3:N3").format={fill:blue,font:{bold:true,color:"#FFFFFF"},horizontalAlignment:"center",verticalAlignment:"center",wrapText:true,borders:{preset:"all",style:"thin",color:"#B4C7E7"}};
+detail.getRange("M4:N503").format={borders:{preset:"all",style:"thin",color:"#E7E6E6"},verticalAlignment:"center"};
+detail.getRange("M3:M503").format.columnWidth=16;
+detail.getRange("N3:N503").format.columnWidth=17;
+detail.getRange("N4:N503").format.numberFormat="yyyy-mm-dd";
+
+const summary=wb.worksheets.getItem("需求总览");
+for(let r=5;r<=14;r++){
+  summary.getRange(`B${r}`).formulas=[[`=COUNTIF('需求明细'!$B$4:$B$503,A${r})`]];
+  for(let j=0;j<4;j++){const c=String.fromCharCode(67+j);summary.getRange(`${c}${r}`).formulas=[[`=COUNTIFS('需求明细'!$B$4:$B$503,$A${r},'需求明细'!$H$4:$H$503,${c}$4)`]];}
+}
 const weekly=wb.worksheets.add("开发周任务");
 weekly.showGridLines=false;
 weekly.getRange("A1:J1").merge(); weekly.getRange("A1").values=[["开发人员每周任务统计"]];
@@ -31,8 +37,8 @@ weekly.getRange("A4:J4").format={fill:blue,font:{bold:true,color:"#FFFFFF"},hori
 weekly.getRange("A5:J104").format={borders:{preset:"all",style:"thin",color:"#E7E6E6"},verticalAlignment:"center"};
 weekly.getRange("A5:A104").format.numberFormat="yyyy-mm-dd";
 for(let r=5;r<=104;r++){
-  weekly.getRange(`D${r}`).formulas=[[`=IF(OR(A${r}="",B${r}="",C${r}=""),"",COUNTIFS('需求明细'!$N$5:$N$504,A${r},'需求明细'!$M$5:$M$504,B${r},'需求明细'!$I$5:$I$504,C${r}))`]];
-  for(let j=0;j<4;j++){const c=String.fromCharCode(69+j);const statusCell=String.fromCharCode(69+j)+"$4";weekly.getRange(`${c}${r}`).formulas=[[`=IF(D${r}="","",COUNTIFS('需求明细'!$N$5:$N$504,$A${r},'需求明细'!$M$5:$M$504,$B${r},'需求明细'!$I$5:$I$504,$C${r},'需求明细'!$H$5:$H$504,${statusCell}))`]];}
+  weekly.getRange(`D${r}`).formulas=[[`=IF(OR(A${r}="",B${r}="",C${r}=""),"",COUNTIFS('需求明细'!$N$4:$N$503,A${r},'需求明细'!$M$4:$M$503,B${r},'需求明细'!$I$4:$I$503,C${r}))`]];
+  for(let j=0;j<4;j++){const c=String.fromCharCode(69+j);const statusCell=String.fromCharCode(69+j)+"$4";weekly.getRange(`${c}${r}`).formulas=[[`=IF(D${r}="","",COUNTIFS('需求明细'!$N$4:$N$503,$A${r},'需求明细'!$M$4:$M$503,$B${r},'需求明细'!$I$4:$I$503,$C${r},'需求明细'!$H$4:$H$503,${statusCell}))`]];}
   weekly.getRange(`I${r}`).formulas=[[`=IF(D${r}="","",IF(D${r}=0,0,H${r}/D${r}))`]];
 }
 weekly.getRange("D5:H104").format={numberFormat:"#,##0",horizontalAlignment:"center"};
