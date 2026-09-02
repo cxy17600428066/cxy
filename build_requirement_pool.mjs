@@ -4,13 +4,13 @@ import { FileBlob, SpreadsheetFile, Workbook } from "@oai/artifact-tool";
 
 const modules=["OMS","标准库","CRM","BI报表","基础设置","小程序","北森","勤策","PLM","旺店通"];
 const statuses=["未开始","进行中","开发中","已上线"];
-const sourcePath=path.resolve("outputs","requirement_pool_template","需求池模板.xlsx");
+const sourcePath=path.resolve("outputs","requirement_pool_merged","需求池模板_合并明细.xlsx");
 const outputDir=path.resolve("outputs","requirement_pool_merged");
 await fs.mkdir(outputDir,{recursive:true});
 const source=await SpreadsheetFile.importXlsx(await FileBlob.load(sourcePath));
 console.log((await source.inspect({kind:"workbook,sheet,table",maxChars:4000,tableMaxRows:5,tableMaxCols:12})).ndjson);
 if(process.env.PREVIEW_ONLY==="1"){
-  for(const [name,range] of [["需求总览","A1:F15"],["OMS","A1:K14"]]){
+  for(const [name,range] of [["需求总览","A1:F15"],["需求明细","A1:L14"]]){
     const png=await source.render({sheetName:name,range,scale:1,format:"png"});
     await fs.writeFile(path.join(outputDir,`before_${name}.png`),new Uint8Array(await png.arrayBuffer()));
   }
