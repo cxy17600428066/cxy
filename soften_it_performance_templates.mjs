@@ -1,6 +1,7 @@
 import { FileBlob, SpreadsheetFile } from "@oai/artifact-tool";
 
 const path = "./outputs/it-performance-templates/2026年5月绩效考核模板-产品测试研发RPA.xlsx";
+const outputPath = "./outputs/it-performance-templates/2026年5月绩效考核模板-灵活评分版.xlsx";
 const wb = await SpreadsheetFile.importXlsx(await FileBlob.load(path));
 const sheets = ["产品","测试","前端","后端","全栈","RPA"];
 const standards = [
@@ -30,5 +31,5 @@ console.log(check.ndjson);
 const errors = await wb.inspect({kind:"match",searchTerm:"#REF!|#DIV/0!|#VALUE!|#NAME\\?|#N/A|#NUM!|#NULL!|#SPILL!|#CALC!",options:{useRegex:true,maxResults:300},summary:"final formula error scan"});
 console.log(errors.ndjson);
 const output = await SpreadsheetFile.exportXlsx(wb);
-await output.save(path);
-console.log(path);
+await output.save(outputPath);
+console.log(outputPath);
