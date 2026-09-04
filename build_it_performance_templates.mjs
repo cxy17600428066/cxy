@@ -1,7 +1,7 @@
 import fs from "node:fs/promises";
 import { Workbook, SpreadsheetFile } from "@oai/artifact-tool";
 
-const outDir = "C:/Users/admin/Documents/New project/outputs/it-performance-templates";
+const outDir = "./outputs/it-performance-templates";
 const outFile = `${outDir}/2026年5月绩效考核模板-产品测试研发RPA.xlsx`;
 const wb = Workbook.create();
 
@@ -101,4 +101,4 @@ await fs.mkdir(outDir,{recursive:true});
 const inspect=await wb.inspect({kind:"table",sheetId:"产品",range:"A1:L18",include:"values,formulas",tableMaxRows:20,tableMaxCols:12,maxChars:16000}); console.log(inspect.ndjson);
 const errors=await wb.inspect({kind:"match",searchTerm:"#REF!|#DIV/0!|#VALUE!|#NAME\\?|#N/A|#NUM!|#NULL!|#SPILL!|#CALC!",options:{useRegex:true,maxResults:300},summary:"final formula error scan"}); console.log(errors.ndjson);
 for (const role of Object.keys(roles)) { const p=await wb.render({sheetName:role,range:"A1:L18",scale:1,format:"png"}); await fs.writeFile(`${outDir}/preview-${role}.png`,new Uint8Array(await p.arrayBuffer())); }
-const output=await SpreadsheetFile.exportXlsx(wb); await output.save(outFile); console.log(outFile);
+const output=await SpreadsheetFile.exportXlsx(wb); await fs.writeFile(outFile,new Uint8Array(await output.arrayBuffer())); console.log(outFile);
