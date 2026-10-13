@@ -1,0 +1,10 @@
+from pathlib import Path
+p=Path('outputs/mes_v2.js');s=p.read_text(encoding='utf-8')
+s=s.replace("function render(){document.getElementById('role')", "function render(){let allowed=type==='online'?['渠道','商品']:['中心','大区','省区','客户','商品'];if(!allowed.includes(dimension))dimension='商品';document.getElementById('role')")
+s=s.replace("<td class=\"num\">${fmt(sum(ps))} 箱</td>", "<td class=\"num\">${fmt(ps.reduce((n,p)=>n+p.versions[0].qty,0))} 箱</td>")
+s=s.replace("let p=id?get(id):visible()[0];if(id&&!p)return;let opts=", "let p=id?get(id):visible()[0];if(id&&!p)return;if(document.getElementById('fObject')){const object=document.getElementById('fObject').value;p={...(p||{}),type,customer:type==='offline'&&period==='week'?object:'',province:type==='offline'&&period==='month'?object:'',channel:type==='online'?object:'',sku:document.getElementById('fSku').value}}let opts=")
+s=s.replace("${p?esc(p.customer||p.channel||p.province)+' · '+sku(p.sku).name:'当前范围'}", "${p?esc(p.customer||p.channel||p.province)+' · '+sku(p.sku).name:'当前范围'}")
+p.write_text(s,encoding='utf-8')
+bp=Path('outputs/build_mes_v2.cjs');b=bp.read_text(encoding='utf-8');b=b.replace('.field input', '.field input')
+b=b.replace('.tabs{display:flex;', '.field input[type=checkbox]{width:auto;margin-right:6px}.tabs{display:flex;')
+bp.write_text(b,encoding='utf-8')
