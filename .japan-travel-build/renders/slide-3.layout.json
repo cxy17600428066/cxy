@@ -1,0 +1,12 @@
+{"schema":"openai.presentation.layout/v5","unit":"px","slide":{"id":"sl/gnzly7","index":2,"layout":{"id":"ly/nqtwzm5k","name":"Blank"},"backgroundColor":"rgba(245,242,234,1)","position":{"left":0,"top":0,"width":1280,"height":720}},
+"elements":[
+{"id":"im/65knuh4j","kind":"image","position":{"left":0,"top":0,"width":770,"height":720},"fit":"cover","alt":"河口湖畔的富士山"},
+{"id":"sh/o729gjqt","kind":"textbox","name":"DAY 02","position":{"left":828,"top":62,"width":360,"height":32},"text":"DAY 02","style":{"fontSize":21,"typeface":"Microsoft YaHei","color":"#B75242","alignment":"left"},"geometry":"rect","lineWidth":0},
+{"id":"sh/98bq94re","kind":"textbox","name":"河口湖","position":{"left":826,"top":127,"width":392,"height":147},"text":"河口湖\n与富士山","style":{"fontSize":52,"typeface":"Microsoft YaHei","color":"#173B53","bold":true,"alignment":"left"},"geometry":"rect","lineWidth":0},
+{"id":"sh/a9kri98j","kind":"textbox","name":"上午抵达","position":{"left":830,"top":320,"width":350,"height":39},"text":"上午抵达","style":{"fontSize":27,"typeface":"Microsoft YaHei","color":"#173B53","bold":true,"alignment":"left"},"geometry":"rect","lineWidth":0},
+{"id":"sh/bat8be94","kind":"textbox","name":"新宿出发，约2小时车程","position":{"left":830,"top":363,"width":355,"height":76},"text":"新宿出发，约2小时车程\n抵达后先寄存行李","style":{"fontSize":24,"typeface":"Microsoft YaHei","color":"#687B82","alignment":"left"},"geometry":"rect","lineWidth":0},
+{"id":"sh/wvm9kjqp","kind":"textbox","name":"下午沿湖看山","position":{"left":830,"top":466,"width":360,"height":40},"text":"下午沿湖看山","style":{"fontSize":27,"typeface":"Microsoft YaHei","color":"#173B53","bold":true,"alignment":"left"},"geometry":"rect","lineWidth":0},
+{"id":"sh/xwvqdora","kind":"textbox","name":"大石公园与河口湖北岸","position":{"left":830,"top":511,"width":355,"height":76},"text":"大石公园与河口湖北岸\n留时间散步、喝咖啡","style":{"fontSize":24,"typeface":"Microsoft YaHei","color":"#687B82","alignment":"left"},"geometry":"rect","lineWidth":0},
+{"id":"sh/qd076p8f","kind":"textbox","name":"晚上入住温泉酒店","position":{"left":830,"top":619,"width":360,"height":38},"text":"晚上入住温泉酒店","style":{"fontSize":25,"typeface":"Microsoft YaHei","color":"#173B53","alignment":"left"},"geometry":"rect","lineWidth":0},
+{"id":"sh/re98zu90","kind":"textbox","name":"03","position":{"left":1190,"top":667,"width":40,"height":25},"text":"03","style":{"fontSize":18,"typeface":"Microsoft YaHei","color":"#687B82","alignment":"left"},"geometry":"rect","lineWidth":0}
+]}

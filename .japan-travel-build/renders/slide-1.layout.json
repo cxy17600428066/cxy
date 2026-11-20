@@ -1,0 +1,9 @@
+{"schema":"openai.presentation.layout/v5","unit":"px","slide":{"id":"sl/hry9e4","index":0,"layout":{"id":"ly/nqtwzm5k","name":"Blank"},"backgroundColor":"rgba(245,242,234,1)","position":{"left":0,"top":0,"width":1280,"height":720}},
+"elements":[
+{"id":"im/4ri5ovyh","kind":"image","position":{"left":486,"top":0,"width":794,"height":720},"fit":"cover","alt":"河口湖与冬日富士山倒影"},
+{"id":"sh/ql47ihcz","kind":"textbox","name":"JAPAN  /  5 DAYS","position":{"left":62,"top":66,"width":390,"height":32},"text":"JAPAN  /  5 DAYS","style":{"fontSize":21,"typeface":"Microsoft YaHei","color":"#426E89","alignment":"left"},"geometry":"rect","lineWidth":0},
+{"id":"sh/r6dormtk","kind":"textbox","name":"富士山","position":{"left":60,"top":177,"width":410,"height":205},"text":"富士山\n与东京","style":{"fontSize":78,"typeface":"Microsoft YaHei","color":"#173B53","bold":true,"alignment":"left"},"geometry":"rect","lineWidth":0},
+{"id":"sh/0b6pobu1","kind":"textbox","name":"杭州出发  5天4晚","position":{"left":65,"top":430,"width":370,"height":44},"text":"杭州出发  5天4晚","style":{"fontSize":29,"typeface":"Microsoft YaHei","color":"#173B53","alignment":"left"},"geometry":"rect","lineWidth":0},
+{"id":"sh/1cf6xgbm","kind":"textbox","name":"河口湖住一晚","position":{"left":65,"top":507,"width":360,"height":82},"text":"河口湖住一晚\n沿湖看山，走进东京","style":{"fontSize":25,"typeface":"Microsoft YaHei","color":"#687B82","alignment":"left"},"geometry":"rect","lineWidth":0},
+{"id":"sh/e947m1cv","kind":"textbox","name":"TOKYO + KAWAGUCHIKO","position":{"left":65,"top":653,"width":380,"height":25},"text":"TOKYO + KAWAGUCHIKO","style":{"fontSize":17,"typeface":"Microsoft YaHei","color":"#426E89","alignment":"left"},"geometry":"rect","lineWidth":0}
+]}

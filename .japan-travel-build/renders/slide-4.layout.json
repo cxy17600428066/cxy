@@ -1,0 +1,9 @@
+{"schema":"openai.presentation.layout/v5","unit":"px","slide":{"id":"sl/a3zcx2","index":3,"layout":{"id":"ly/nqtwzm5k","name":"Blank"},"backgroundColor":"rgba(245,242,234,1)","position":{"left":0,"top":0,"width":1280,"height":720}},
+"elements":[
+{"id":"im/g7ihgjel","kind":"image","position":{"left":0,"top":0,"width":1280,"height":473},"fit":"cover","alt":"新仓山浅间公园的忠灵塔与富士山"},
+{"id":"sh/ylkj2xs3","kind":"textbox","name":"DAY 03","position":{"left":65,"top":512,"width":190,"height":32},"text":"DAY 03","style":{"fontSize":21,"typeface":"Microsoft YaHei","color":"#B75242","alignment":"left"},"geometry":"rect","lineWidth":0},
+{"id":"sh/zmtkb29o","kind":"textbox","name":"新仓山浅间公园","position":{"left":63,"top":558,"width":710,"height":66},"text":"新仓山浅间公园","style":{"fontSize":48,"typeface":"Microsoft YaHei","color":"#173B53","bold":true,"alignment":"left"},"geometry":"rect","lineWidth":0},
+{"id":"sh/8bm187q5","kind":"textbox","name":"五重塔与富士山的经典同框","position":{"left":66,"top":634,"width":710,"height":38},"text":"五重塔与富士山的经典同框","style":{"fontSize":25,"typeface":"Microsoft YaHei","color":"#687B82","alignment":"left"},"geometry":"rect","lineWidth":0},
+{"id":"sh/9cv2hcrq","kind":"textbox","name":"清晨湖边看山，随后前往公园","position":{"left":847,"top":520,"width":375,"height":89},"text":"清晨湖边看山，随后前往公园\n午后回东京，晚上逛新宿","style":{"fontSize":23,"typeface":"Microsoft YaHei","color":"#173B53","alignment":"left"},"geometry":"rect","lineWidth":0},
+{"id":"sh/mpkj6xsf","kind":"textbox","name":"观景台约398级台阶","position":{"left":847,"top":620,"width":375,"height":69},"text":"观景台约398级台阶\n按体力调整，轻装出行","style":{"fontSize":21,"typeface":"Microsoft YaHei","color":"#687B82","alignment":"left"},"geometry":"rect","lineWidth":0}
+]}

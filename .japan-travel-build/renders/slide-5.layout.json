@@ -1,0 +1,10 @@
+{"schema":"openai.presentation.layout/v5","unit":"px","slide":{"id":"sl/hsgxve","index":4,"layout":{"id":"ly/nqtwzm5k","name":"Blank"},"backgroundColor":"rgba(16,34,45,1)","position":{"left":0,"top":0,"width":1280,"height":720}},
+"elements":[
+{"id":"im/610vqdoz","kind":"image","position":{"left":495,"top":0,"width":785,"height":720},"fit":"cover","alt":"东京塔夜景"},
+{"id":"sh/sb618z6d","kind":"textbox","name":"DAY 04","position":{"left":65,"top":62,"width":350,"height":32},"text":"DAY 04","style":{"fontSize":21,"typeface":"Microsoft YaHei","color":"#DFC7A4","alignment":"left"},"geometry":"rect","lineWidth":0},
+{"id":"sh/tcf2h47y","kind":"textbox","name":"东京","position":{"left":63,"top":133,"width":415,"height":155},"text":"东京\n经典地标","style":{"fontSize":58,"typeface":"Microsoft YaHei","color":"#FFFFFF","bold":true,"alignment":"left"},"geometry":"rect","lineWidth":0},
+{"id":"sh/edoja9o3","kind":"textbox","name":"上午  浅草与隅田川","position":{"left":66,"top":339,"width":405,"height":38},"text":"上午  浅草与隅田川","style":{"fontSize":26,"typeface":"Microsoft YaHei","color":"#FFFFFF","bold":true,"alignment":"left"},"geometry":"rect","lineWidth":0},
+{"id":"sh/fexkjepo","kind":"textbox","name":"浅草寺、雷门、仲见世街","position":{"left":66,"top":388,"width":405,"height":79},"text":"浅草寺、雷门、仲见世街\n河畔散步，远眺晴空塔","style":{"fontSize":23,"typeface":"Microsoft YaHei","color":"#C3D2D9","alignment":"left"},"geometry":"rect","lineWidth":0},
+{"id":"sh/gfq1cj69","kind":"textbox","name":"下午至夜晚  银座与东京塔","position":{"left":66,"top":519,"width":405,"height":40},"text":"下午至夜晚  银座与东京塔","style":{"fontSize":25,"typeface":"Microsoft YaHei","color":"#FFFFFF","bold":true,"alignment":"left"},"geometry":"rect","lineWidth":0},
+{"id":"sh/1gz2lo7u","kind":"textbox","name":"银座街头漫步","position":{"left":66,"top":567,"width":405,"height":82},"text":"银座街头漫步\n增上寺、芝公园与东京塔夜景","style":{"fontSize":23,"typeface":"Microsoft YaHei","color":"#C3D2D9","alignment":"left"},"geometry":"rect","lineWidth":0}
+]}
